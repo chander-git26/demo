@@ -1,0 +1,8 @@
+com\cos\master\repository\UserRepository.class
+com\cos\master\utils\AppUtils.class
+com\cos\master\config\PropertiesConfig.class
+com\cos\master\security\Security.class
+com\cos\master\MasterApplication.class
+com\cos\master\controller\UserController.class
+com\cos\master\service\UserService.class
+com\cos\master\entities\UserEntity.class
