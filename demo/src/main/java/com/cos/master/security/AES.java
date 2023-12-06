@@ -22,6 +22,8 @@ public class AES {
 //	Key key = new SecretKeySpec(keyValue, ALGORITHM);
 //        return key;
 //    }
+    
+    
 public static String encrypt(String value) throws Exception {
 	
 	Key key = new SecretKeySpec(keyValue, ALGORITHM);
