@@ -3,9 +3,7 @@ package com.cos.master.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.cos.master.entities.FamilyInfoResponse;
-import com.cos.master.entities.PersonalInfoResponse;
-import com.cos.master.entities.ProffesionalInfoResponse;
+
 import com.cos.master.entities.UserEntity;
 
 import java.time.LocalDate;
@@ -23,18 +21,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select * from user_info where user_id = ?1 ;", nativeQuery = true)
 	public UserEntity fetchByUserId(String userId);
 
-	
-	@Query(value = "Select aadharnumber,pannumber,maritalstatus,bloodgroup,height,weight,smoking,alochol from personal_info where user_id='?1'", nativeQuery = true)
-	public List<PersonalInfoResponse> getPersonalInfo(String user_id);
-	
-	@Query(value = "Select sourceofincome,companysname,annualincome,bussinessname,annualrevenue from professional_info where user_id='?1'", nativeQuery = true)
-	public List<ProffesionalInfoResponse> getProffessionalInfo(String user_id);
-	
-	@Query(value = "Select father_name,fater_age,father_occupation,f_upload_medical_history,mother_occupation,m_upload_medical_history,spouse_name,spouse_age,spouse_occupation,s_upload_medical_history,nomine1_name,nomine1_age,nomine1_occupation,nomine1_upload_medical_history,nomine2_name,nomine2_age,nomine2_occupation,nomine2_upload_medical_history,marital_status,selectnumberofchildren  from family_info where user_id='?1'", nativeQuery = true)
-	public List<FamilyInfoResponse> getFamilyInfo(String user_id);
-	
-	@Query(value = "Select Past_surgeries,Blood_pressure,Diabetes,Upload_medical_history from medical_info where user_id='?1'", nativeQuery = true)
-	public List<FamilyInfoResponse> getMedicalInfo(String user_id);
+	@Query(value = "select email,password from user_info where email ='raju@gmail.com';", nativeQuery = true)
+	public UserEntity fetchByUserInfo(String email);
 	
 	
 }
