@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select * from user_info where user_id = ?1 ;", nativeQuery = true)
 	public UserEntity fetchByUserId(String userId);
 
-	@Query(value = "select email,password from user_info where email ='raju@gmail.com';", nativeQuery = true)
+	@Query(value = "select email,password from user_info where email ='?1';", nativeQuery = true)
 	public UserEntity fetchByUserInfo(String email);
 	
 	
