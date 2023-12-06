@@ -23,7 +23,7 @@ public class UserService {
 	public UserEntity getUserInfo(String userId) {
 		return userRepo.fetchByUserId(userId);
 	}
-	public UserEntity getusername(String email) {
+	public String getusername(String email) {
 		return userRepo.fetchByUserInfo(email);
 }
 

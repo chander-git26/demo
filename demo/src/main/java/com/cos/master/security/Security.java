@@ -23,8 +23,8 @@ import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+
 import java.util.Base64.Encoder;
 
 import com.cos.master.config.PropertiesConfig;

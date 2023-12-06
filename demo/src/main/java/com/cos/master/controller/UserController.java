@@ -13,24 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cos.master.entities.ProfileFamilyInformationEntity;
-import com.cos.master.entities.ProfileMedicalInformationEntity;
-import com.cos.master.entities.ProfilePersonalInformationEntity;
-import com.cos.master.entities.ProfileProfessionalInformationEntity;
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.entities.UserEntity;
-import com.cos.master.repository.ProfileFamilyInformationRepository;
-import com.cos.master.repository.ProfileMedicalInformationRepository;
-import com.cos.master.repository.ProfilePersonalInformationRepository;
-import com.cos.master.repository.ProfileProfessionalInformationRepository;
 import com.cos.master.repository.UserRepository;
 import com.cos.master.security.AES;
 import com.cos.master.security.Security;
 import com.cos.master.service.UserService;
-import com.cos.master.utils.AppProfileFamilyInformationUtils;
-import com.cos.master.utils.AppProfileMedicalInformationUtils;
-import com.cos.master.utils.AppProfilePersonalInformationUtils;
-import com.cos.master.utils.AppProfileProfessionalInformationUtils;
 import com.cos.master.utils.AppUtils;
 
 
@@ -42,7 +30,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@Autowired(required = true)
+	@Autowired
 	Security security;
 	
 	@Autowired
@@ -66,8 +54,8 @@ public class UserController {
 				String createdUserId = String.valueOf(appUtils.generateUserId());
 				user.setUserId(createdUserId);
 				String encryptPassword = aes.encrypt(userEntity.getPassword());
-//
-//				user.setId(3);
+
+			user.setId(3);
 				user.setPassword(encryptPassword);
 		      		user.setMobile(userEntity.getMobile());
 				user.setEmail(userEntity.getEmail());
@@ -115,8 +103,8 @@ public class UserController {
 		String email = userInf.getEmail();
 	    String password = userInf.getPassword();
 //	    String encryptPassword = aes.encrypt(password);
-		UserEntity userInfo = userService.getusername(email);
-		String decryptPassword = aes.decrypt(userInfo.getPassword());
+		String userPassword = userService.getusername(email);
+		String decryptPassword = aes.decrypt(userPassword);
 //      	users = userRepo.save(user);
 		if(password.equals(decryptPassword)) {
 			return new ResponseEntity<>("200",HttpStatus.OK);
