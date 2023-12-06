@@ -1,6 +1,7 @@
 package com.cos.master.controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cos.master.entities.PersonalInfoResponse;
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.entities.UserEntity;
 import com.cos.master.repository.UserRepository;
@@ -75,14 +77,56 @@ public class UserController {
 		}
 		return new ResponseEntity<>("500",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	@GetMapping("/getUserDetails/{userId}")
-	public ResponseObject getUserDetails(@PathVariable("userId") String userId) {
-			UserEntity userEntity = new UserEntity();
-			UserEntity user = userService.getUserInfo(userId);
+	
+	//personal
+	@GetMapping("/getPersonalInfo")
+	public ResponseObject getPersonalInfo(@PathVariable("user_id") String user_id) {
+		PersonalInfoResponse personal = new PersonalInfoResponse();
+		
+		
+		List<PersonalInfoResponse> user = userService.getPersonalInfo(user_id);
 			if(user != null) {
 				return appUtils.prepareResponse("Data fetch successful", "successfull", "200", 1, user);
 			}else {
 				return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
 			}
 	}
+	
+	//professional
+	
+	@GetMapping("/getProffessionalInfo")
+	public ResponseObject  getProffessionalInfo(@PathVariable("user_id") String user_id) {
+			UserEntity userEntity = new UserEntity();
+			UserEntity user = userService.getUserInfo(user_id);
+			if(user != null) {
+				return appUtils.prepareResponse("Data fetch successful", "successfull", "200", 1, user);
+			}else {
+				return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
+			}
+	}
+	//family
+	
+	@GetMapping("/getfamilyInfo")
+	public ResponseObject  getfamilyInfo(@PathVariable("user_id") String user_id) {
+			UserEntity userEntity = new UserEntity();
+			UserEntity user = userService.getUserInfo(user_id);
+			if(user != null) {
+				return appUtils.prepareResponse("Data fetch successful", "successfull", "200", 1, user);
+			}else {
+				return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
+			}
+	}
+	
+	//medical
+	@GetMapping("/getmedicalInfo")
+	public ResponseObject  getmedicalInfo(@PathVariable("user_id") String user_id) {
+			UserEntity userEntity = new UserEntity();
+			UserEntity user = userService.getUserInfo(user_id);
+			if(user != null) {
+				return appUtils.prepareResponse("Data fetch successful", "successfull", "200", 1, user);
+			}else {
+				return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
+			}
+	}
+	
 }
