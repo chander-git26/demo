@@ -103,8 +103,8 @@ public class UserController {
 		String email = userInf.getEmail();
 	    String password = userInf.getPassword();
 //	    String encryptPassword = aes.encrypt(password);
-		UserEntity userInfo = userService.getusername(email);
-		String decryptPassword = aes.decrypt(userInfo.getPassword());
+		String userPassword = userService.getusername(email);
+		String decryptPassword = aes.decrypt(userPassword);
 //      	users = userRepo.save(user);
 		if(password.equals(decryptPassword)) {
 			return new ResponseEntity<>("200",HttpStatus.OK);
