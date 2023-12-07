@@ -25,6 +25,7 @@ public class AES {
     
     
 public static String encrypt(String value) throws Exception {
+	try {
 	
 	Key key = new SecretKeySpec(keyValue, ALGORITHM);
     Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -32,17 +33,27 @@ public static String encrypt(String value) throws Exception {
 
     byte[] encValue = cipher.doFinal(value.getBytes());
     byte[] encryptedByteValue = new Base64().encode(encValue);
-    System.out.println("Encrypted Value :: " + new String(encryptedByteValue));
-
-    return new String(encryptedByteValue);
+    if (encryptedByteValue != null && encryptedByteValue.length > 0) {
+        String encryptedText = new String(encryptedByteValue);
+        System.out.println("Encrypted Value :: " + encryptedText);
+        return encryptedText;
+    } else {
+        System.err.println("Encryption failed or produced empty result.");
+        return null; // Or any appropriate value indicating failure
+    }
+} catch (Exception e) {
+    e.printStackTrace();
+    // Handle the exception appropriately (e.g., log the error, throw it, etc.)
+    return null; // Or any appropriate value indicating failure
+}
 }
 
-public static String decrypt(String encryptedValue) throws Exception {
+public static String decrypt(String encryptedText) throws Exception {
 	Key key = new SecretKeySpec(keyValue, ALGORITHM);
      Cipher cipher = Cipher.getInstance(ALGORITHM);
      cipher.init(Cipher.DECRYPT_MODE, key);
       
-     byte[] decodedBytes = new Base64().decode(encryptedValue.getBytes());
+     byte[] decodedBytes = new Base64().decode(encryptedText.getBytes());
 
      byte[] enctVal = cipher.doFinal(decodedBytes);
      
