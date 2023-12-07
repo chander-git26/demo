@@ -2,7 +2,7 @@ package com.cos.master.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
+import org.springframework.data.repository.query.Param;
 
 import com.cos.master.entities.UserEntity;
 
@@ -21,8 +21,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select * from user_info where user_id = ?1 ;", nativeQuery = true)
 	public UserEntity fetchByUserId(String userId);
 
-	@Query(value = "select password from user_info where email ='?1';", nativeQuery = true)
+	@Query(value = "select password from user_info where email ='raju@gmail.com';", nativeQuery = true)
 	public String fetchByUserInfo(String email);
-	
+//	@Query(value = "SELECT AES_DECRYPT(password, '[B@2ac1fdc4') FROM user_info WHERE email = :email", nativeQuery = true)
+//	public String fetchByUserInfo(@Param("email") String email);
+//	
 	
 }

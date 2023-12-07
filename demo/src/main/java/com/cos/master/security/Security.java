@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
 import java.util.Base64.Encoder;
 
 import com.cos.master.config.PropertiesConfig;
+import com.cos.master.repository.UserRepository;
 
 @Component
 public class Security {
@@ -54,8 +55,11 @@ public class Security {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
         
 	}
+
 
 	
 	

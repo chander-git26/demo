@@ -30,7 +30,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@Autowired
+	@Autowired(required = true)
 	Security security;
 	
 	@Autowired
@@ -40,9 +40,6 @@ public class UserController {
 	UserRepository userRepo;
 	@Autowired
 	AES aes;
-	
-	
-	
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity) {
 		UserEntity user = new UserEntity();
@@ -53,9 +50,9 @@ public class UserController {
 				user.setLastname(userEntity.getLastname());
 				String createdUserId = String.valueOf(appUtils.generateUserId());
 				user.setUserId(createdUserId);
-				String encryptPassword = aes.encrypt(userEntity.getPassword());
-
-			user.setId(3);
+				String encryptPassword = AES.encrypt(userEntity.getPassword());
+//
+//				user.setId(3);
 				user.setPassword(encryptPassword);
 		      		user.setMobile(userEntity.getMobile());
 				user.setEmail(userEntity.getEmail());
@@ -103,8 +100,8 @@ public class UserController {
 		String email = userInf.getEmail();
 	    String password = userInf.getPassword();
 //	    String encryptPassword = aes.encrypt(password);
-		String userPassword = userService.getusername(email);
-		String decryptPassword = aes.decrypt(userPassword);
+		String userpassword = userService.getusername(email);
+		String decryptPassword = aes.decrypt(userpassword);
 //      	users = userRepo.save(user);
 		if(password.equals(decryptPassword)) {
 			return new ResponseEntity<>("200",HttpStatus.OK);
