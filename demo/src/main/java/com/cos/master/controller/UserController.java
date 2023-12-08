@@ -18,8 +18,16 @@ import com.cos.master.entities.FamilyResponse;
 import com.cos.master.entities.MedicalInfoResponse;
 import com.cos.master.entities.PersonalInfoResponse;
 import com.cos.master.entities.ProfessionalResponse;
+import com.cos.master.entities.ProfileFamilyInformationEntity;
+import com.cos.master.entities.ProfileMedicalInformationEntity;
+import com.cos.master.entities.ProfilePersonalInformationEntity;
+import com.cos.master.entities.ProfileProfessionalInformationEntity;
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.entities.UserEntity;
+import com.cos.master.repository.ProfileFamilyInformationRepository;
+import com.cos.master.repository.ProfileMedicalInformationRepository;
+import com.cos.master.repository.ProfilePersonalInformationRepository;
+import com.cos.master.repository.ProfileProfessionalInformationRepository;
 import com.cos.master.repository.UserRepository;
 import com.cos.master.security.AES;
 import com.cos.master.security.Security;
@@ -45,6 +53,19 @@ public class UserController {
 	UserRepository userRepo;
 	@Autowired
 	AES aes;
+	
+	@Autowired
+	ProfileMedicalInformationRepository medicalInformationRepo;
+	
+	@Autowired
+	ProfileFamilyInformationRepository familyInformationRepo;
+	
+	@Autowired
+	ProfileProfessionalInformationRepository professionalInformationRepo;
+	
+	@Autowired
+	ProfilePersonalInformationRepository personalInformationRepo;
+	
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity) {
 		UserEntity user = new UserEntity();
@@ -195,7 +216,145 @@ public class UserController {
 			return new ResponseEntity<>("400",HttpStatus.OK);
 		}
 		
+	}
 	
+	@PostMapping("/personalInformation")
+	public ResponseEntity<?> createUserProfilePersonalInformation(@RequestBody ProfilePersonalInformationEntity profilePersonalInformationEntity) {
+		ProfilePersonalInformationEntity userprofilepersonalUpdate = new ProfilePersonalInformationEntity();
+		ProfilePersonalInformationEntity userss = null;
+		try {
+		if(profilePersonalInformationEntity != null) {
+			userprofilepersonalUpdate.setAadharNumber(profilePersonalInformationEntity.getAadharNumber());
+			userprofilepersonalUpdate.setPanNumber(profilePersonalInformationEntity.getPanNumber());
+			userprofilepersonalUpdate.setUserId(profilePersonalInformationEntity.getUserId());
+			userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
+			userprofilepersonalUpdate.setBloodGroup(profilePersonalInformationEntity.getBloodGroup());
+			userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
+			userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
+			userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
+			userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
+			ProfilePersonalInformationEntity createUserProfilePersonalInformation = personalInformationRepo.save(userprofilepersonalUpdate);
+			if(createUserProfilePersonalInformation != null) {
+				return new ResponseEntity<>("200",HttpStatus.CREATED);
+//				return new ResponseEntity<>(createUserProfilePersonalInformation,HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>("400",HttpStatus.OK);
+			}
+			
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("500",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>("500",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+//	ProfessionalInformation:-----
+	
+	@PostMapping("/professionalInformation")
+	public ResponseEntity<?> createUserProfileProfessionalInformation(@RequestBody ProfileProfessionalInformationEntity profileProfessionalInformationEntity) {
+		ProfileProfessionalInformationEntity userprofileprofessionalUpdate = new ProfileProfessionalInformationEntity();
+		ProfileProfessionalInformationEntity userss = null;
+	
+		try {
+			if(profileProfessionalInformationEntity != null) {
+				
+				userprofileprofessionalUpdate.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
+				
+				userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
+				userprofileprofessionalUpdate.setBussinessName(profileProfessionalInformationEntity.getBussinessName());
+
+				userprofileprofessionalUpdate.setUserId(profileProfessionalInformationEntity.getUserId());
+
+				
+				userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
+				userprofileprofessionalUpdate.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
+			
+			
+				
+				ProfileProfessionalInformationEntity createUserProfileProfessionalInformation = professionalInformationRepo.save(userprofileprofessionalUpdate);
+
+				if(createUserProfileProfessionalInformation != null) {
+					return new ResponseEntity<>("200",HttpStatus.CREATED);
+				}
+				else {
+					return new ResponseEntity<>("400",HttpStatus.OK);
+				}
+				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("500",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>("500",HttpStatus.INTERNAL_SERVER_ERROR);
+	}	
+//	FamilyInformation:------
+	@PostMapping(value ="/familyInformation",produces = MediaType.APPLICATION_JSON_VALUE)
+	
+	public ResponseObject createUserProfileFamilyInformation(@RequestBody ProfileFamilyInformationEntity profileFamilyUpdate){
+		ProfileFamilyInformationEntity userProfileFamilyUpdate = new ProfileFamilyInformationEntity();
+		ProfileFamilyInformationEntity userss = null;
+		try {
+			if (profileFamilyUpdate != null) {
+				userProfileFamilyUpdate.setUserId(profileFamilyUpdate.getUserId());
+				userProfileFamilyUpdate.setFatherName(profileFamilyUpdate.getFatherName());
+				userProfileFamilyUpdate.setFatherAge(profileFamilyUpdate.getFatherAge());
+				userProfileFamilyUpdate.setFatherOccupation(profileFamilyUpdate.getFatherOccupation());
+				userProfileFamilyUpdate.setMotherName(profileFamilyUpdate.getMotherName());
+				userProfileFamilyUpdate.setMotherAge(profileFamilyUpdate.getMotherAge());
+				userProfileFamilyUpdate.setMotherOccupation(profileFamilyUpdate.getMotherOccupation());
+				userProfileFamilyUpdate.setSpouseName(profileFamilyUpdate.getSpouseName());
+				userProfileFamilyUpdate.setSpouseAge(profileFamilyUpdate.getSpouseAge());
+				userProfileFamilyUpdate.setSpouseOccupation(profileFamilyUpdate.getSpouseOccupation());
+				userProfileFamilyUpdate.setNominee1Name(profileFamilyUpdate.getNominee1Name());
+				userProfileFamilyUpdate.setNominee2Name(profileFamilyUpdate.getNominee2Name());
+				userProfileFamilyUpdate.setOtherNomineeName(profileFamilyUpdate.getOtherNomineeName());
+				userProfileFamilyUpdate.setOtherNomineeAge(profileFamilyUpdate.getOtherNomineeAge());
+				userProfileFamilyUpdate.setMaritalStatus(profileFamilyUpdate.getMaritalStatus());
+				userProfileFamilyUpdate.setOtherNomineeRelation(profileFamilyUpdate.getOtherNomineeRelation());
+//				userprofilefamilyUpdate.setFater_upload_medical_history(((ProfileFamilyInformationEntity) father_upload_medical_history).getFater_upload_medical_history());
+////				userprofilefamilyUpdate.setMother_upload_medical_history(((ProfileFamilyInformationEntity) mother_upload_medical_history).getMother_upload_medical_history());
+////				userprofilefamilyUpdate.setSpouse_upload_medical_history(((ProfileFamilyInformationEntity) spouse_upload_medical_history).getSpouse_upload_medical_history());
+////				userprofilefamilyUpdate.setNomine1_upload_medical_history(((ProfileFamilyInformationEntity) nomine1_upload_medical_history).getNomine1_upload_medical_history());
+////				userprofilefamilyUpdate.setNomine2_upload_medical_history(((ProfileFamilyInformationEntity) nomine2_upload_medical_history).getNomine2_upload_medical_history());
+				userProfileFamilyUpdate.setSelectNumberOfChildren(profileFamilyUpdate.getSelectNumberOfChildren());
+				ProfileFamilyInformationEntity createUserProfileFamilyInformation = familyInformationRepo.save(userProfileFamilyUpdate);
+				if (createUserProfileFamilyInformation != null) {
+					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1, createUserProfileFamilyInformation);
+				} else {
+					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
+				}
+			}
+		} catch (Exception e) {
+			return appUtils.prepareResponse("internal server error", "Failer","500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return appUtils.prepareResponse("internal server error", "Failer","500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+//	MedicalInformation:-------
+	
+	@PostMapping("/medicalInformation")
+	public ResponseEntity<?> createUserProfileMedicallInformation(@RequestBody ProfileMedicalInformationEntity profileMedicalInformationEntity) {
+		ProfileMedicalInformationEntity userprofilemedicalUpdate = new ProfileMedicalInformationEntity();
+		try {
+			if (profileMedicalInformationEntity != null) {	
+				userprofilemedicalUpdate.setUserId(profileMedicalInformationEntity.getUserId());
+				userprofilemedicalUpdate.setPastSurgeries(profileMedicalInformationEntity.getPastSurgeries());
+				userprofilemedicalUpdate.setBloodPressure(profileMedicalInformationEntity.getBloodPressure());
+				userprofilemedicalUpdate.setDiabetes(profileMedicalInformationEntity.getDiabetes());
+				ProfileMedicalInformationEntity createUserProfileMedicalInformation = medicalInformationRepo.save(userprofilemedicalUpdate);
+
+				if (createUserProfileMedicalInformation != null) {
+					return new ResponseEntity<>("200", HttpStatus.CREATED);
+				} else {
+					return new ResponseEntity<>("400", HttpStatus.OK);
+				}
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
 
