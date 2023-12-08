@@ -226,7 +226,6 @@ public class UserController {
 		if(profilePersonalInformationEntity != null) {
 			userprofilepersonalUpdate.setAadharNumber(profilePersonalInformationEntity.getAadharNumber());
 			userprofilepersonalUpdate.setPanNumber(profilePersonalInformationEntity.getPanNumber());
-			userprofilepersonalUpdate.setUserId(profilePersonalInformationEntity.getUserId());
 			userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
 			userprofilepersonalUpdate.setBloodGroup(profilePersonalInformationEntity.getBloodGroup());
 			userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
@@ -234,9 +233,8 @@ public class UserController {
 			userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
 			userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
 			ProfilePersonalInformationEntity createUserProfilePersonalInformation = personalInformationRepo.save(userprofilepersonalUpdate);
-			if(createUserProfilePersonalInformation != null) {
+			if(createUserProfilePersonalInformation.getId() != 0) {
 				return new ResponseEntity<>("200",HttpStatus.CREATED);
-//				return new ResponseEntity<>(createUserProfilePersonalInformation,HttpStatus.OK);
 			}
 			else {
 				return new ResponseEntity<>("400",HttpStatus.OK);
@@ -263,19 +261,14 @@ public class UserController {
 				userprofileprofessionalUpdate.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
 				
 				userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
-				userprofileprofessionalUpdate.setBussinessName(profileProfessionalInformationEntity.getBussinessName());
-
-				userprofileprofessionalUpdate.setUserId(profileProfessionalInformationEntity.getUserId());
-
-				
+				userprofileprofessionalUpdate.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
+				userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
 				userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
 				userprofileprofessionalUpdate.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
-			
-			
 				
 				ProfileProfessionalInformationEntity createUserProfileProfessionalInformation = professionalInformationRepo.save(userprofileprofessionalUpdate);
 
-				if(createUserProfileProfessionalInformation != null) {
+				if(createUserProfileProfessionalInformation.getId() != 0) {
 					return new ResponseEntity<>("200",HttpStatus.CREATED);
 				}
 				else {
@@ -297,7 +290,7 @@ public class UserController {
 		ProfileFamilyInformationEntity userss = null;
 		try {
 			if (profileFamilyUpdate != null) {
-				userProfileFamilyUpdate.setUserId(profileFamilyUpdate.getUserId());
+				userProfileFamilyUpdate.setId(profileFamilyUpdate.getId());
 				userProfileFamilyUpdate.setFatherName(profileFamilyUpdate.getFatherName());
 				userProfileFamilyUpdate.setFatherAge(profileFamilyUpdate.getFatherAge());
 				userProfileFamilyUpdate.setFatherOccupation(profileFamilyUpdate.getFatherOccupation());
@@ -320,7 +313,7 @@ public class UserController {
 ////				userprofilefamilyUpdate.setNomine2_upload_medical_history(((ProfileFamilyInformationEntity) nomine2_upload_medical_history).getNomine2_upload_medical_history());
 				userProfileFamilyUpdate.setSelectNumberOfChildren(profileFamilyUpdate.getSelectNumberOfChildren());
 				ProfileFamilyInformationEntity createUserProfileFamilyInformation = familyInformationRepo.save(userProfileFamilyUpdate);
-				if (createUserProfileFamilyInformation != null) {
+				if (createUserProfileFamilyInformation.getId() != 0) {
 					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1, createUserProfileFamilyInformation);
 				} else {
 					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);

@@ -28,9 +28,6 @@ public class ProfileProfessionalInformationEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private Integer id;
-
-	@Column(name = "user_id")
-	private String userId;
 	
 	@Column(name = "source_of_income")
 	private String sourceOfIncome;
@@ -38,22 +35,14 @@ public class ProfileProfessionalInformationEntity implements Serializable {
 	@Column(name = "company_name")
 	private String companyName;
 	
-	@Column(name = "bussiness_name")
-	private String bussinessName;
+	@Column(name = "business_name")
+	private String businessName;
 	
 	@Column(name = "annual_income")
 	private Integer annualIncome;
 	
 	@Column(name = "business_annual_revenue")
 	private Integer businessAnnualRevenue;
-	
-	@CreationTimestamp
-	@Column(name = "created_date")
-	private LocalDate createdDate;
-	
-	@UpdateTimestamp
-	@Column(name = "modified_date")
-	private LocalDate modifiedDate;
 	
 }
 

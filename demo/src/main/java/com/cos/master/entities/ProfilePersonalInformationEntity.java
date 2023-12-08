@@ -27,8 +27,6 @@ public class ProfilePersonalInformationEntity implements Serializable {
 
 	private Integer id;
 
-	@Column(name = "user_id")
-	private String userId;
 	@Column(name = "aadhar_number")
 	private String aadharNumber;
 	@Column(name = "pan_number")
@@ -43,8 +41,8 @@ public class ProfilePersonalInformationEntity implements Serializable {
 	private String bloodGroup;
 	
 	
-	private String height;
-	private String weight;
+	private Integer height;
+	private Integer weight;
 	private String smoking;
 	private String alochol;
 

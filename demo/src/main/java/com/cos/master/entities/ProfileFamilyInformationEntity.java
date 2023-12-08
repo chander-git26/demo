@@ -26,12 +26,7 @@ public class ProfileFamilyInformationEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private Integer id;
-
-	@Column(name = "user_id")
-
-	private Integer userId;
 
 	@Column(name = "father_name")
 	private String fatherName;
