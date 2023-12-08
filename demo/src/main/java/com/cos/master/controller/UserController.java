@@ -13,24 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cos.master.entities.ProfileFamilyInformationEntity;
-import com.cos.master.entities.ProfileMedicalInformationEntity;
-import com.cos.master.entities.ProfilePersonalInformationEntity;
-import com.cos.master.entities.ProfileProfessionalInformationEntity;
+import com.cos.master.entities.FamilyResponse;
+import com.cos.master.entities.MedicalInfoResponse;
+import com.cos.master.entities.PersonalInfoResponse;
+import com.cos.master.entities.ProfessionalResponse;
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.entities.UserEntity;
-import com.cos.master.repository.ProfileFamilyInformationRepository;
-import com.cos.master.repository.ProfileMedicalInformationRepository;
-import com.cos.master.repository.ProfilePersonalInformationRepository;
-import com.cos.master.repository.ProfileProfessionalInformationRepository;
 import com.cos.master.repository.UserRepository;
 import com.cos.master.security.AES;
 import com.cos.master.security.Security;
 import com.cos.master.service.UserService;
-import com.cos.master.utils.AppProfileFamilyInformationUtils;
-import com.cos.master.utils.AppProfileMedicalInformationUtils;
-import com.cos.master.utils.AppProfilePersonalInformationUtils;
-import com.cos.master.utils.AppProfileProfessionalInformationUtils;
 import com.cos.master.utils.AppUtils;
 
 
@@ -100,14 +92,94 @@ public class UserController {
 			UserEntity userEntity = new UserEntity();
 			UserEntity user = userService.getUserInfo(userId);
 			if(user != null) {
-				return appUtils.prepareResponse("Data fetch successful", "successfull", "200", 1, user);
+				return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, user);
 			}else {
 				return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
 			}
 	}
 	
+	@GetMapping("/getPersonalInfo/{userId}")
+	public ResponseObject getPersonalInfo(@PathVariable("userId") Integer userId) {
+		try {
+			if (userId != 0) {
+				String user_id = String.valueOf(userId);
+				PersonalInfoResponse personalInfo = userService.getPersonalInfo(user_id);
+				if (personalInfo.getId() != 0) {
+					return appUtils.prepareResponse("Data fetch successfully", "successful", "200", 1, personalInfo);
+				} else {
+					return appUtils.prepareResponse("Data not found", "Failed", "400", 0, null);
+				}
+			} else {
+				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
+			}
+		} catch (Exception e) {
+			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
+		}
+
+	}
 	
 	
+	@GetMapping("/getProfessionalInfo/{userId}")
+	public ResponseObject getProffessionalInfo(@PathVariable("userId") Integer userId) {
+		try {
+			if (userId != 0) {
+				String user_id = String.valueOf(userId);
+				ProfessionalResponse proffesionalInfo = userService.getProffesionalInfo(user_id);
+				if (proffesionalInfo.getId() != 0) {
+					return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, proffesionalInfo);
+				} else {
+					return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, proffesionalInfo);
+				}
+			} else {
+				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
+		}
+
+	}
+	
+	@GetMapping("/getfamilyInfo/{userId}")
+	public ResponseObject getfamilyInfo(@PathVariable("userId") Integer userId) {
+		try {
+			if (userId != 0) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+				FamilyResponse user = userService.getFamilyInfo(user_id);
+				if (user != null) {
+					return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, user);
+				} else {
+					return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
+				}
+			} else {
+				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
+			}
+		} catch (Exception e) {
+			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
+		}
+	}
+	
+	@GetMapping("/getMedicalInfo/{userId}")
+	public ResponseObject getmedicalInfo(@PathVariable("userId") Integer userId) {
+		try {	
+			if (userId != 0) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+				MedicalInfoResponse medicalInfo = userService.getMedicalInfo(user_id);
+				if (medicalInfo.getId() != 0) {
+					return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, medicalInfo);
+				} else {
+					return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, medicalInfo);
+				}
+			} else {
+				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
+			}
+		} catch (Exception e) {
+			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
+		}
+
+	}
 	@PostMapping("/signin")
 	public ResponseEntity<?> signin(@RequestBody UserEntity userInf) throws Exception {
 		UserEntity user = new UserEntity();
@@ -115,8 +187,8 @@ public class UserController {
 		String email = userInf.getEmail();
 	    String password = userInf.getPassword();
 //	    String encryptPassword = aes.encrypt(password);
-		UserEntity userInfo = userService.getusername(email);
-		String decryptPassword = aes.decrypt(userInfo.getPassword());
+		String userpassword = userService.getusername(email);
+		String decryptPassword = aes.decrypt(userpassword);
 //      	users = userRepo.save(user);
 		if(password.equals(decryptPassword)) {
 			return new ResponseEntity<>("200",HttpStatus.OK);
