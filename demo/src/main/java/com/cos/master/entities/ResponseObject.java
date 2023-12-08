@@ -1,8 +1,11 @@
 package com.cos.master.entities;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public class ResponseObject {
 	private String reason;
 	private String status;

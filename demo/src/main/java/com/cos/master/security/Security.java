@@ -23,12 +23,11 @@ import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-
 import java.util.Base64.Encoder;
 
 import com.cos.master.config.PropertiesConfig;
-import com.cos.master.repository.UserRepository;
 
 @Component
 public class Security {
@@ -55,11 +54,8 @@ public class Security {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
         
 	}
-
 
 	
 	

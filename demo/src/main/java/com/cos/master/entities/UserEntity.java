@@ -14,7 +14,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data
 @Getter
 @Setter
 @Entity
@@ -22,9 +21,7 @@ import lombok.Setter;
 public class UserEntity implements Serializable{
 	
 	@Id
-	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@GeneratedValue(strategy = GenerationType.AUTO)
 
 	private Integer id;
 	private String firstname;
@@ -40,12 +37,8 @@ public class UserEntity implements Serializable{
 	private String state;
 	private String country;
 	private String zipcode;
-	
-//	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "created_date")
 	private LocalDate createdDate;
-	
-//	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "modified_date")
 	private LocalDate modifieddDate;
 }
