@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.cos.master.entities.FamilyResponse;
 import com.cos.master.entities.MedicalInfoResponse;
 import com.cos.master.entities.PersonalInfoResponse;
@@ -44,9 +45,6 @@ public class UserController {
 	UserRepository userRepo;
 	@Autowired
 	AES aes;
-	
-	
-	
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity) {
 		UserEntity user = new UserEntity();
@@ -57,7 +55,7 @@ public class UserController {
 				user.setLastname(userEntity.getLastname());
 				String createdUserId = String.valueOf(appUtils.generateUserId());
 				user.setUserId(createdUserId);
-				String encryptPassword = aes.encrypt(userEntity.getPassword());
+				String encryptPassword = AES.encrypt(userEntity.getPassword());
 //
 //				user.setId(3);
 				user.setPassword(encryptPassword);
