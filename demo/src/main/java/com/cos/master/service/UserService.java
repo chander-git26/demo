@@ -28,20 +28,30 @@ public class UserService {
 	public UserEntity getUserInfo(String userId) {
 		return userRepo.fetchByUserId(userId);
 	}
+	
+	public String getuseremail(String email) {
+		return userRepo.getuseremail(email);
+	}
+	
 	public PersonalInfoResponse getPersonalInfo(String userId) {
 		PersonalInfoResponse personalInfo = new PersonalInfoResponse();
 		List<Object[]> personalInfoList = userRepo.getPersonalInfo(userId);
 		for (int i = 0; i < personalInfoList.size(); i++) {
 			Object[] data = personalInfoList.get(i);
 			personalInfo.setId(Integer.parseInt(setData(data, 0)));
-			personalInfo.setAadhaar_number(setData(data, 1));
-			personalInfo.setPan_number(setData(data, 2));
-			personalInfo.setMarital_status(setData(data, 3));
-			personalInfo.setBlood_Group(setData(data, 4));
-			personalInfo.setHeight(Integer.parseInt(setData(data, 5)));
-			personalInfo.setWeight(Integer.parseInt(setData(data, 6)));
-			personalInfo.setSmoking(setData(data, 7));
-			personalInfo.setAlcohol(setData(data, 8));
+			personalInfo.setAddress(setData(data, 1));
+			personalInfo.setGender(setData(data, 2));
+			personalInfo.setDateofbirth(setData(data, 3));
+			personalInfo.setState(setData(data, 4));
+			personalInfo.setCountry(setData(data, 5));
+			personalInfo.setMarital_status(setData(data, 6));
+			personalInfo.setBlood_Group(setData(data, 7));
+			personalInfo.setHeight(Integer.parseInt(setData(data, 8)));
+			personalInfo.setWeight(Integer.parseInt(setData(data, 9)));
+			personalInfo.setSmoking(setData(data, 10));
+			personalInfo.setAlcohol(setData(data, 11));
+			
+			
 		}
 		return personalInfo;
 	}

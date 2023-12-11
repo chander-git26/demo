@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select password from user_info where email = :email", nativeQuery = true)
 	public String fetchByUserInfo(@Param("email") String email);
 	
-	@Query(value = "Select id,aadharnumber,pannumber,maritalstatus,bloodgroup,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
+	@Query(value = "Select id,address,gender,dateofbirth,state,country,maritalstatus,bloodgroup,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
 	public List<Object[]> getPersonalInfo(@Param("userId") String userId);
 	
 	@Query(value = "select id,source_of_income,company_name,business_name, business_annual_revenue, annual_income from professional_info where id =:userId", nativeQuery = true)
@@ -39,5 +39,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select id,father_name,age,father_occupation,father_medical_history,mother_name,mother_age,mother_occupation,mother_medical_history,spouse_name,spouse_age,spouse_occupation,spouse_medical_history,nominee1_name,nominee2_name,other_nominee_name,other_nominee_age,other_nominee_relationship from family_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getFamilylInfo(@Param("userId") String userId);
 
+	@Query(value = "select user_id from user_info where email=?1", nativeQuery = true)
+	public String getuseremail( String email);
+	
 }
 
