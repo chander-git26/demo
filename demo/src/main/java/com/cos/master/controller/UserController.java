@@ -332,7 +332,7 @@ public class UserController {
 		ProfileMedicalInformationEntity userprofilemedicalUpdate = new ProfileMedicalInformationEntity();
 		try {
 			if (profileMedicalInformationEntity != null) {	
-				userprofilemedicalUpdate.setUserId(profileMedicalInformationEntity.getUserId());
+				userprofilemedicalUpdate.setId(profileMedicalInformationEntity.getId());
 				userprofilemedicalUpdate.setPastSurgeries(profileMedicalInformationEntity.getPastSurgeries());
 				userprofilemedicalUpdate.setBloodPressure(profileMedicalInformationEntity.getBloodPressure());
 				userprofilemedicalUpdate.setDiabetes(profileMedicalInformationEntity.getDiabetes());
