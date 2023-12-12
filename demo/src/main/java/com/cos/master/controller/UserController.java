@@ -43,7 +43,6 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@Autowired(required = true)
 	Security security;
 	
 	@Autowired
@@ -51,6 +50,7 @@ public class UserController {
 	
 	@Autowired
 	UserRepository userRepo;
+	
 	@Autowired
 	AES aes;
 	
@@ -248,8 +248,6 @@ public class UserController {
 		return new ResponseEntity<>("500",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-//	ProfessionalInformation:-----
-	
 	@PostMapping("/professionalInformation")
 	public ResponseEntity<?> createUserProfileProfessionalInformation(@RequestBody ProfileProfessionalInformationEntity profileProfessionalInformationEntity) {
 		ProfileProfessionalInformationEntity userprofileprofessionalUpdate = new ProfileProfessionalInformationEntity();
@@ -282,7 +280,7 @@ public class UserController {
 		}
 		return new ResponseEntity<>("500",HttpStatus.INTERNAL_SERVER_ERROR);
 	}	
-//	FamilyInformation:------
+
 	@PostMapping(value ="/familyInformation",produces = MediaType.APPLICATION_JSON_VALUE)
 	
 	public ResponseObject createUserProfileFamilyInformation(@RequestBody ProfileFamilyInformationEntity profileFamilyUpdate){
@@ -307,10 +305,10 @@ public class UserController {
 				userProfileFamilyUpdate.setMaritalStatus(profileFamilyUpdate.getMaritalStatus());
 				userProfileFamilyUpdate.setOtherNomineeRelation(profileFamilyUpdate.getOtherNomineeRelation());
 //				userprofilefamilyUpdate.setFater_upload_medical_history(((ProfileFamilyInformationEntity) father_upload_medical_history).getFater_upload_medical_history());
-////				userprofilefamilyUpdate.setMother_upload_medical_history(((ProfileFamilyInformationEntity) mother_upload_medical_history).getMother_upload_medical_history());
-////				userprofilefamilyUpdate.setSpouse_upload_medical_history(((ProfileFamilyInformationEntity) spouse_upload_medical_history).getSpouse_upload_medical_history());
-////				userprofilefamilyUpdate.setNomine1_upload_medical_history(((ProfileFamilyInformationEntity) nomine1_upload_medical_history).getNomine1_upload_medical_history());
-////				userprofilefamilyUpdate.setNomine2_upload_medical_history(((ProfileFamilyInformationEntity) nomine2_upload_medical_history).getNomine2_upload_medical_history());
+//				userprofilefamilyUpdate.setMother_upload_medical_history(((ProfileFamilyInformationEntity) mother_upload_medical_history).getMother_upload_medical_history());
+//				userprofilefamilyUpdate.setSpouse_upload_medical_history(((ProfileFamilyInformationEntity) spouse_upload_medical_history).getSpouse_upload_medical_history());
+//				userprofilefamilyUpdate.setNomine1_upload_medical_history(((ProfileFamilyInformationEntity) nomine1_upload_medical_history).getNomine1_upload_medical_history());
+//				userprofilefamilyUpdate.setNomine2_upload_medical_history(((ProfileFamilyInformationEntity) nomine2_upload_medical_history).getNomine2_upload_medical_history());
 				userProfileFamilyUpdate.setSelectNumberOfChildren(profileFamilyUpdate.getSelectNumberOfChildren());
 				ProfileFamilyInformationEntity createUserProfileFamilyInformation = familyInformationRepo.save(userProfileFamilyUpdate);
 				if (createUserProfileFamilyInformation.getId() != 0) {
@@ -324,8 +322,6 @@ public class UserController {
 		}
 		return appUtils.prepareResponse("internal server error", "Failer","500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
-//	MedicalInformation:-------
 	
 	@PostMapping("/medicalInformation")
 	public ResponseEntity<?> createUserProfileMedicallInformation(@RequestBody ProfileMedicalInformationEntity profileMedicalInformationEntity) {
