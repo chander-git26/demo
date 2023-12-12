@@ -27,10 +27,13 @@ public class PersonalInformationEntity implements Serializable {
 
 	private Integer id;
 
-	@Column(name = "aadhar_number")
-	private String aadharNumber;
-	@Column(name = "pan_number")
-	private String panNumber;
+	
+	private String address;
+
+	private String gender;
+	private String dateofbirth;
+	private String state;
+	private String country;
 	@Column(name = "marital_status")
 	private String maritalStatus;
 	@Column(name = "blood_group")

@@ -218,9 +218,12 @@ public class UserController {
 		PersonalInformationEntity userprofilepersonalUpdate = new PersonalInformationEntity();
 		PersonalInformationEntity userss = null;
 		try {
-		if(profilePersonalInformationEntity != null) {
-			userprofilepersonalUpdate.setAadharNumber(profilePersonalInformationEntity.getAadharNumber());
-			userprofilepersonalUpdate.setPanNumber(profilePersonalInformationEntity.getPanNumber());
+			if(profilePersonalInformationEntity != null) {
+				userprofilepersonalUpdate.setAddress(profilePersonalInformationEntity.getAddress());
+				userprofilepersonalUpdate.setGender(profilePersonalInformationEntity.getGender());
+				userprofilepersonalUpdate.setDateofbirth(profilePersonalInformationEntity.getDateofbirth());
+				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
+				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
 			userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
 			userprofilepersonalUpdate.setBloodGroup(profilePersonalInformationEntity.getBloodGroup());
 			userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
