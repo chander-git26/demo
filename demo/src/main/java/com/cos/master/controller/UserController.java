@@ -82,16 +82,12 @@ public class UserController {
 				user.setPassword(encryptPassword);
 		      		user.setMobile(userEntity.getMobile());
 				user.setEmail(userEntity.getEmail());
-				user.setAddress(userEntity.getAddress());
-				user.setDateofbirth(userEntity.getDateofbirth());
-				user.setGender(userEntity.getGender());
-				user.setState(userEntity.getState());
-				user.setCountry(userEntity.getCountry());
-				user.setZipcode(userEntity.getZipcode());
+				
+				
 				user.setCreatedDate(LocalDate.now());
 				user.setModifieddDate(LocalDate.now());
 				users = userRepo.save(user);
-//				int createUser = userService.createUser(user.getFirstname(),user.getLastname(),user.getUserId(),user.getGender(),user.getDateofbirth(),user.getMobile(),user.getPassword(),user.getEmail(),user.getAddress(),user.getState(),user.getCountry(),user.getZipcode(),user.getCreatedDate(),user.getModifieddDate());
+//				int createUser = userService.createUser(user.getFirstname(),user.getLastname(),user.getUserId(),user.getMobile(),user.getPassword(),user.getEmail(),user.getCreatedDate(),user.getModifieddDate());
 				if(users != null) {
 					return new ResponseEntity<>("200",HttpStatus.CREATED);
 				}else {

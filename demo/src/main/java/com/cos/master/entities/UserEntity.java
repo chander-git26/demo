@@ -28,15 +28,12 @@ public class UserEntity implements Serializable{
 	private String lastname;
 	@Column(name = "user_id")
 	private String userId;
-	private String gender;
-	private String dateofbirth;
+	
 	private String mobile;
 	private String password;
+
 	private String email;
-	private String address;
-	private String state;
-	private String country;
-	private String zipcode;
+
 	@Column(name = "created_date")
 	private LocalDate createdDate;
 	@Column(name = "modified_date")
