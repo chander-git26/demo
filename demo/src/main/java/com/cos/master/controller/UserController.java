@@ -13,21 +13,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.cos.master.entities.FamilyInformationEntity;
 import com.cos.master.entities.FamilyResponse;
 import com.cos.master.entities.MedicalInfoResponse;
+import com.cos.master.entities.MedicalInformationEntity;
 import com.cos.master.entities.PersonalInfoResponse;
+import com.cos.master.entities.PersonalInformationEntity;
+import com.cos.master.entities.ProfessionalInformationEntity;
 import com.cos.master.entities.ProfessionalResponse;
-import com.cos.master.entities.ProfileFamilyInformationEntity;
-import com.cos.master.entities.ProfileMedicalInformationEntity;
-import com.cos.master.entities.ProfilePersonalInformationEntity;
-import com.cos.master.entities.ProfileProfessionalInformationEntity;
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.entities.UserEntity;
-import com.cos.master.repository.ProfileFamilyInformationRepository;
-import com.cos.master.repository.ProfileMedicalInformationRepository;
-import com.cos.master.repository.ProfilePersonalInformationRepository;
-import com.cos.master.repository.ProfileProfessionalInformationRepository;
+import com.cos.master.repository.FamilyInformationRepository;
+import com.cos.master.repository.MedicalInformationRepository;
+import com.cos.master.repository.PersonalInformationRepository;
+import com.cos.master.repository.ProfessionalInformationRepository;
 import com.cos.master.repository.UserRepository;
 import com.cos.master.security.AES;
 import com.cos.master.security.Security;
@@ -52,19 +51,19 @@ public class UserController {
 	UserRepository userRepo;
 	
 	@Autowired
+	FamilyInformationRepository familyInfoRepo;
+	
+	@Autowired
+	MedicalInformationRepository medicalInfoRepo;
+	
+	@Autowired
+	PersonalInformationRepository personalInfoRepo;
+	
+	@Autowired
+	ProfessionalInformationRepository professionalInfoRepo;
+	
+	@Autowired
 	AES aes;
-	
-	@Autowired
-	ProfileMedicalInformationRepository medicalInformationRepo;
-	
-	@Autowired
-	ProfileFamilyInformationRepository familyInformationRepo;
-	
-	@Autowired
-	ProfileProfessionalInformationRepository professionalInformationRepo;
-	
-	@Autowired
-	ProfilePersonalInformationRepository personalInformationRepo;
 	
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity) {
@@ -219,9 +218,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/personalInformation")
-	public ResponseEntity<?> createUserProfilePersonalInformation(@RequestBody ProfilePersonalInformationEntity profilePersonalInformationEntity) {
-		ProfilePersonalInformationEntity userprofilepersonalUpdate = new ProfilePersonalInformationEntity();
-		ProfilePersonalInformationEntity userss = null;
+	public ResponseEntity<?> createUserProfilePersonalInformation(@RequestBody PersonalInformationEntity profilePersonalInformationEntity) {
+		PersonalInformationEntity userprofilepersonalUpdate = new PersonalInformationEntity();
+		PersonalInformationEntity userss = null;
 		try {
 		if(profilePersonalInformationEntity != null) {
 			userprofilepersonalUpdate.setAadharNumber(profilePersonalInformationEntity.getAadharNumber());
@@ -232,7 +231,7 @@ public class UserController {
 			userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
 			userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
 			userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
-			ProfilePersonalInformationEntity createUserProfilePersonalInformation = personalInformationRepo.save(userprofilepersonalUpdate);
+			PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo.save(userprofilepersonalUpdate);
 			if(createUserProfilePersonalInformation.getId() != 0) {
 				return new ResponseEntity<>("200",HttpStatus.CREATED);
 			}
@@ -249,9 +248,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/professionalInformation")
-	public ResponseEntity<?> createUserProfileProfessionalInformation(@RequestBody ProfileProfessionalInformationEntity profileProfessionalInformationEntity) {
-		ProfileProfessionalInformationEntity userprofileprofessionalUpdate = new ProfileProfessionalInformationEntity();
-		ProfileProfessionalInformationEntity userss = null;
+	public ResponseEntity<?> createUserProfileProfessionalInformation(@RequestBody ProfessionalInformationEntity profileProfessionalInformationEntity) {
+		ProfessionalInformationEntity userprofileprofessionalUpdate = new ProfessionalInformationEntity();
+		ProfessionalInformationEntity userss = null;
 	
 		try {
 			if(profileProfessionalInformationEntity != null) {
@@ -264,7 +263,7 @@ public class UserController {
 				userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
 				userprofileprofessionalUpdate.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
 				
-				ProfileProfessionalInformationEntity createUserProfileProfessionalInformation = professionalInformationRepo.save(userprofileprofessionalUpdate);
+				ProfessionalInformationEntity createUserProfileProfessionalInformation = professionalInfoRepo.save(userprofileprofessionalUpdate);
 
 				if(createUserProfileProfessionalInformation.getId() != 0) {
 					return new ResponseEntity<>("200",HttpStatus.CREATED);
@@ -283,9 +282,9 @@ public class UserController {
 
 	@PostMapping(value ="/familyInformation",produces = MediaType.APPLICATION_JSON_VALUE)
 	
-	public ResponseObject createUserProfileFamilyInformation(@RequestBody ProfileFamilyInformationEntity profileFamilyUpdate){
-		ProfileFamilyInformationEntity userProfileFamilyUpdate = new ProfileFamilyInformationEntity();
-		ProfileFamilyInformationEntity userss = null;
+	public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate){
+		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
+		FamilyInformationEntity userss = null;
 		try {
 			if (profileFamilyUpdate != null) {
 				userProfileFamilyUpdate.setId(profileFamilyUpdate.getId());
@@ -310,7 +309,7 @@ public class UserController {
 //				userprofilefamilyUpdate.setNomine1_upload_medical_history(((ProfileFamilyInformationEntity) nomine1_upload_medical_history).getNomine1_upload_medical_history());
 //				userprofilefamilyUpdate.setNomine2_upload_medical_history(((ProfileFamilyInformationEntity) nomine2_upload_medical_history).getNomine2_upload_medical_history());
 				userProfileFamilyUpdate.setSelectNumberOfChildren(profileFamilyUpdate.getSelectNumberOfChildren());
-				ProfileFamilyInformationEntity createUserProfileFamilyInformation = familyInformationRepo.save(userProfileFamilyUpdate);
+				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
 				if (createUserProfileFamilyInformation.getId() != 0) {
 					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1, createUserProfileFamilyInformation);
 				} else {
@@ -324,15 +323,15 @@ public class UserController {
 	}
 	
 	@PostMapping("/medicalInformation")
-	public ResponseEntity<?> createUserProfileMedicallInformation(@RequestBody ProfileMedicalInformationEntity profileMedicalInformationEntity) {
-		ProfileMedicalInformationEntity userprofilemedicalUpdate = new ProfileMedicalInformationEntity();
+	public ResponseEntity<?> createUserProfileMedicallInformation(@RequestBody MedicalInformationEntity profileMedicalInformationEntity) {
+		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
 		try {
 			if (profileMedicalInformationEntity != null) {	
 				userprofilemedicalUpdate.setId(profileMedicalInformationEntity.getId());
 				userprofilemedicalUpdate.setPastSurgeries(profileMedicalInformationEntity.getPastSurgeries());
 				userprofilemedicalUpdate.setBloodPressure(profileMedicalInformationEntity.getBloodPressure());
 				userprofilemedicalUpdate.setDiabetes(profileMedicalInformationEntity.getDiabetes());
-				ProfileMedicalInformationEntity createUserProfileMedicalInformation = medicalInformationRepo.save(userprofilemedicalUpdate);
+				MedicalInformationEntity createUserProfileMedicalInformation = medicalInfoRepo.save(userprofilemedicalUpdate);
 
 				if (createUserProfileMedicalInformation != null) {
 					return new ResponseEntity<>("200", HttpStatus.CREATED);
@@ -345,8 +344,18 @@ public class UserController {
 		}
 		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-}
 
+	@GetMapping("/getUserId/{email}")
+	public ResponseObject getUserId(@PathVariable("email") String email) {
+		UserEntity userEntity = new UserEntity();
+		String user = userService.getUserEmail(email);
+		if (user != null) {
+			return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, user);
+		} else {
+			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
+		}
+	}
+}
 
 
 

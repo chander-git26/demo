@@ -8,8 +8,11 @@ import lombok.Setter;
 @Setter
 public class PersonalInfoResponse {
 	private Integer id;
-	private String aadhaar_number;
-	private String pan_number;
+	private String address;
+	private String gender;
+	private String dateofbirth;
+	private String state;
+	private String country;
 	private String marital_status;
 	private String blood_Group;
 	private int height;

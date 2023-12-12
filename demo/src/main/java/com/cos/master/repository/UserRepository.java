@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select password from user_info where email = :email", nativeQuery = true)
 	public String fetchByUserInfo(@Param("email") String email);
 	
-	@Query(value = "Select id,aadhar_number,pan_number,marital_status,blood_group,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
+	@Query(value = "Select id,address,gender,dateofbirth,state,country,maritalstatus,bloodgroup,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
 	public List<Object[]> getPersonalInfo(@Param("userId") String userId);
 	
 	@Query(value = "select id,source_of_income,company_name,business_name, business_annual_revenue, annual_income from professional_info where id =:userId", nativeQuery = true)
@@ -41,5 +41,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Query(value = "select otp from user_info where user_id =:userId ", nativeQuery = true)
 	public String getUserOtp(@Param("userId") String userId);
+
+	@Query(value = "select user_id from user_info where email=?1", nativeQuery = true)
+	public String getUserEmail( String email);
+	
 }
 
