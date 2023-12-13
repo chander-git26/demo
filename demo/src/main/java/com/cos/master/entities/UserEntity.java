@@ -34,7 +34,19 @@ public class UserEntity implements Serializable{
 
 	private String email;
 	private String otp;
-
+	
+	private String address;
+	private String gender;
+	private String dateofbirth;
+	private String state;
+	private String country;
+	private String Martiualstatus;
+	private String Bloodgroup;
+	private String Height;
+	private String weight;
+	private String smoking;
+	private String Alochol;
+	
 	@Column(name = "created_date")
 	private LocalDate createdDate;
 	@Column(name = "modified_date")

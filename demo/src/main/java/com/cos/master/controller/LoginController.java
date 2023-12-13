@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.repository.UserRepository;
+import com.cos.master.service.UserService;
 import com.cos.master.utils.AppUtils;
 
 @RestController
@@ -23,18 +24,29 @@ public class LoginController {
 	@Autowired
 	UserRepository userRepo;
 	
-	@GetMapping("/verifyMobileNumber/{mobile}")
-	public ResponseObject verifyMobile(@PathVariable("mobile") String mobile){
-		
-		String otp = appUtils.generateOtp();
-		if(otp != null) {
-			int rowsAffected = userRepo.saveOtp(otp,mobile);
-			if(rowsAffected !=0) {
-				Map<String, Object> otpMap = new HashMap<>();
-				otpMap.put("otp", otp);
-				return  appUtils.prepareResponse("User otp generated", "success", "200", 1, null);	
+	@Autowired
+	UserService userService;
+   
+	@GetMapping("/generateOtp/{mobile}")
+	public ResponseObject generateOtp(@PathVariable("mobile") String mobile) {
+		try {
+			if (mobile != null) {
+				String mobileNum = userService.verifyMobileNumber(mobile);
+				if (mobileNum != null) {
+					String otp = appUtils.generateOtp();
+					if (otp != null) {
+						int rowsAffected = userRepo.saveOtp(otp, mobile);
+						if (rowsAffected != 0) {
+							Map<String, Object> otpMap = new HashMap<>();
+							otpMap.put("otp", otp);
+							return appUtils.prepareResponse("User otp generated", "success", "200", 1, null);
+						}
+					}
+				}
 			}
+			return appUtils.prepareResponse("mobile number cannot be empty", "Failed", "400", 0, null);
+		} catch (Exception e) {
+			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
-		return  appUtils.prepareResponse("User otp generated", "success", "400", 0, null);
 	}
 }
