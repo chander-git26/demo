@@ -1,6 +1,7 @@
 package com.cos.master.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.cos.master.entities.PersonalInfoResponse;
 import com.cos.master.entities.ProfessionalResponse;
 import com.cos.master.entities.UserEntity;
+
+import jakarta.transaction.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -45,5 +48,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select user_id from user_info where email=?1", nativeQuery = true)
 	public String getUserEmail( String email);
 	
+	@Modifying
+	@Transactional
+	@Query(value = "update user_info set password=:updatedPassword where mobile=:moblieNumber ", nativeQuery=true)
+	public int updatePassword(@Param("updatedPassword")String updatedPassword,@Param("moblieNumber")String moblieNumber);
+	
+	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
+	public String getUserMobile(@Param("mobile")String mobile);
 }
 

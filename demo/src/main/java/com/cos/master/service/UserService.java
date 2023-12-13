@@ -33,6 +33,15 @@ public class UserService {
 		return userRepo.getUserEmail(email);
 	}
 	
+//	public int updatePassword(String password,String mobile)
+//	{
+//		return  userRepo.updatePassword(password,mobile);
+//	}
+	
+	public String getUserMobile(String mobile) {
+		return userRepo.getUserMobile(mobile);
+	}
+	
 	public PersonalInfoResponse getPersonalInfo(String userId) {
 		PersonalInfoResponse personalInfo = new PersonalInfoResponse();
 		List<Object[]> personalInfoList = userRepo.getPersonalInfo(userId);
