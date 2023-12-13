@@ -81,10 +81,9 @@ public class UserController {
 				String createdUserId = String.valueOf(appUtils.generateUserId());
 				user.setUserId(createdUserId);
 				String encryptPassword = aes.encrypt(userEntity.getPassword());
-//
-//				user.setId(3);
+
 				user.setPassword(encryptPassword);
-		      		user.setMobile(userEntity.getMobile());
+		      	user.setMobile(userEntity.getMobile());
 				user.setEmail(userEntity.getEmail());
 				
 				
@@ -124,7 +123,7 @@ public class UserController {
 				String user_id = String.valueOf(userId);
 				PersonalInfoResponse personalInfo = userService.getPersonalInfo(user_id);
 				if (personalInfo.getId() != 0) {
-					return appUtils.prepareResponse("Data fetch successfully", "successful", "200", 1, personalInfo);
+					return appUtils.prepareResponse("Data fetch successfully", "Success", "200", 1, personalInfo);
 				} else {
 					return appUtils.prepareResponse("Data not found", "Failed", "400", 0, null);
 				}
@@ -145,7 +144,7 @@ public class UserController {
 				String user_id = String.valueOf(userId);
 				ProfessionalResponse proffesionalInfo = userService.getProffesionalInfo(user_id);
 				if (proffesionalInfo.getId() != 0) {
-					return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, proffesionalInfo);
+					return appUtils.prepareResponse("Data fetch successfully", "Success", "200", 1, proffesionalInfo);
 				} else {
 					return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, proffesionalInfo);
 				}
@@ -167,7 +166,7 @@ public class UserController {
 				String user_id = String.valueOf(userId);
 				FamilyResponse user = userService.getFamilyInfo(user_id);
 				if (user != null) {
-					return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, user);
+					return appUtils.prepareResponse("Data fetch successfully", "Success", "200", 1, user);
 				} else {
 					return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
 				}
@@ -187,7 +186,7 @@ public class UserController {
 				String user_id = String.valueOf(userId);
 				MedicalInfoResponse medicalInfo = userService.getMedicalInfo(user_id);
 				if (medicalInfo.getId() != 0) {
-					return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, medicalInfo);
+					return appUtils.prepareResponse("Data fetch successfully", "Success", "200", 1, medicalInfo);
 				} else {
 					return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, medicalInfo);
 				}
@@ -358,7 +357,7 @@ public class UserController {
 		UserEntity userEntity = new UserEntity();
 		String user = userService.getUserEmail(email);
 		if (user != null) {
-			return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, user);
+			return appUtils.prepareResponse("Data fetch successfully", "Success", "200", 1, user);
 		} else {
 			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
 		}
