@@ -23,18 +23,18 @@ public class LoginController {
 	@Autowired
 	UserRepository userRepo;
 	
-	@GetMapping("/verifyMobileNumber/{mobile}")
-	public ResponseObject verifyMobile(@PathVariable("mobile") String mobile){
-		
-		String otp = appUtils.generateOtp();
-		if(otp != null) {
-			int rowsAffected = userRepo.saveOtp(otp,mobile);
-			if(rowsAffected !=0) {
-				Map<String, Object> otpMap = new HashMap<>();
-				otpMap.put("otp", otp);
-				return  appUtils.prepareResponse("User otp generated", "success", "200", 1, null);	
-			}
-		}
-		return  appUtils.prepareResponse("User otp generated", "success", "400", 0, null);
-	}
+//	@GetMapping("/verifyMobileNumber/{mobile}")
+//	public ResponseObject verifyMobile(@PathVariable("mobile") String mobile){
+//		
+//		String otp = appUtils.generateOtp();
+//		if(otp != null) {
+//			int rowsAffected = userRepo.saveOtp(otp,mobile);
+//			if(rowsAffected !=0) {
+//				Map<String, Object> otpMap = new HashMap<>();
+//				otpMap.put("otp", otp);
+//				return  appUtils.prepareResponse("User otp generated", "success", "200", 1, null);	
+//			}
+//		}
+//		return  appUtils.prepareResponse("User otp generated", "success", "400", 0, null);
+//	}
 }

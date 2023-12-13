@@ -363,35 +363,7 @@ public class UserController {
 		}
 	}
 	
-//	@PostMapping("/updatePassword/{mobile}")
-//	public ResponseEntity<?> updatePassword(@PathVariable("mobile") String mobile) throws Exception {
-//		
-//		UserEntity update=new UserEntity();
-//		String encryptPassword = AES.encrypt(update.getPassword());
-//		String  update1=userService.updatePassword(mobile);
-//		if(update !=null) {
-//			return new ResponseEntity<>("200", HttpStatus.update);
-//		} else {
-//			return new ResponseEntity<>("400", HttpStatus.OK);	
-	//}
-			
-			
-//	@PostMapping("/updatePassword/{mobile}")
-//	public ResponseObject getUserMobile(@PathVariable("mobile") String mobile) throws Exception {
-//		UserEntity userEntity = new UserEntity();
-//		String user = userService.getUserMobile(mobile);
-//		String password = "";
-//		String encryptPassword = AES.encrypt(userEntity.getPassword());
-//		String updatepassword=userRepo.updatePassword(encryptPassword);
-//		if (user != null) {
-//			return appUtils.prepareResponse("updated successfully", "success", "200", 1, user);
-//		} else {
-//			return appUtils.prepareResponse("Failed to fetch ", "failed", "400", 1, user);
-//		}
-//	
-//	
-//	
-//	} 
+
 	
 	@PostMapping("/updatePassword")
 	public ResponseEntity<?> updatePassword(@RequestBody String json) throws Exception {
@@ -412,7 +384,7 @@ public class UserController {
 		}
 
 	}
-	}
+}
 
 
 
