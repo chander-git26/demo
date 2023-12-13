@@ -1,5 +1,6 @@
 package com.cos.master.utils;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,13 @@ public class AppUtils {
 			return id;
 		}
 	}
-	public int generateOtp() {
-		Random random = new Random();
-		int randomNumber = random.nextInt();
-		System.out.println("generated number :"+randomNumber);
-		if(randomNumber <= 1000) {
-			randomNumber += 1000;
-			System.out.println("incremented number :"+randomNumber);
+	public String generateOtp() {
+		String generatedOtp = "";
+		generatedOtp = new DecimalFormat("000000").format(new Random().nextInt(999999));
+		if(generatedOtp != null) {
+			return generatedOtp;
 		}
-		return randomNumber;
+		return generatedOtp;
 	}
 	public String validateOtp(String userId){
 		return userRepo.getUserOtp(userId);	
