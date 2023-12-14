@@ -26,7 +26,7 @@ public class LoginController {
 	
 	@Autowired
 	UserService userService;
-   
+	
 	@GetMapping("/generateOtp/{mobile}")
 	public ResponseObject generateOtp(@PathVariable("mobile") String mobile) {
 		try {
