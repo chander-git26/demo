@@ -33,8 +33,8 @@ public class AppUtils {
 		}
 		return generatedOtp;
 	}
-	public String validateOtp(String userId){
-		return userRepo.getUserOtp(userId);	
+	public String validateOtp(String mobile){
+		return userRepo.getUserOtp(mobile);	
 	}
 	public ResponseObject prepareResponse(String reason, String status, String statusCode, int resultCount, Object dataObject ) {
 		ResponseObject responseObject= new ResponseObject();

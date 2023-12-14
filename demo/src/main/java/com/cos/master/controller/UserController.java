@@ -1,17 +1,21 @@
 package com.cos.master.controller;
 
+import java.awt.Image;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.master.entities.FamilyInformationEntity;
 import com.cos.master.entities.FamilyResponse;
@@ -218,27 +222,26 @@ public class UserController {
 		PersonalInformationEntity userprofilepersonalUpdate = new PersonalInformationEntity();
 		PersonalInformationEntity userss = null;
 		try {
-			if(profilePersonalInformationEntity != null) {
+			if (profilePersonalInformationEntity != null) {
 				userprofilepersonalUpdate.setAddress(profilePersonalInformationEntity.getAddress());
 				userprofilepersonalUpdate.setGender(profilePersonalInformationEntity.getGender());
 				userprofilepersonalUpdate.setDateofbirth(profilePersonalInformationEntity.getDateofbirth());
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
 				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
-			userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
-			userprofilepersonalUpdate.setBloodGroup(profilePersonalInformationEntity.getBloodGroup());
-			userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
-			userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
-			userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
-			userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
-			PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo.save(userprofilepersonalUpdate);
-			if(createUserProfilePersonalInformation.getId() != 0) {
-				return new ResponseEntity<>("200",HttpStatus.CREATED);
+				userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
+				userprofilepersonalUpdate.setBloodGroup(profilePersonalInformationEntity.getBloodGroup());
+				userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
+				userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
+				userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
+				userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
+				PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo.save(userprofilepersonalUpdate);
+				if (createUserProfilePersonalInformation.getId() != 0) {
+					return new ResponseEntity<>("200", HttpStatus.CREATED);
+				} else {
+					return new ResponseEntity<>("400", HttpStatus.OK);
+				}
+
 			}
-			else {
-				return new ResponseEntity<>("400",HttpStatus.OK);
-			}
-			
-		}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("500",HttpStatus.INTERNAL_SERVER_ERROR);
