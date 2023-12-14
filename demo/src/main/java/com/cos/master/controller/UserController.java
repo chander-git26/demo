@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -160,7 +161,7 @@ public class UserController {
 	
 	@GetMapping("/getfamilyInfo/{userId}")
 	public ResponseObject getfamilyInfo(@PathVariable("userId") Integer userId) {
-		try {
+		try { 
 			if (userId != 0) {
 				UserEntity userEntity = new UserEntity();
 				String user_id = String.valueOf(userId);
@@ -199,7 +200,7 @@ public class UserController {
 
 	}
 	@PostMapping("/signin")
-	public ResponseEntity<?> signin(@RequestBody UserEntity userInf) throws Exception {
+	public ResponseEntity<String> signin(@RequestBody UserEntity userInf) throws Exception {
 		UserEntity user = new UserEntity();
 		
 		String email = userInf.getEmail();
@@ -209,11 +210,13 @@ public class UserController {
 		String decryptPassword = aes.decrypt(userpassword);
 //      	users = userRepo.save(user);
 		if(password.equals(decryptPassword)) {
-			return new ResponseEntity<>("200",HttpStatus.OK);
+			return new ResponseEntity<>("Successfully signed in", HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<>("400",HttpStatus.OK);
+			return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);
 		}
+		
+
 		
 	}
 	

@@ -20,9 +20,9 @@ public class UserService {
 	@Autowired
 	UserRepository userRepo;
 	
-	public int createUser(String firstname, String lastname, String userId, String mobile, String password, String email, LocalDate createdDate, LocalDate modifiedDate){
-		return userRepo.createUser(firstname, lastname, userId, mobile, password, email,  createdDate, modifiedDate);
-	}
+//	public int createUser(String firstname, String lastname, String userId, String mobile, String password, String email, LocalDate createdDate, LocalDate modifiedDate){
+//		return userRepo.createUser(firstname, lastname, userId, mobile, password, email,  createdDate, modifiedDate);
+//	}
 	
 	
 	public UserEntity getUserInfo(String userId) {
@@ -134,5 +134,13 @@ public class UserService {
 	
 	public String getusername(String email) {
 		return userRepo.fetchByUserInfo(email);
+	}
+	
+	public int updateFathername(String father_name,int id) {
+		return userRepo.updateFathername(father_name,id);
+	}
+	
+	public int updateAge(int age,int id) {
+		return userRepo.updateAge(age,id);
 	}
 }

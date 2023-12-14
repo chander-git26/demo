@@ -21,9 +21,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select MAX(user_id) from user_info", nativeQuery = true)
 	public String generateUserId();
 	
-	@Query(value = "INSERT INTO `demo`.`user_info` (`firstname`, `lastname`, `user_id`, `mobile`, `password`, `email`,  `created_date`, `modified_date`) VALUES (?1, '?2', '?3', '?4', '?5', '?6', '?7', '?8','?8');", nativeQuery = true)
-	public Integer createUser(String firstname, String lastname, String userId,  String password,  String email, String mobile,LocalDate createdDate, LocalDate modifiedDate);
-	
+//	@Query(value = "INSERT INTO `demo`.`user_info` (`firstname`, `lastname`, `user_id`, `mobile`, `password`, `email`,  `created_date`, `modified_date`) VALUES (?1, '?2', '?3', '?4', '?5', '?6', '?7', '?8','?8');", nativeQuery = true)
+//	public Integer createUser(String firstname, String lastname, String userId,  String password,  String email, String mobile,LocalDate createdDate, LocalDate modifiedDate);
+//	
 	@Query(value = "select * from user_info where user_id = ?1", nativeQuery = true)
 	public UserEntity fetchByUserId(String userId);
 
@@ -65,5 +65,17 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	
 
+	
+	//update
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set father_name =:father_name where id =:id", nativeQuery = true)
+	public int updateFathername(@Param("father_name") String father_name,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set age =:age where id =:id", nativeQuery = true)
+	public int updateAge(@Param("age") int age,@Param("id") int id);
+	
 }
 
