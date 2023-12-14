@@ -49,9 +49,22 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select user_id from user_info where email=?1", nativeQuery = true)
 	public String getUserEmail( String email);
 	
+	@Query(value = "select mobileNumber from user_info where mobile=?1", nativeQuery = true)
+	public String getMobileNumber(String  mobileNumber);
+
 	@Modifying
 	@Transactional
+
+	@Query(value = "update user_info set password=:updatedPassword where mobile=:moblieNumber ", nativeQuery=true)
+	public int updatePassword(@Param("updatedPassword")String updatedPassword,@Param("moblieNumber")String moblieNumber);
+	
+	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
+	public String getUserMobile(@Param("mobile")String mobile);
+
 	@Query(value ="update user_info set otp =:otp where mobile =:mobile", nativeQuery = true)
 	public int saveOtp(@Param("otp") String otp,@Param("mobile") String mobile);
+	
+	
+
 }
 

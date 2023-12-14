@@ -33,6 +33,15 @@ public class UserService {
 		return userRepo.getUserEmail(email);
 	}
 	
+//	public int updatePassword(String password,String mobile)
+//	{
+//		return  userRepo.updatePassword(password,mobile);
+//	}
+	
+	public String getUserMobile(String mobile) {
+		return userRepo.getUserMobile(mobile);
+	}
+	
 	public PersonalInfoResponse getPersonalInfo(String userId) {
 		PersonalInfoResponse personalInfo = new PersonalInfoResponse();
 		List<Object[]> personalInfoList = userRepo.getPersonalInfo(userId);
@@ -115,6 +124,14 @@ public class UserService {
 	public String setData(Object[] data, int index) {
 		return data[index] !=null ? data[index].toString() : null;
 	}
+	
+	
+	public String verifyMobileNumber(String mobileNumber) {
+		return userRepo.getMobileNumber(mobileNumber);
+	}
+
+	
+	
 	public String getusername(String email) {
 		return userRepo.fetchByUserInfo(email);
 	}

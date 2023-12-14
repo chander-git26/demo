@@ -2,6 +2,8 @@ package com.cos.master.controller;
 
 import java.awt.Image;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,12 +38,15 @@ import com.cos.master.security.AES;
 import com.cos.master.security.Security;
 import com.cos.master.service.UserService;
 import com.cos.master.utils.AppUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
 @RestController
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
+	
+	
 	
 	@Autowired
 	UserService userService;
@@ -79,9 +84,8 @@ public class UserController {
 				user.setLastname(userEntity.getLastname());
 				String createdUserId = String.valueOf(appUtils.generateUserId());
 				user.setUserId(createdUserId);
-				String encryptPassword = AES.encrypt(userEntity.getPassword());
-//
-//				user.setId(3);
+				String encryptPassword = aes.encrypt(userEntity.getPassword());
+
 				user.setPassword(encryptPassword);
 		      	user.setMobile(userEntity.getMobile());
 				user.setEmail(userEntity.getEmail());
@@ -333,6 +337,10 @@ public class UserController {
 				userprofilemedicalUpdate.setPastSurgeries(profileMedicalInformationEntity.getPastSurgeries());
 				userprofilemedicalUpdate.setBloodPressure(profileMedicalInformationEntity.getBloodPressure());
 				userprofilemedicalUpdate.setDiabetes(profileMedicalInformationEntity.getDiabetes());
+				userprofilemedicalUpdate.setUploadMedicalHistory(profileMedicalInformationEntity.getUploadMedicalHistory());
+				
+				
+				
 				MedicalInformationEntity createUserProfileMedicalInformation = medicalInfoRepo.save(userprofilemedicalUpdate);
 
 				if (createUserProfileMedicalInformation != null) {
@@ -357,7 +365,33 @@ public class UserController {
 			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
 		}
 	}
-}
+	
+
+	
+	@PostMapping("/updatePassword")
+	public ResponseEntity<?> updatePassword(@RequestBody String json) throws Exception {
+		UserEntity user = new UserEntity();
+		Map<String, Object> data = null;
+		ObjectMapper mapper = new ObjectMapper();
+		data = mapper.readValue(json, Map.class);
+		String mobilenumber = (String) data.get("mobile");
+		String password = (String) data.get("password");
+		String usermobile = userService.getUserMobile(mobilenumber);
+
+		String encryptPassword = aes.encrypt(password);
+		int updatepassword = userRepo.updatePassword(encryptPassword, mobilenumber);
+		if (updatepassword != 0) {
+			return new ResponseEntity<>("200", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("400", HttpStatus.OK);
+		}
+
+	}
+	  	
+	  
+} 
+
+
 
 
 
