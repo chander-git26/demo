@@ -12,6 +12,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 @SpringBootApplication
 @EnableJpaRepositories("com.cos.master")
 public class MasterApplication {
@@ -25,6 +28,20 @@ public class MasterApplication {
         final UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config=new CorsConfiguration();
         config.setAllowCredentials(true);
+        
+//        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:8280"));
+
+        config.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
+				"Accept", "Jwt-Token", "Authorization", "Origin, Accept", "X-Requested-With",
+				"Access-Control-Request-Method", "Access-Control-Request-Headers"));
+        config.setExposedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Jwt-Token", "Authorization",
+				"Access-Control-Allow-Origin", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "File-Name"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        
+        source.registerCorsConfiguration("/**", config);
+
+        
         config.addAllowedHeader("*");
         config.addAllowedOriginPattern("*");
         config.addAllowedMethod("OPTIONS");

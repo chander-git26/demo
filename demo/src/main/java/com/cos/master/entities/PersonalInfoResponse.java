@@ -1,22 +1,46 @@
 package com.cos.master.entities;
 
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PersonalInfoResponse {
+
+public class PersonalInfoResponse implements Serializable{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Integer id;
+	
 	private String address;
 	private String gender;
-	private String dateofbirth;
+	
+	@Column(name = "date_of_birth")
+	private String dateOfBirth;
+	
 	private String state;
 	private String country;
-	private String marital_status;
-	private String blood_Group;
-	private int height;
-	private int weight;
+	
+	@Column(name = "marital_status")
+	private String maritalStatus;
+	
+	@Column(name = "blood_group")
+	private String bloodGroup;
+	
+//	private int height;
+//	private int weight;
+	private Integer height;
+	private Integer weight;
+	
 	private String smoking;
 	private String alcohol;
 

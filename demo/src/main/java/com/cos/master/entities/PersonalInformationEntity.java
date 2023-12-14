@@ -24,12 +24,8 @@ public class PersonalInformationEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private Integer id;
-
-	
 	private String address;
-
 	private String gender;
 	private String dateofbirth;
 	private String state;

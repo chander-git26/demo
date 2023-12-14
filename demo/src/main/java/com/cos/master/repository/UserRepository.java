@@ -20,30 +20,34 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Query(value = "select MAX(user_id) from user_info", nativeQuery = true)
 	public String generateUserId();
+
+	@Query(value = "INSERT INTO `demo`.`user_info` (`firstname`, `lastname`, `user_id`, `mobile`, `password`, `email`,  `created_date`, `modified_date`) VALUES (?1, '?2', '?3', '?4', '?5', '?6', '?7', '?8');", nativeQuery = true)
+	public Integer createUser(String firstname, String lastname, String userId,  String password,  String email, String mobile,LocalDate createdDate, LocalDate modifiedDate);
 	
-//	@Query(value = "INSERT INTO `demo`.`user_info` (`firstname`, `lastname`, `user_id`, `mobile`, `password`, `email`,  `created_date`, `modified_date`) VALUES (?1, '?2', '?3', '?4', '?5', '?6', '?7', '?8','?8');", nativeQuery = true)
-//	public Integer createUser(String firstname, String lastname, String userId,  String password,  String email, String mobile,LocalDate createdDate, LocalDate modifiedDate);
-//	
 	@Query(value = "select * from user_info where user_id = ?1", nativeQuery = true)
 	public UserEntity fetchByUserId(String userId);
 
 	@Query(value = "select password from user_info where email = :email", nativeQuery = true)
 	public String fetchByUserInfo(@Param("email") String email);
 	
-	@Query(value = "Select id,address,gender,dateofbirth,state,country,maritalstatus,bloodgroup,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
+	
+	
+	@Query(value = "Select id,address,gender,date_of_birth,state,country,marital_status,blood_group,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
 	public List<Object[]> getPersonalInfo(@Param("userId") String userId);
 	
-	@Query(value = "select id,source_of_income,company_name,business_name, business_annual_revenue, annual_income from professional_info where id =:userId", nativeQuery = true)
+	@Query(value = "select id,source_of_income,company_name,business_name, annual_income, business_annual_revenue from professional_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getProfessionallInfo(@Param("userId") String userId);
 	
-	@Query(value = "select id,Past_surgeries,Blood_pressure,Diabetes,Upload_medical_history from medical_info where id = :userId", nativeQuery = true)
-	public List<Object[]> getMedicallInfo(@Param("userId") String userId);
-	
-	@Query(value = "select id,father_name,age,father_occupation,father_medical_history,mother_name,mother_age,mother_occupation,mother_medical_history,spouse_name,spouse_age,spouse_occupation,spouse_medical_history,nominee1_name,nominee2_name,other_nominee_name,other_nominee_age,other_nominee_relationship from family_info where id =:userId", nativeQuery = true)
+	@Query(value = "select id,father_name,father_age,father_occupation,fater_upload_medical_history,mother_name,mother_age,mother_occupation,mother_upload_medical_history,spouse_name,spouse_age,spouse_occupation,spouse_upload_medical_history,nominee1_name,nominee2_name,other_nominee_name,other_nominee_age,other_nominee_relation,marital_status,select_number_of_children from family_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getFamilylInfo(@Param("userId") String userId);
 	
-	@Query(value = "select otp from user_info where user_id =:userId ", nativeQuery = true)
-	public String getUserOtp(@Param("userId") String userId);
+	@Query(value = "select id,past_surgeries,blood_pressure,diabetes,upload_medical_history from medical_info where id = :userId", nativeQuery = true)
+	public List<Object[]> getMedicallInfo(@Param("userId") String userId);
+	
+	
+	
+//	@Query(value = "select otp from user_info where user_id =:mobile ", nativeQuery = true)
+//	public String getUserOtp(@Param("mobile") String mobile);
 
 	@Query(value = "select user_id from user_info where email=?1", nativeQuery = true)
 	public String getUserEmail( String email);

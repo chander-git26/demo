@@ -50,11 +50,11 @@ public class UserService {
 			personalInfo.setId(Integer.parseInt(setData(data, 0)));
 			personalInfo.setAddress(setData(data, 1));
 			personalInfo.setGender(setData(data, 2));
-			personalInfo.setDateofbirth(setData(data, 3));
+			personalInfo.setDateOfBirth(setData(data, 3));
 			personalInfo.setState(setData(data, 4));
 			personalInfo.setCountry(setData(data, 5));
-			personalInfo.setMarital_status(setData(data, 6));
-			personalInfo.setBlood_Group(setData(data, 7));
+			personalInfo.setMaritalStatus(setData(data, 6));
+			personalInfo.setBloodGroup(setData(data, 7));
 			personalInfo.setHeight(Integer.parseInt(setData(data, 8)));
 			personalInfo.setWeight(Integer.parseInt(setData(data, 9)));
 			personalInfo.setSmoking(setData(data, 10));
@@ -70,11 +70,11 @@ public class UserService {
 		for (int i = 0; i < professionalInfoList.size(); i++) {
 			Object[] data = professionalInfoList.get(i);
 			proffesionalInfo.setId(Integer.parseInt(setData(data, 0)));
-			proffesionalInfo.setSource_of_income(setData(data, 1));
-			proffesionalInfo.setCompany_name(setData(data, 2));
-			proffesionalInfo.setBusiness_name(setData(data, 3));
-			proffesionalInfo.setAnnual_business_revenue(setData(data, 4));;
-			proffesionalInfo.setAnnual_salary(setData(data, 5));
+			proffesionalInfo.setSourceOfIncome(setData(data, 1));
+			proffesionalInfo.setCompanyName(setData(data, 2));
+			proffesionalInfo.setBusinessName(setData(data, 3));
+			proffesionalInfo.setBusinessAnnualRevenue(Integer.parseInt(setData(data, 4)));;
+			proffesionalInfo.setAnnualIncome(Integer.parseInt(setData(data, 5)));
 		}
 		return proffesionalInfo;
 
@@ -85,23 +85,23 @@ public class UserService {
 		for (int i = 0; i < professionalInfoList.size(); i++) {
 			Object[] data = professionalInfoList.get(i);
 			familyInfo.setId(Integer.parseInt(setData(data, 0)));
-			familyInfo.setFather_name(setData(data, 1));
-			familyInfo.setAge(Integer.parseInt(setData(data, 2)));
-			familyInfo.setFather_occupation(setData(data, 3));
-			familyInfo.setFather_medical_history(setData(data, 4));
-			familyInfo.setMother_name(setData(data, 5));
-			familyInfo.setMother_age(Integer.parseInt(setData(data, 6)));
-			familyInfo.setMother_occupation(setData(data, 7));
-			familyInfo.setMother_medical_history(setData(data, 8));
-			familyInfo.setSpouse_name(setData(data, 9));
-//			familyInfo.setSpouse_age(Integer.parseInt(setData(data, 10)));
-			familyInfo.setSpouse_occupation(setData(data, 11));
-			familyInfo.setSpouse_medical_history(setData(data, 12));
-			familyInfo.setNominee1_name(setData(data, 13));
-			familyInfo.setNominee2_name(setData(data, 14));
-			familyInfo.setOther_nominee_name(setData(data, 15));
-//			familyInfo.setOther_nominee_age(Integer.parseInt(setData(data, 16)));
-			familyInfo.setOther_nominee_relationship(setData(data, 17));
+			familyInfo.setFatherName(setData(data, 1));
+			familyInfo.setFatherAge(Integer.parseInt(setData(data, 2)));
+			familyInfo.setFatherOccupation(setData(data, 3));
+			familyInfo.setFatherUploadMedicalHistory(setData(data, 4));
+			familyInfo.setMotherName(setData(data, 5));
+			familyInfo.setMotherAge(Integer.parseInt(setData(data, 6)));
+			familyInfo.setMotherOccupation(setData(data, 7));
+			familyInfo.setMotherUploadMedicalHistory(setData(data, 8));
+			familyInfo.setSpouseName(setData(data, 9));
+			familyInfo.setSpouseAge(Integer.parseInt(setData(data, 10)));
+			familyInfo.setSpouseOccupation(setData(data, 11));
+			familyInfo.setSpouseUploadMedicalHistory(setData(data, 12));
+			familyInfo.setNominee1Name(setData(data, 13));
+			familyInfo.setNominee2Name(setData(data, 14));
+			familyInfo.setOtherNomineeName(setData(data, 15));
+			familyInfo.setOtherNomineeAge(Integer.parseInt(setData(data, 16)));
+			familyInfo.setOtherNomineeRelation(setData(data, 17));
 			
 		}
 		return familyInfo;
@@ -113,8 +113,8 @@ public class UserService {
 		for (int i = 0; i < professionalInfoList.size(); i++) {
 			Object[] data = professionalInfoList.get(i);
 			medicalInfo.setId(Integer.parseInt(setData(data, 0)));
-			medicalInfo.setPast_surgeries(setData(data, 1));
-			medicalInfo.setBlood_pressure(setData(data, 2));
+			medicalInfo.setPastSurgeries(setData(data, 1));
+			medicalInfo.setBloodPressure(Integer.parseInt(setData(data, 2)));
 			medicalInfo.setDiabetes(setData(data, 3));
 //			medicalInfo.setUpload_medical_history(setData(data, 3));
 		}
