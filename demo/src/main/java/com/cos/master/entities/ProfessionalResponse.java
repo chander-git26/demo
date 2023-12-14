@@ -1,18 +1,44 @@
 package com.cos.master.entities;
 
+import java.io.Serializable;
 
+import java.time.LocalDate;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class ProfessionalResponse {
+@Setter
+
+
+public class ProfessionalResponse implements Serializable {
+	
 	private Integer id;
-	private String source_of_income;
-	private String company_name;
-	private String business_name;
-	private String annual_business_revenue;
-	private String annual_salary;
- }
+	
+	@Column(name = "source_of_income")
+	private String sourceOfIncome;
+	
+	@Column(name = "company_name")
+	private String companyName;
+	
+	@Column(name = "business_name")
+	private String businessName;
+	
+	@Column(name = "annual_income")
+	private Integer annualIncome;
+	
+	@Column(name = "business_annual_revenue")
+	private Integer businessAnnualRevenue;
+	
+}
+
