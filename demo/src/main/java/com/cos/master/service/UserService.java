@@ -124,6 +124,14 @@ public class UserService {
 	public String setData(Object[] data, int index) {
 		return data[index] !=null ? data[index].toString() : null;
 	}
+	
+	
+	public String verifyMobileNumber(String mobileNumber) {
+		return userRepo.getMobileNumber(mobileNumber);
+	}
+
+	
+	
 	public String getusername(String email) {
 		return userRepo.fetchByUserInfo(email);
 	}

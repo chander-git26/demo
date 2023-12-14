@@ -34,7 +34,10 @@ public class UserEntity implements Serializable{
 
 	private String email;
 	private String otp;
+	
+	
 
+	
 	@Column(name = "created_date")
 	private LocalDate createdDate;
 	@Column(name = "modified_date")
