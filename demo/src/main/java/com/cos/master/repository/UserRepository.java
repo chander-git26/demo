@@ -44,15 +44,13 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select id,past_surgeries,blood_pressure,diabetes,upload_medical_history from medical_info where id = :userId", nativeQuery = true)
 	public List<Object[]> getMedicallInfo(@Param("userId") String userId);
 	
-	
-	
 //	@Query(value = "select otp from user_info where user_id =:mobile ", nativeQuery = true)
 //	public String getUserOtp(@Param("mobile") String mobile);
 
 	@Query(value = "select user_id from user_info where email=?1", nativeQuery = true)
 	public String getUserEmail( String email);
 	
-	@Query(value = "select mobileNumber from user_info where mobile=?1", nativeQuery = true)
+	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
 	public String getMobileNumber(String  mobileNumber);
 
 	@Modifying
@@ -63,14 +61,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
 	public String getUserMobile(@Param("mobile")String mobile);
-
+	
+	@Modifying
+	@Transactional
 	@Query(value ="update user_info set otp =:otp where mobile =:mobile", nativeQuery = true)
 	public int saveOtp(@Param("otp") String otp,@Param("mobile") String mobile);
-	
-	
 
-	
-	//updatefamilyinfo
 	@Modifying
 	@Transactional
 	@Query(value ="update family_info set father_name =:father_name where id =:id", nativeQuery = true)
