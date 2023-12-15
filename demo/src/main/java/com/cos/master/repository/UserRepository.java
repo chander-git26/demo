@@ -38,7 +38,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select id,source_of_income,company_name,business_name, annual_income, business_annual_revenue from professional_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getProfessionallInfo(@Param("userId") String userId);
 	
-	@Query(value = "select id,father_name,father_age,father_occupation,fater_upload_medical_history,mother_name,mother_age,mother_occupation,mother_upload_medical_history,spouse_name,spouse_age,spouse_occupation,spouse_upload_medical_history,nominee1_name,nominee2_name,other_nominee_name,other_nominee_age,other_nominee_relation,marital_status,select_number_of_children from family_info where id =:userId", nativeQuery = true)
+	@Query(value = "select id,father_name,father_age,father_occupation,father_upload_medical_history,mother_name,mother_age,mother_occupation,mother_upload_medical_history,spouse_name,spouse_age,spouse_occupation,spouse_upload_medical_history,nominee1_name,nominee2_name,other_nominee_name,other_nominee_age,other_nominee_relation,marital_status,select_number_of_children from family_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getFamilylInfo(@Param("userId") String userId);
 	
 	@Query(value = "select id,past_surgeries,blood_pressure,diabetes,upload_medical_history from medical_info where id = :userId", nativeQuery = true)
@@ -70,16 +70,106 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 
 	
-	//update
+	//updatefamilyinfo
 	@Modifying
 	@Transactional
 	@Query(value ="update family_info set father_name =:father_name where id =:id", nativeQuery = true)
-	public int updateFathername(@Param("father_name") String father_name,@Param("id") int id);
+	public int updateFatherName(@Param("father_name") String father_name,@Param("id") int id);
 	
 	@Modifying
 	@Transactional
-	@Query(value ="update family_info set age =:age where id =:id", nativeQuery = true)
-	public int updateAge(@Param("age") int age,@Param("id") int id);
+	@Query(value ="update family_info set father_age =:father_age where id =:id", nativeQuery = true)
+	public int updateAge(@Param("father_age") int father_age,@Param("id") int id);
 	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set father_occupation =:father_occupation where id =:id", nativeQuery = true)
+	public int upadteFatherOccupation(@Param("father_occupation") String father_occupation,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set mother_age =:mother_age where id =:id", nativeQuery = true)
+	public int updateMotherAge(@Param("mother_age") int mother_age,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set mother_Name =:mother_Name where id =:id", nativeQuery = true)
+	public int upadteMotherName(@Param("mother_Name") String mother_Name,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set mother_occupation =:mother_occupation where id =:id", nativeQuery = true)
+	public int upadteMotherOccupation(@Param("mother_occupation") String mother_occupation,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set spouse_name =:spouse_name where id =:id", nativeQuery = true)
+	public int upadteSpouseName(@Param("spouse_name") String spouse_name,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set spouse_age =:spouse_age where id =:id", nativeQuery = true)
+	public int updateSpouseAge(@Param("spouse_age") int spouse_age,@Param("id") int id);
+	
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set spouse_occupation =:spouse_occupation where id =:id", nativeQuery = true)
+	public int updateSpouseOccupation(@Param("spouse_occupation") String spouse_occupation,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set nominee1_name =:nominee1_name where id =:id", nativeQuery = true)
+	public int updateNominee1Name(@Param("nominee1_name") String nominee1_name,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set nominee2_name =:nominee2_name where id =:id", nativeQuery = true)
+	public int updateNominee2Name(@Param("nominee2_name") String nominee2_name,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set other_nominee_name =:other_nominee_name where id =:id", nativeQuery = true)
+	public int updateOtherNomineeName(@Param("other_nominee_name") String other_nominee_name,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set other_nominee_age =:other_nominee_age where id =:id", nativeQuery = true)
+	public int updateOtherNomineeAge(@Param("other_nominee_age") int other_nominee_age,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set other_nominee_relation =:other_nominee_relation where id =:id", nativeQuery = true)
+	public int updateOtherNomineeRelation(@Param("other_nominee_relation") String other_nominee_relation,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set marital_status =:marital_status where id =:id", nativeQuery = true)
+	public int updateMaritalStatus(@Param("marital_status") String marital_status,@Param("id") int id);
+	
+	
+
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set select_number_of_children =:select_number_of_children where id =:id", nativeQuery = true)
+	public int updateSelectNumberOfChildren(@Param("select_number_of_children") int select_number_of_children,@Param("id") int id);
+	
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update medical_info set past_surgeries =:past_surgeries where id =:id", nativeQuery = true)
+	public int updatePastSurgeries(@Param("past_surgeries") String past_surgeries,@Param("id") int id);
+	
+
+	@Modifying
+	@Transactional
+	@Query(value ="update medical_info set blood_pressure =:blood_pressure where id =:id", nativeQuery = true)
+	public int updateBloodPressure(@Param("blood_pressure") String blood_pressure,@Param("id") int id);
+	
+
+	@Modifying
+	@Transactional
+	@Query(value ="update medical_info set diabetes =:diabetes where id =:id", nativeQuery = true)
+	public int updateDiabetes(@Param("diabetes") String diabetes,@Param("id") int id);
 }
 
