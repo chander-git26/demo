@@ -32,7 +32,9 @@ public class LoginController {
 		try {
 			if (mobile != null) {
 				String mobileNum = userService.verifyMobileNumber(mobile);
-				if (mobileNum != null) {
+				if (mobileNum == null || mobile.isEmpty()) {
+					return appUtils.prepareResponse("Mobile number not registered", "Failed", "400", 0, null);
+				}else {
 					String otp = appUtils.generateOtp();
 					if (otp != null) {
 						int rowsAffected = userRepo.saveOtp(otp, mobile);

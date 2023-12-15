@@ -52,7 +52,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select user_id from user_info where email=?1", nativeQuery = true)
 	public String getUserEmail( String email);
 	
-	@Query(value = "select mobileNumber from user_info where mobile=?1", nativeQuery = true)
+	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
 	public String getMobileNumber(String  mobileNumber);
 
 	@Modifying
@@ -63,14 +63,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
 	public String getUserMobile(@Param("mobile")String mobile);
-
+	
+	@Modifying
+	@Transactional
 	@Query(value ="update user_info set otp =:otp where mobile =:mobile", nativeQuery = true)
 	public int saveOtp(@Param("otp") String otp,@Param("mobile") String mobile);
 	
-	
-
-	
-	//update
 	@Modifying
 	@Transactional
 	@Query(value ="update family_info set father_name =:father_name where id =:id", nativeQuery = true)
