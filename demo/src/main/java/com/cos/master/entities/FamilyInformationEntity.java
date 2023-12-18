@@ -33,7 +33,11 @@ public class FamilyInformationEntity implements Serializable {
 	@Column(name = "father_age")
 	private Integer fatherAge;
 	private String fatherOccupation;
-//	private MultipartFile  fater_upload_medical_history;
+	
+	@Column(name = "father_upload_medical_history")
+	private String  fatherUploadMedicalHistory;
+	
+//	private MultipartFile  father_upload_medical_history;
 
 	@Column(name = "mother_name")
 	private String motherName;
@@ -41,6 +45,9 @@ public class FamilyInformationEntity implements Serializable {
 	private Integer motherAge;
 	@Column(name = "mother_occupation")
 	private String motherOccupation;
+	
+	@Column(name = "mother_upload_medical_history")
+	private String  motherUploadMedicalHistory;
 //	private MultipartFile   mother_upload_medical_history;
 
 	@Column(name = "spouse_name")
@@ -49,6 +56,9 @@ public class FamilyInformationEntity implements Serializable {
 	private Integer spouseAge;
 	@Column(name = "spouse_occupation")
 	private String spouseOccupation;
+	
+	@Column(name = "spouse_upload_medical_history")
+	private String  spouseUploadMedicalHistory;
 //	private MultipartFile  spouse_upload_medical_history;
 
 	@Column(name = "nominee1_name")
@@ -59,7 +69,7 @@ public class FamilyInformationEntity implements Serializable {
 
 	@Column(name = "other_nominee_name")
 	private String otherNomineeName;
-	@Column(name = "other_nominee_ge")
+	@Column(name = "other_nominee_age")
 	private Integer otherNomineeAge;
 	@Column(name = "other_nominee_relation")
 	private String otherNomineeRelation;

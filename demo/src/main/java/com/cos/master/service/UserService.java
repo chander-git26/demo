@@ -179,11 +179,75 @@ public class UserService {
 		return userRepo.fetchByUserInfo(email);
 	}
 	
-	public int updateFathername(String father_name,int id) {
-		return userRepo.updateFathername(father_name,id);
+	public int updateFatherName(String father_name,int id) {
+		return userRepo.updateFatherName(father_name,id);
 	}
 	
-	public int updateAge(int age,int id) {
-		return userRepo.updateAge(age,id);
+	public int updateAge(int father_age,int id) {
+		return userRepo.updateAge(father_age,id);
 	}
+	
+	public int upadteFatherOccupation(String father_occupation,int id) {
+		return userRepo.upadteFatherOccupation(father_occupation,id);
+	}
+	
+	public int updateMotherAge(int mother_age,int id) {
+		return userRepo.updateMotherAge(mother_age,id);
+	}
+	
+	public int upadteMotherName(String mother_Name,int id) {
+		return userRepo.upadteMotherName(mother_Name,id);
+	}
+	
+	public int upadteMotherOccupation(String mother_occupation,int id) {
+		return userRepo.upadteMotherOccupation(mother_occupation,id);
+	}
+	public int upadteSpouseName(String spouse_name,int id) {
+		return userRepo.upadteSpouseName(spouse_name,id);
+	}
+	
+	public int updateSpouseAge(int spouse_age,int id) {
+		return userRepo.updateSpouseAge(spouse_age,id);
+	}
+	
+	public int updateSpouseOccupation(String spouse_occupation,int id) {
+		return userRepo.updateSpouseOccupation(spouse_occupation,id);
+	}
+	
+	public int updateNominee1Name(String nominee1_name,int id) {
+		return userRepo.updateNominee1Name(nominee1_name,id);
+	}
+	
+	public int updateNominee2Name(String other_nominee_name,int id) {
+		return userRepo.updateNominee2Name(other_nominee_name,id);
+	}
+	
+	public int updateOtherNomineeName(String other_nominee_name,int id) {
+		return userRepo.updateOtherNomineeName(other_nominee_name,id);
+	}
+	
+	public int updateOtherNomineeAge(int other_nominee_age,int id) {
+		return userRepo.updateOtherNomineeAge(other_nominee_age,id);
+	}
+	
+	public int updateOtherNomineeRelation(String other_nominee_relation,int id) {
+		return userRepo.updateOtherNomineeRelation(other_nominee_relation,id);
+	}
+
+	public int updateSelectNumberOfChildren(int select_number_of_children,int id) {
+		return userRepo.updateSelectNumberOfChildren(select_number_of_children,id);
+	}
+	
+	public int updatePastSurgeries(String past_surgeries,int id) {
+		return userRepo.updatePastSurgeries(past_surgeries,id);
+	}
+	
+	public int updateBloodPressure(String blood_pressure,int id) {
+		return userRepo.updateBloodPressure(blood_pressure,id);
+	}
+
+	public int updateDiabetes(String diabetes,int id) {
+		return userRepo.updateDiabetes(diabetes,id);
+	}
+	
 }
