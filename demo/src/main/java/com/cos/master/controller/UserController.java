@@ -527,5 +527,5 @@ public class UserController {
 			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, null);
 		}
 	}
-
+	
 }
