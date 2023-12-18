@@ -248,11 +248,11 @@ public class UserController {
 			if (profilePersonalInformationEntity != null) {
 				userprofilepersonalUpdate.setAddress(profilePersonalInformationEntity.getAddress());
 				userprofilepersonalUpdate.setGender(profilePersonalInformationEntity.getGender());
-				String startDateString = profilePersonalInformationEntity.getDateofbirth();
+				String startDateString = profilePersonalInformationEntity.getDateOfBirth();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 				DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			    String newDate = LocalDate.parse(startDateString, formatter).format(formatter2);
-				userprofilepersonalUpdate.setDateofbirth(newDate);
+				userprofilepersonalUpdate.setDateOfBirth(newDate);
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
 				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
 				userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
