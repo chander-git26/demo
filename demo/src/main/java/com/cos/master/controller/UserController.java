@@ -80,19 +80,22 @@ public class UserController {
 	UserRepository userRepo;
 
 	@Autowired
+	PersonalInformationRepository personalInfoRepo;
+
+	@Autowired
+	ProfessionalInformationRepository professionalInfoRepo;
+	
+	@Autowired
 	FamilyInformationRepository familyInfoRepo;
 
 	@Autowired
 	MedicalInformationRepository medicalInfoRepo;
 
 	@Autowired
-	PersonalInformationRepository personalInfoRepo;
-
-	@Autowired
-	ProfessionalInformationRepository professionalInfoRepo;
-
-	@Autowired
 	AES aes;
+	
+//    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity) {
@@ -102,11 +105,13 @@ public class UserController {
 			if (userEntity != null) {
 				user.setFirstname(userEntity.getFirstname());
 				user.setLastname(userEntity.getLastname());
+				
 				String createdUserId = String.valueOf(appUtils.generateUserId());
 				user.setUserId(createdUserId);
 				String encryptPassword = aes.encrypt(userEntity.getPassword());
 
 				user.setPassword(encryptPassword);
+				
 				user.setMobile(userEntity.getMobile());
 				user.setEmail(userEntity.getEmail());
 
@@ -126,6 +131,25 @@ public class UserController {
 		}
 		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@PostMapping("/signin")
+	public ResponseEntity<String> signin(@RequestBody UserEntity userInf) throws Exception {
+		UserEntity user = new UserEntity();
+
+		String email = userInf.getEmail();
+		String password = userInf.getPassword();
+//	    String encryptPassword = aes.encrypt(password);
+		String userpassword = userService.getusername(email);
+		String decryptPassword = aes.decrypt(userpassword);
+//      	users = userRepo.save(user);
+		if(password.equals(decryptPassword)) {
+			return new ResponseEntity<>("Successfully signed in", HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);
+		}
+	}
+
 
 	@GetMapping("/getUserDetails/{userId}")
 	public ResponseObject getUserDetails(@PathVariable("userId") String userId) {
@@ -199,6 +223,7 @@ public class UserController {
 		}
 	}
 
+	
 	@GetMapping("/getMedicalInfo/{userId}")
 	public ResponseObject getmedicalInfo(@PathVariable("userId") Integer userId) {
 		try {
@@ -220,34 +245,18 @@ public class UserController {
 
 	}
 
-	@PostMapping("/signin")
-	public ResponseEntity<String> signin(@RequestBody UserEntity userInf) throws Exception {
-		UserEntity user = new UserEntity();
-
-		String email = userInf.getEmail();
-		String password = userInf.getPassword();
-//	    String encryptPassword = aes.encrypt(password);
-		String userpassword = userService.getusername(email);
-		String decryptPassword = aes.decrypt(userpassword);
-//      	users = userRepo.save(user);
-		if(password.equals(decryptPassword)) {
-			return new ResponseEntity<>("Successfully signed in", HttpStatus.OK);
-		}
-		else {
-			return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);
-		}
-	}
-
-	@PostMapping("/personalInformation")
-	public ResponseEntity<?> createUserProfilePersonalInformation(
+	@PostMapping("/savePersonalInformation")
+	public ResponseEntity<?> savePersonalInformation(
 			@RequestBody PersonalInformationEntity profilePersonalInformationEntity) {
 		PersonalInformationEntity userprofilepersonalUpdate = new PersonalInformationEntity();
 		PersonalInformationEntity userss = null;
 		try {
 			if (profilePersonalInformationEntity != null) {
+				
+				userprofilepersonalUpdate.setId(profilePersonalInformationEntity.getId());
 				userprofilepersonalUpdate.setAddress(profilePersonalInformationEntity.getAddress());
 				userprofilepersonalUpdate.setGender(profilePersonalInformationEntity.getGender());
-				userprofilepersonalUpdate.setDateofbirth(profilePersonalInformationEntity.getDateofbirth());
+				userprofilepersonalUpdate.setDateOfBirth(profilePersonalInformationEntity.getDateOfBirth());
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
 				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
 				userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
@@ -256,8 +265,9 @@ public class UserController {
 				userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
 				userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
 				userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
-				PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo.save(userprofilepersonalUpdate);
-				if (createUserProfilePersonalInformation.getId() != 0) {
+				
+				PersonalInformationEntity savePersonalInformation = personalInfoRepo.save(userprofilepersonalUpdate);
+				if (savePersonalInformation.getId() != 0) {
 					return new ResponseEntity<>("200", HttpStatus.CREATED);
 				} else {
 					return new ResponseEntity<>("400", HttpStatus.OK);
@@ -271,8 +281,8 @@ public class UserController {
 		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PostMapping("/professionalInformation")
-	public ResponseEntity<?> createUserProfileProfessionalInformation(
+	@PostMapping("/saveProfessionalInformation")
+	public ResponseEntity<?> saveProfessionalInformation(
 			@RequestBody ProfessionalInformationEntity profileProfessionalInformationEntity) {
 		ProfessionalInformationEntity userprofileprofessionalUpdate = new ProfessionalInformationEntity();
 		ProfessionalInformationEntity userss = null;
@@ -283,6 +293,8 @@ public class UserController {
 				userprofileprofessionalUpdate
 						.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
 
+				userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
+				
 				userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
 				userprofileprofessionalUpdate.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
 				userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
@@ -310,11 +322,11 @@ public class UserController {
 	// define a location
 	public static final String DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/";
 
-	@PostMapping(value = "/familyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
 //	    @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
 
 //	public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
-	public ResponseObject createUserProfileFamilyInformation(@RequestParam String id,String fatherName,Integer fatherAge,String fatherOccupation
+	public ResponseObject saveFamilyInformation(@RequestParam String id,String fatherName,Integer fatherAge,String fatherOccupation
 			
 			,@RequestParam("fatherUploadMedicalHistory")List<MultipartFile> fatherUploadMedicalHistory
 			,String motherName,Integer motherAge,String motherOccupation
@@ -333,18 +345,14 @@ public class UserController {
 			if (id != null) {
 				userProfileFamilyUpdate.setId(Integer.parseInt(id));
 				userProfileFamilyUpdate.setFatherName(fatherName);			
-//				userProfileFamilyUpdate.setFatherAge(Integer.parseInt(fatherAge));
 				userProfileFamilyUpdate.setFatherAge(fatherAge);
 				userProfileFamilyUpdate.setFatherOccupation(fatherOccupation);
-//				userProfileFamilyUpdate.setFatherUploadMedicalHistory(fatherUploadMedicalHistory);
 				userProfileFamilyUpdate.setMotherName(motherName);
 				userProfileFamilyUpdate.setMotherAge(motherAge);
 				userProfileFamilyUpdate.setMotherOccupation(motherOccupation);
-//				userProfileFamilyUpdate.setMotherUploadMedicalHistory(motherUploadMedicalHistory);
 				userProfileFamilyUpdate.setSpouseName(spouseName);
 				userProfileFamilyUpdate.setSpouseAge(spouseAge);
 				userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);				
-//				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);	
 				userProfileFamilyUpdate.setNominee1Name(nominee1Name);
 				userProfileFamilyUpdate.setNominee2Name(nominee2Name);
 				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
@@ -352,6 +360,7 @@ public class UserController {
 				userProfileFamilyUpdate.setOtherNomineeRelation(otherNomineeRelation);
 				userProfileFamilyUpdate.setMaritalStatus(maritalStatus);
 				userProfileFamilyUpdate.setSelectNumberOfChildren(selectNumberOfChildren);
+				
 				List<String> filenames = new ArrayList<>();	 
 				 for(MultipartFile file : fatherUploadMedicalHistory) {
 			            String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -360,7 +369,7 @@ public class UserController {
 			            filenames.add(filename);
 			        } 
 				 for (int i = 0; i < filenames.size(); i++) {
-//					 userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
+					 userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
 
 				}	 
 				 for(MultipartFile file : motherUploadMedicalHistory) {
@@ -370,7 +379,7 @@ public class UserController {
 			            filenames.add(filename);
 			        }				 
 				 for (int i = 0; i < filenames.size(); i++) {
-//					 userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
+					 userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
 
 				}				 
 				 for(MultipartFile file : spouseUploadMedicalHistory) {
@@ -380,7 +389,7 @@ public class UserController {
 			            filenames.add(filename);
 			        }	 
 				 for (int i = 0; i < filenames.size(); i++) {
-//					 userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
+					 userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
 				}	
 				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo
 						.save(userProfileFamilyUpdate);
@@ -398,21 +407,20 @@ public class UserController {
 		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PostMapping(value = "/medicalInformation", consumes = "multipart/form-data")
-	public ResponseObject createUserProfileMedicallInformation(@RequestParam String id,
+	@PostMapping(value = "/saveMedicalInformation", consumes = "multipart/form-data")
+	public ResponseObject saveMedicalInformation(@RequestParam String id,
 			@RequestParam String pastSurgeries, @RequestParam String bloodPressure, @RequestParam String diabetes,
 			@RequestParam("uploadMedicalHistory") List<MultipartFile> uploadMedicalHistory) throws IOException {
 
 		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
 		try {
 			if (id != null) {
+				
 				userprofilemedicalUpdate.setId(Integer.parseInt(id));	
-				userprofilemedicalUpdate.setPastSurgeries(pastSurgeries);
-				userprofilemedicalUpdate.setBloodPressure(Integer.parseInt(diabetes));
-				userprofilemedicalUpdate.setDiabetes(diabetes);
 				userprofilemedicalUpdate.setPastSurgeries(pastSurgeries);
 				userprofilemedicalUpdate.setBloodPressure(Integer.parseInt(bloodPressure));
 				userprofilemedicalUpdate.setDiabetes(diabetes);
+				
 				List<String> filenames = new ArrayList<>();
 
 				for (MultipartFile file : uploadMedicalHistory) {
@@ -436,8 +444,69 @@ public class UserController {
 		}
 
 	}
+	
+	//------------------------------------------
+	
+	//-----
+    
+    @GetMapping("saveMedicalInformation/{uploadMedicalHistory}")
+    
+//    public ResponseEntity<Resource> downloadFiles(@PathVariable("upload_medical_history") String uploadMedicalHistory) throws IOException {
+    public ResponseObject downloadFiles(@PathVariable("user_id") String userId) throws IOException {
+
+//    	MedicalInfoResponse medicalInfo = userService.getMedicalInfo(uploadMedicalHistory);
+    	MedicalInfoResponse medicalInfo = userService.getMedicalInfo(userId);
+    	
+//		MedicalInformationEntity userEntity = new MedicalInformationEntity();
+//    	String user = userService.getMedicalInfo(uploadMedicalHistory);
+    	
+//		MedicalInformationEntity userEntity = new MedicalInformationEntity();
+//    	String user = userService.getMedicalInfo(userId);
+    	
+        Path filePath = get(DIRECTORY).toAbsolutePath().normalize().resolve(userId);
+        if(!Files.exists(filePath)) {
+            throw new FileNotFoundException(userId + " was not found on the server");
+        }
+        Resource resource = new UrlResource(filePath.toUri());
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("File-Name", userId);
+        httpHeaders.add(CONTENT_DISPOSITION, "attachment;File-Name=" + resource.getFilename());
+        
+//        return ResponseEntity.ok().contentType(MediaType.parseMediaType(Files.probeContentType(filePath)))
+//                .headers(httpHeaders).body(resource);
+        
+     // Assuming ResponseObject is your custom class and you want to extract information from ResponseEntity<Resource>
+
+        ResponseEntity<Resource> responseEntity = ResponseEntity.ok()
+            .contentType(MediaType.parseMediaType(Files.probeContentType(filePath)))
+            .headers(httpHeaders)
+            .body(resource);
+        
+    	// Create and return a ResponseObject wrapping the ResponseEntity
+//		return new ResponseObject();
+
+//        // Extracting information from ResponseEntity and creating a ResponseObject
+//        ResponseObject responseObject = new ResponseObject();
+//        responseObject.setStatus(responseEntity.getStatusCodeValue()); // Set status code
+//        responseObject.setHeaders(responseEntity.getHeaders()); // Set headers
+//        responseObject.setResource(responseEntity.getBody()); // Set resource/body
+
+        // Now you have populated your ResponseObject with data from ResponseEntity<Resource>
+        
+        if (medicalInfo != null) {
+			return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, medicalInfo);
+		} else {
+			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, medicalInfo);
+		}
+    }
+    
 
 	// -----------------------------------------
+    
+    
+
+    
+    //--------------------------------------------------
 
 	@GetMapping("download/{userId}")
 	public ResponseObject getmedicalInfo(@PathVariable("userId") String userId) throws IOException {

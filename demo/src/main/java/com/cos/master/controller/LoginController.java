@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 @RequestMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE )
 public class LoginController {
+	
 	@Autowired
 	AppUtils appUtils;
 	
