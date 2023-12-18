@@ -2,6 +2,7 @@ package com.cos.master.controller;
 
 import java.awt.Image;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -247,7 +248,11 @@ public class UserController {
 			if (profilePersonalInformationEntity != null) {
 				userprofilepersonalUpdate.setAddress(profilePersonalInformationEntity.getAddress());
 				userprofilepersonalUpdate.setGender(profilePersonalInformationEntity.getGender());
-				userprofilepersonalUpdate.setDateofbirth(profilePersonalInformationEntity.getDateofbirth());
+				String startDateString = profilePersonalInformationEntity.getDateofbirth();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+				DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			    String newDate = LocalDate.parse(startDateString, formatter).format(formatter2);
+				userprofilepersonalUpdate.setDateofbirth(newDate);
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
 				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
 				userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
