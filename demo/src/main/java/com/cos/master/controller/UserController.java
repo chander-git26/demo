@@ -239,7 +239,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping("/personalInformation")
+	@PostMapping("/savePersonalInformation")
 	public ResponseEntity<?> createUserProfilePersonalInformation(
 			@RequestBody PersonalInformationEntity profilePersonalInformationEntity) {
 		PersonalInformationEntity userprofilepersonalUpdate = new PersonalInformationEntity();
@@ -251,7 +251,7 @@ public class UserController {
 				String startDateString = profilePersonalInformationEntity.getDateOfBirth();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 				DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			    String newDate = LocalDate.parse(startDateString, formatter).format(formatter2);
+			    String newDate = LocalDate.parse(startDateString, formatter2).format(formatter2);
 				userprofilepersonalUpdate.setDateOfBirth(newDate);
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
 				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
@@ -276,7 +276,7 @@ public class UserController {
 		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PostMapping("/professionalInformation")
+	@PostMapping("/saveProfessionalInformation")
 	public ResponseEntity<?> createUserProfileProfessionalInformation(
 			@RequestBody ProfessionalInformationEntity profileProfessionalInformationEntity) {
 		ProfessionalInformationEntity userprofileprofessionalUpdate = new ProfessionalInformationEntity();
@@ -315,7 +315,7 @@ public class UserController {
 	// define a location
 	public static final String DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/";
 
-	@PostMapping(value = "/familyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
 //	    @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
 
 //	public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
@@ -397,13 +397,14 @@ public class UserController {
 				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PostMapping(value = "/medicalInformation", consumes = "multipart/form-data")
+	@PostMapping(value = "/saveMedicalInformation", consumes = "multipart/form-data")
 	public ResponseObject createUserProfileMedicallInformation(@RequestParam String id,
 			@RequestParam String pastSurgeries, @RequestParam String bloodPressure, @RequestParam String diabetes,
 			@RequestParam("uploadMedicalHistory") List<MultipartFile> uploadMedicalHistory) throws IOException {
