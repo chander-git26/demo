@@ -68,6 +68,67 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Transactional
 	@Query(value ="update user_info set otp =:otp where mobile =:mobile", nativeQuery = true)
 	public int saveOtp(@Param("otp") String otp,@Param("mobile") String mobile);
+	
+	//update
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set address =:address where id =:userId", nativeQuery = true)
+	public int updateAddress(@Param("address") String address,@Param("userId") int userId);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set gender =:gender where id =:userId", nativeQuery = true)
+	public int updategender(@Param("gender") String gender,@Param("userId") int userId);
+	
+	
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set dateofbirth =:dateofbirth where id =:userId", nativeQuery = true)
+	public int updatedateofbirth(@Param("dateofbirth") String dateofbirth,@Param("userId") int userId);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set state =:state where id =:userId", nativeQuery = true)
+	public int updatestate(@Param("state") String state,@Param("userId") int userId);
+	
+
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set country =:country where id =:userId", nativeQuery = true)
+	public int updatecountry(@Param("country") String country,@Param("userId") int userId);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set maritalStatus =:maritalStatus where id =:userId", nativeQuery = true)
+	public int updateMaritalStatus(@Param("maritalStatus") String maritalStatus,@Param("userId") int userId);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set bloodGroup =:bloodGroup where id =:userId", nativeQuery = true)
+	public int updateBloodGroup(@Param("bloodGroup") String bloodGroup,@Param("userId") int userId);
+	
+
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set height =:height where id =:userId", nativeQuery = true)
+	public int updateHeight(@Param("height") int height,@Param("userId") int userId);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set weight=:weight where id =:userId", nativeQuery = true)
+	public int updateWeight(@Param("weight") int weight,@Param("userId") int userId);
+	
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set smoking=:smoking where id =:userId", nativeQuery = true)
+	public int updateSmoking(@Param("smoking") String smoking,@Param("userId") int  userId);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update personal_info set alochol=:alochol where id =:userId", nativeQuery = true)
+	public int updateAlochol(@Param("alochol") String alochol,@Param("userId") int  userId);
 
 	@Modifying
 	@Transactional
@@ -139,13 +200,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Transactional
 	@Query(value ="update family_info set other_nominee_relation =:other_nominee_relation where id =:id", nativeQuery = true)
 	public int updateOtherNomineeRelation(@Param("other_nominee_relation") String other_nominee_relation,@Param("id") int id);
-	
-	@Modifying
-	@Transactional
-	@Query(value ="update family_info set marital_status =:marital_status where id =:id", nativeQuery = true)
-	public int updateMaritalStatus(@Param("marital_status") String marital_status,@Param("id") int id);
-	
-	
 
 	@Modifying
 	@Transactional

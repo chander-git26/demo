@@ -121,6 +121,51 @@ public class UserService {
 		return medicalInfo;
 
 	}
+	public int updateAddress(String address,int id) {
+		return userRepo.updateAddress(address, id);
+	}
+	
+	
+	public int updateGender(String gender,int id) {
+		return userRepo.updategender(gender,id);
+	}
+	
+	public int updateDateOfBirth(String dateofbirth,int id) {
+		return userRepo.updatedateofbirth(dateofbirth,id);
+	}
+	
+	public int updateState(String state,int id) {
+		return userRepo.updatestate(state,id);
+	}
+	
+	public int updateCountry(String country,int id) {
+		return userRepo.updatecountry(country,id);
+	}
+	
+	public int updateMaritalStatus(String maritalStatus,int id) {
+		return userRepo.updateMaritalStatus(maritalStatus,id);
+	}
+
+	public int updateBloodGroup(String bloodGroup,int id) {
+		return userRepo.updateBloodGroup(bloodGroup,id);
+	}
+	
+	public int updateHeight(int height,int id) {
+		return userRepo.updateHeight(height,id);
+	}
+	
+	public int updateWeight(int weight,int id) {
+		return userRepo.updateWeight(weight,id);
+	}
+	
+	public int updateSmokingStatus(String smoking,int id) {
+		return userRepo.updateSmoking(smoking,id);
+	}
+	
+	public int updateAlocholStatus(String alochol,int id) {
+		return userRepo.updateAlochol(alochol,id);
+	}
+	
 	public String setData(Object[] data, int index) {
 		return data[index] !=null ? data[index].toString() : null;
 	}
@@ -129,8 +174,6 @@ public class UserService {
 	public String verifyMobileNumber(String mobileNumber) {
 		return userRepo.getMobileNumber(mobileNumber);
 	}
-
-	
 	
 	public String getusername(String email) {
 		return userRepo.fetchByUserInfo(email);
@@ -190,11 +233,6 @@ public class UserService {
 	public int updateOtherNomineeRelation(String other_nominee_relation,int id) {
 		return userRepo.updateOtherNomineeRelation(other_nominee_relation,id);
 	}
-	
-	public int updateMaritalStatus(String marital_status,int id) {
-		return userRepo.updateMaritalStatus(marital_status,id);
-	}
-	
 
 	public int updateSelectNumberOfChildren(int select_number_of_children,int id) {
 		return userRepo.updateSelectNumberOfChildren(select_number_of_children,id);
