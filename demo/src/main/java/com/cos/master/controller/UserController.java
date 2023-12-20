@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -69,6 +70,8 @@ import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
 @RestController
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
+	
+	public static final Logger logger = Logger.getLogger(UserController.class);
 	@Autowired
 	UserService userService;
 
@@ -387,6 +390,7 @@ public class UserController {
 				 for (int i = 0; i < filenames.size(); i++) {
 //					 userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
 				}	
+				 
 				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo
 						.save(userProfileFamilyUpdate);
 				if (createUserProfileFamilyInformation.getId() != 0) {
@@ -406,42 +410,80 @@ public class UserController {
 
 	@PostMapping(value = "/saveMedicalInformation", consumes = "multipart/form-data")
 	public ResponseObject createUserProfileMedicallInformation(@RequestParam String id,
-			@RequestParam String pastSurgeries, @RequestParam String bloodPressure, @RequestParam String diabetes,
-			@RequestParam("uploadMedicalHistory") List<MultipartFile> uploadMedicalHistory) throws IOException {
-
+			@RequestParam String pastSurgeries, @RequestParam String currentTreatments, @RequestParam String covidStatus,
+		    @RequestParam("uploadBloodPressure") List<MultipartFile> uploadBloodPressure,
+			@RequestParam("uploadDiabetes") List<MultipartFile> uploadDiabetes,
+			@RequestParam("uploadHeartStroke") List<MultipartFile> uploadHeartStroke,
+			@RequestParam("upload_OtherReport") List<MultipartFile> upload_OtherReport)throws IOException{
+		
 		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
 		try {
 			if (id != null) {
 				userprofilemedicalUpdate.setId(Integer.parseInt(id));	
+				userprofilemedicalUpdate.setPastSurgeries(pastSurgeries); 
+				//userprofilemedicalUpdate.setBloodPressure(Integer.parseInt(diabetes));
+				userprofilemedicalUpdate.setCurrentTreatments(currentTreatments);
 				userprofilemedicalUpdate.setPastSurgeries(pastSurgeries);
-				userprofilemedicalUpdate.setBloodPressure(Integer.parseInt(diabetes));
-				userprofilemedicalUpdate.setDiabetes(diabetes);
-				userprofilemedicalUpdate.setPastSurgeries(pastSurgeries);
-				userprofilemedicalUpdate.setBloodPressure(Integer.parseInt(bloodPressure));
-				userprofilemedicalUpdate.setDiabetes(diabetes);
-				List<String> filenames = new ArrayList<>();
+				//userprofilemedicalUpdate.setBloodPressure(Integer.parseInt(bloodPressure));
+				userprofilemedicalUpdate.setCovidStatus(covidStatus);
+				List<String> filenames = new ArrayList<>();	 
+				 for(MultipartFile file : uploadBloodPressure) {
+			            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+			            Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+			            copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+			            filenames.add(filename);
+			        } 
+				 for (int i = 0; i < filenames.size(); i++) {
 
-				for (MultipartFile file : uploadMedicalHistory) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
+				}	 
+				 for(MultipartFile file : uploadDiabetes) {
+			            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+			            Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+			            copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+			            filenames.add(filename);
+			        }				 
+				 for (int i = 0; i < filenames.size(); i++) {
+
+
+				}				 
+				 for(MultipartFile file : uploadHeartStroke) {
+			            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+			            Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+			            copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+			            filenames.add(filename);
+			        }	 
+				 for (int i = 0; i < filenames.size(); i++) {
+
+				}	
+				 for(MultipartFile file : upload_OtherReport) {
+			            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+			            Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+			            copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+			            filenames.add(filename);
+			        } 
+				 for (int i = 0; i < filenames.size(); i++) {
+			
+
+				}	 
+				MedicalInformationEntity createUserProfileFamilyInformation = medicalInfoRepo
+						.save(userprofilemedicalUpdate);
+				if (createUserProfileFamilyInformation.getId() != 0) {
+					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
+							createUserProfileFamilyInformation);
+				} else {
+					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
 				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userprofilemedicalUpdate.setUploadMedicalHistory(filenames.get(i));
-				}
-				MedicalInformationEntity createUserProfileMedicalInformation = medicalInfoRepo.save(userprofilemedicalUpdate);
-				return appUtils.prepareResponse("Data Saved successfully", "Success", "200", 1, filenames);
-				} 
-			else {
-				return appUtils.prepareResponse("id cannot be empty", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
-			return appUtils.prepareResponse("Some error occurred", "Failed", "500", 0, null);
-
+			e.printStackTrace();
+			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
+		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+
+
+	
 
 	// -----------------------------------------
 
@@ -519,6 +561,7 @@ public class UserController {
 	}
 	@GetMapping("/verifyMobilenumber/{mobile}")
 	public ResponseObject verifyMobileNumber(@PathVariable("mobile") String mobile) {
+		logger.info("inside verifyMobileNumber method");
 		UserEntity userEntity = new UserEntity();
 		String mobileNumber = userService.verifyMobileNumber(mobile);
 		if (mobile != null) {

@@ -21,12 +21,20 @@ public class MedicalInformationEntity implements Serializable {
 	@Column(name = "past_surgeries")
 	private String pastSurgeries;
 
-	@Column(name = "blood_pressure")
-	private Integer bloodPressure;
-
-	private String diabetes;
+	@Column(name = "upload_bp_report")
+	private String uploadBloodPressure;
+    @Column(name="upload_diabetes_report")
+	private String uploadDiabetes;
 	
-	@Column(name = "upload_medical_history")
-	private String uploadMedicalHistory;
+	@Column(name = "upload_heart_stroke_report")
+	private String uploadHeartStroke;
 
+	@Column(name="upload_other_report")
+	private String upload_OtherReport;
+	
+	@Column(name="current_treatments")
+	private String currentTreatments;
+	
+	@Column(name="covid_status")
+	private String covidStatus;
 }

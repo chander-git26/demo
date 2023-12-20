@@ -24,16 +24,21 @@ public class MedicalInfoResponse implements Serializable{
 	
 	@Column(name = "past_surgeries")
 	private String pastSurgeries;
-	
-	@Column(name = "blood_pressure")
-	private Integer bloodPressure;
-	
-	@Column(name = "diabetes")
+
+	@Column(name = "upload_bp_report")
+	private String bloodPressure;
+    @Column(name="upload_diabetes_report")
 	private String diabetes;
 	
-//	private MultipartFile Upload_medical_history;
-	
-	@Column(name = "Upload_medical_history")
-	private String UploadMedicalHistory;
+	@Column(name = "upload_heart_stroke_report")
+	private String heartStroke;
 
+	@Column(name="upload_other_report")
+	private String otherReport;
+	
+	@Column(name="current_treatments")
+	private String currentTreatments;
+	
+	@Column(name="covid_status")
+	private String covidStatus;
 }

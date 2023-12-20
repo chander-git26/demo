@@ -114,8 +114,8 @@ public class UserService {
 			Object[] data = professionalInfoList.get(i);
 			medicalInfo.setId(Integer.parseInt(setData(data, 0)));
 			medicalInfo.setPastSurgeries(setData(data, 1));
-			medicalInfo.setBloodPressure(Integer.parseInt(setData(data, 2)));
-			medicalInfo.setDiabetes(setData(data, 3));
+			//medicalInfo.setBloodPressure(Integer.parseInt(setData(data, 2)));
+			//medicalInfo.setDiabetes(setData(data, 3));
 //			medicalInfo.setUpload_medical_history(setData(data, 3));
 		}
 		return medicalInfo;
