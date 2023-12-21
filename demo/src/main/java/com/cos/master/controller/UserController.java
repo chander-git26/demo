@@ -1,6 +1,21 @@
+
 package com.cos.master.controller;
  
 import java.awt.Image;
+import java.util.Optional;
+
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
+import org.springframework.web.servlet.ModelAndView;
+
+import ch.qos.logback.core.model.Model;
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.awt.Image;
+
+import java.nio.file.Paths;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -45,6 +60,7 @@ import com.cos.master.utils.AppUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
  
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -594,4 +610,42 @@ public class UserController {
 		}
 	}
 	
+	
+	  // display image
+    @GetMapping("/display")
+    public ResponseEntity<byte[]> displayImage(@RequestParam("userId") int userId) throws IOException, SQLException
+    {
+//    	UserService userService = null;
+        UserEntity profile = userService.viewById(userId);
+        byte [] imageBytes = null;
+        imageBytes = profile.getProfile()  .getBytes(1,(int) profile.getProfile()  .length());
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
+    }
+	
+	
+	// add image - post
+    @PostMapping("/uploadImage")
+    public ResponseObject uploadImage(HttpServletRequest request,@RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException
+	{
+		try {
+			byte[] bytes = file.getBytes();
+			Blob blob = new SerialBlob(bytes);
+
+			UserEntity userEntity = new UserEntity();
+			userEntity.setProfile(blob);
+			int rows = userService.uploadProfile(UserId, userEntity.getProfile());
+			if (rows != 0) {
+				return appUtils.prepareResponse("profile updated successfully", "success", "200", 1, null);
+			} else {
+				return appUtils.prepareResponse("failed to update profile", "failed", "400", 0, null);
+			}
+		} catch (Exception e) {
+			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+		}
+
+	
+    
+    
+	
+}
 }
