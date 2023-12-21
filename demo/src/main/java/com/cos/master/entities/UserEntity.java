@@ -1,6 +1,8 @@
 package com.cos.master.entities;
 
 import java.io.Serializable;
+import java.sql.Blob;
+import jakarta.persistence.Lob;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -37,4 +39,7 @@ public class UserEntity implements Serializable {
 	private LocalDate createdDate;
 	@Column(name = "modified_date")
 	private LocalDate modifieddDate;
+	
+	@Lob
+    private Blob profile;
 }
