@@ -15,6 +15,11 @@ import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
+import java.awt.Image;
+import java.sql.Blob;
+
+import org.springframework.data.repository.CrudRepository;
+
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
@@ -223,5 +228,36 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Transactional
 	@Query(value ="update medical_info set diabetes =:diabetes where id =:id", nativeQuery = true)
 	public int updateDiabetes(@Param("diabetes") String diabetes,@Param("id") int id);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "update user_info set profile =:profile where id=:userId", nativeQuery = true)
+	public int uploadProfile(@Param("userId") int userId, @Param("profile") Blob profile);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set source_of_income =:source_of_income where id =:id", nativeQuery = true)
+	public int updateSourceofIncome(String source_of_income, int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set company_name =:company_name where id =:id", nativeQuery = true)
+	public int updateCompanyName(String company_name, int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set business_name =:business_name where id =:id", nativeQuery = true)
+    public int updateBusinessName(String business_name, int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set business_annual_revenue =:business_annual_revenue where id =:id", nativeQuery = true)
+    public int updateBusinessannualRevenue(int business_annual_revenue, int id);
+
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set annual_income =:annual_income where id =:id", nativeQuery = true)
+    public int updateannualIncome(int annual_income, int id);
+	
 }
 
