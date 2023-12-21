@@ -17,7 +17,7 @@ import lombok.Setter;
 public class PersonalInfoResponse implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private Integer id;
 	
@@ -33,14 +33,8 @@ public class PersonalInfoResponse implements Serializable{
 	@Column(name = "marital_status")
 	private String maritalStatus;
 	
-	@Column(name = "blood_group")
-	private String bloodGroup;
-	
-//	private int height;
-//	private int weight;
-	private Integer height;
+    private Integer height;
 	private Integer weight;
-	
 	private String smoking;
 	private String alcohol;
 

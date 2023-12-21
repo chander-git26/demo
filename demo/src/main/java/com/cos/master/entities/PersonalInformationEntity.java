@@ -28,7 +28,7 @@ public class PersonalInformationEntity implements Serializable {
 	private String address;
 	private String gender;
 	
-//	private String dateofbirth;
+
 	@Column(name = "date_of_birth")
 	private String dateOfBirth;
 	

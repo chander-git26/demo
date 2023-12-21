@@ -156,6 +156,7 @@ public class UserController {
 				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
 			}
 		} catch (Exception e) {
+		
 			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
 		}
  
@@ -320,27 +321,6 @@ public class UserController {
 				return appUtils.prepareResponse("Invalid source of Income", "failed", "400", 0, null);
 			}
 
-//				userprofileprofessionalUpdate
-//						.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
-//
-//				userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
-//				userprofileprofessionalUpdate.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
-//				userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
-//				userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
-//				userprofileprofessionalUpdate.setGstnumber(profileProfessionalInformationEntity.getGstnumber());
-//	            userprofileprofessionalUpdate.setBusinesstype(profileProfessionalInformationEntity.getbusinesstype());
-//			    userprofileprofessionalUpdate.setInvestamount(profileProfessionalInformationEntity.getInvestamount());
-			// userprofileprofessionalUpdate
-//						.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
-//
-//				ProfessionalInformationEntity createUserProfileProfessionalInformation = professionalInfoRepo
-//						.save(userprofileprofessionalUpdate);
-//
-//				if (createUserProfileProfessionalInformation.getId() != 0) {
-//					return appUtils.prepareResponse("Data saved Successfully", "Success", "200", 1, null);
-//				} else {
-//				}
-//          }
 		} catch (Exception e) {
 			e.printStackTrace();
 			return appUtils.prepareResponse("some error Occured", "failed", "500", 0, null);

@@ -54,11 +54,10 @@ public class UserService {
 			personalInfo.setState(setData(data, 4));
 			personalInfo.setCountry(setData(data, 5));
 			personalInfo.setMaritalStatus(setData(data, 6));
-			personalInfo.setBloodGroup(setData(data, 7));
-			personalInfo.setHeight(Integer.parseInt(setData(data, 8)));
-			personalInfo.setWeight(Integer.parseInt(setData(data, 9)));
-			personalInfo.setSmoking(setData(data, 10));
-			personalInfo.setAlcohol(setData(data, 11));
+			personalInfo.setHeight(Integer.parseInt(setData(data, 7)));
+			personalInfo.setWeight(Integer.parseInt(setData(data, 8)));
+			personalInfo.setSmoking(setData(data, 9));
+			personalInfo.setAlcohol(setData(data, 10));
 			
 			
 		}
