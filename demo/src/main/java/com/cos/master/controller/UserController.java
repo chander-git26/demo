@@ -109,6 +109,8 @@ public class UserController {
 
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity) {
+		logger.info("Started createUser method"+userEntity);
+
 		UserEntity user = new UserEntity();
 		UserEntity users = null;
 		try {
@@ -131,7 +133,9 @@ public class UserController {
 					return new ResponseEntity<>("400", HttpStatus.OK);
 				}
 			}
+			
 		} catch (Exception e) {
+			logger.info("Inside catch block"+e.getMessage());
 			e.printStackTrace();
 			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -140,17 +144,21 @@ public class UserController {
 
 	@GetMapping("/getUserDetails/{userId}")
 	public ResponseObject getUserDetails(@PathVariable("userId") String userId) {
+		logger.info("Fetch getUserDetails method"+userId);
 		UserEntity userEntity = new UserEntity();
 		UserEntity user = userService.getUserInfo(userId);
 		if (user != null) {
 			return appUtils.prepareResponse("Data fetch successfully", "successfull", "200", 1, user);
 		} else {
+
 			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
 		}
 	}
 
 	@GetMapping("/getPersonalInfo/{userId}")
 	public ResponseObject getPersonalInfo(@PathVariable("userId") Integer userId) {
+		logger.info("Display getPersonalInfo method"+userId);
+
 		try {
 			if (userId != 0) {
 				String user_id = String.valueOf(userId);
@@ -164,7 +172,8 @@ public class UserController {
 				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
 			}
 		} catch (Exception e) {
-		
+			logger.info("Inside catch block"+e.getMessage());
+
 			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
 		}
 
@@ -172,6 +181,8 @@ public class UserController {
 
 	@GetMapping("/getProfessionalInfo/{userId}")
 	public ResponseObject getProffessionalInfo(@PathVariable("userId") Integer userId) {
+		logger.info("Display getProfessionalInfo method"+userId);
+
 		try {
 			if (userId != 0) {
 				String user_id = String.valueOf(userId);
@@ -185,6 +196,8 @@ public class UserController {
 				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
 			}
 		} catch (Exception e) {
+			logger.info("inside catch block"+e.getMessage());
+
 			e.printStackTrace();
 			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
 		}
@@ -193,6 +206,8 @@ public class UserController {
 
 	@GetMapping("/getfamilyInfo/{userId}")
 	public ResponseObject getfamilyInfo(@PathVariable("userId") Integer userId) {
+		logger.info("Display getfamilyInfo method"+userId);
+
 		try {
 			if (userId != 0) {
 				UserEntity userEntity = new UserEntity();
@@ -207,12 +222,16 @@ public class UserController {
 				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
 			}
 		} catch (Exception e) {
+			logger.info("inside catch block"+e.getMessage());
+
 			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
 		}
 	}
 
 	@GetMapping("/getMedicalInfo/{userId}")
 	public ResponseObject getmedicalInfo(@PathVariable("userId") Integer userId) {
+		logger.info("Display getMedicalInfo method"+userId);
+
 		try {
 			if (userId != 0) {
 				UserEntity userEntity = new UserEntity();
@@ -227,6 +246,8 @@ public class UserController {
 				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
 			}
 		} catch (Exception e) {
+			logger.info("inside catch block"+e.getMessage());
+
 			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
 		}
 
@@ -234,6 +255,8 @@ public class UserController {
 
 	@PostMapping("/signin")
 	public ResponseEntity<String> signin(@RequestBody UserEntity userInf) throws Exception {
+		logger.info("signin  method"+userInf);
+
 		UserEntity user = new UserEntity();
 
 		String email = userInf.getEmail();
@@ -252,6 +275,8 @@ public class UserController {
 	@PostMapping("/savePersonalInformation")
 	public ResponseEntity<?> createUserProfilePersonalInformation(
 			@RequestBody PersonalInformationEntity profilePersonalInformationEntity) {
+		logger.info("savePersonalInformation method"+profilePersonalInformationEntity);
+
 		PersonalInformationEntity userprofilepersonalUpdate = new PersonalInformationEntity();
 		PersonalInformationEntity userss = null;
 		try {
@@ -281,6 +306,8 @@ public class UserController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("inside catch "+e.getMessage());
+
 			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -289,6 +316,8 @@ public class UserController {
 	@PostMapping("/saveProfessionalInformation")
 	public ResponseObject createUserProfileProfessionalInformation(
 			@RequestBody ProfessionalInformationEntity profileProfessionalInformationEntity) {
+		logger.info("saveProfessionalInformation method"+profileProfessionalInformationEntity);
+
 		ProfessionalInformationEntity userprofileprofessionalUpdate = new ProfessionalInformationEntity();
 		ProfessionalInformationEntity users = null;
 
@@ -348,6 +377,8 @@ public class UserController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("inside catch block"+e.getMessage());
+
 			return appUtils.prepareResponse("some error Occured", "failed", "500", 0, null);
 		}
 
@@ -372,7 +403,9 @@ public class UserController {
 
 	) {
 		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
+		logger.info("saveFamilyInformation  method"+userProfileFamilyUpdate);
 		FamilyInformationEntity userss = null;
+
 		try {
 //			if (profileFamilyUpdate != null) {
 			if (id != null) {
@@ -448,6 +481,8 @@ public class UserController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("inside catch block"+e.getMessage());
+
 			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -461,7 +496,10 @@ public class UserController {
 			@RequestParam("uploadHeartStrokeReport") List<MultipartFile> uploadHeartStrokeReport,
 			@RequestParam("uploadOtherReport") List<MultipartFile> uploadOtherReport,
 			@RequestParam String currentTreatments, @RequestParam String covidStatus) throws IOException {
+		
+
 		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
+		logger.info("saveMedicalInformation  method"+userprofilemedicalUpdate);
 		try {
 			if (id != null) {
 				userprofilemedicalUpdate.setId(Integer.parseInt(id));
@@ -521,6 +559,8 @@ public class UserController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("inside catch block"+e.getMessage());
+
 			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -531,6 +571,8 @@ public class UserController {
 
 	@GetMapping("download/{userId}")
 	public ResponseEntity<?> getmedicalInfo(@PathVariable("userId") String userId) throws IOException {
+		logger.info("download method"+userId);
+
 
 		try {
 			if (!userId.equals("0")) {
@@ -552,6 +594,8 @@ public class UserController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("inside catch block"+e.getMessage());
+
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
@@ -561,8 +605,12 @@ public class UserController {
 
 	@GetMapping("/getUserId/{email}")
 	public ResponseObject getUserId(@PathVariable("email") String email) {
+		logger.info("getUserId method"+email);
+
 		UserEntity userEntity = new UserEntity();
 		String user = userService.getUserEmail(email);
+		logger.info("user mail"+user);
+
 		if (user != null) {
 			return appUtils.prepareResponse("Data fetch successfully", "Success", "200", 1, user);
 		} else {
@@ -573,6 +621,8 @@ public class UserController {
 	@PostMapping("/upload")
 	public ResponseEntity<List<String>> uploadFiles(@RequestParam("files") List<MultipartFile> multipartFiles)
 			throws IOException {
+		logger.info("upload method"+multipartFiles);
+
 		List<String> filenames = new ArrayList<>();
 		for (MultipartFile file : multipartFiles) {
 			String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -585,7 +635,7 @@ public class UserController {
 
 	@PostMapping("/updatePassword")
 	public ResponseEntity<?> updatePassword(@RequestBody String json) throws Exception {
-		logger.info("inside updatePassword method");
+		logger.info("inside updatePassword method"+json);
 		UserEntity user = new UserEntity();
 		Map<String, Object> data = null;
 		ObjectMapper mapper = new ObjectMapper();
@@ -621,6 +671,8 @@ public class UserController {
 	// display image
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> displayImage(@RequestParam("userId") int userId) throws IOException, SQLException {
+		logger.info("image display method"+userId);
+
 //    	UserService userService = null;
 		UserEntity profile = userService.viewById(userId);
 		byte[] imageBytes = null;
@@ -631,6 +683,8 @@ public class UserController {
 	// add image - post
 	@PostMapping("/uploadImage")
 	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
+		logger.info("upload image method"+file);
+
 		try {
 			byte[] bytes = file.getBytes();
 			Blob blob = new SerialBlob(bytes);
@@ -644,6 +698,8 @@ public class UserController {
 				return appUtils.prepareResponse("failed to update profile", "failed", "400", 0, null);
 			}
 		} catch (Exception e) {
+			logger.info("inside catch block"+e.getMessage());
+
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
 	}

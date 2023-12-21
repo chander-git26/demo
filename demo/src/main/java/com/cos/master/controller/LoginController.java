@@ -3,6 +3,7 @@ package com.cos.master.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 @RequestMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE )
 public class LoginController {
+	public static final Logger logger = Logger.getLogger(UserController.class);
 	@Autowired
 	AppUtils appUtils;
 	
@@ -33,6 +35,9 @@ public class LoginController {
 	
 	@PostMapping("/generateOtp")
 	public ResponseObject generateOtp(@RequestBody String json) {
+		logger.info("generateOtp method "+json);
+
+		
 		Map<String, Object> map = null;
 		try {
 		ObjectMapper mapper = new ObjectMapper();
@@ -56,12 +61,15 @@ public class LoginController {
 			}
 			return appUtils.prepareResponse("mobile number cannot be empty", "Failed", "400", 0, null);
 		} catch (Exception e) {
+			logger.info("inside catch block  "+e.getMessage());
+
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
 	}
 
 	@PostMapping("/validateOtp")
 	public ResponseObject getUserOtp(@RequestBody String json) {
+		logger.info("validateOtp method "+json);
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Map<String, Object> map = null;
