@@ -59,6 +59,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
  
@@ -332,7 +333,7 @@ public class UserController {
 			,String maritalStatus,Integer selectNumberOfChildren
  
 			) {
-	FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
+		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
 		FamilyInformationEntity userss = null;
 		try {
 //			if (profileFamilyUpdate != null) {
@@ -355,8 +356,8 @@ public class UserController {
 				userProfileFamilyUpdate.setNominee2Name(nominee2Name);
 				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
 				userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
-				userProfileFamilyUpdate.setOtherNomineeRelation(otherNomineeRelation);
-			
+				
+				
 				List<String> filenames = new ArrayList<>();	 
 				 for(MultipartFile file : fatherUploadMedicalHistory) {
 			            String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -365,7 +366,7 @@ public class UserController {
 			            filenames.add(filename);
 			        } 
 				 for (int i = 0; i < filenames.size(); i++) {
-//				 userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
+					 userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
  
 				}	 
 				 for(MultipartFile file : motherUploadMedicalHistory) {
@@ -375,7 +376,7 @@ public class UserController {
 			            filenames.add(filename);
 			        }				 
 				 for (int i = 0; i < filenames.size(); i++) {
-				//	 userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
+					 userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
  
 				}				 
 				 for(MultipartFile file : spouseUploadMedicalHistory) {
@@ -385,18 +386,19 @@ public class UserController {
 			            filenames.add(filename);
 			        }	 
 				 for (int i = 0; i < filenames.size(); i++) {
-              // 		 userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
+					 userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
 				}	
+				 
 				 for(MultipartFile file : uploadOtherNomineeRelation) {
 			            String filename = StringUtils.cleanPath(file.getOriginalFilename());
 			            Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
 			            copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
 			            filenames.add(filename);
-			        } 
+			        }				 
 				 for (int i = 0; i < filenames.size(); i++) {
-				// userProfileFamilyUpdate.setUploadOtherNomineeRelation(filenames.get(i));
+					 userProfileFamilyUpdate.setUploadOtherNomineeRelation(filenames.get(i));
 
-				}	 
+				}			
 				 
 				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo
 						.save(userProfileFamilyUpdate);
@@ -414,7 +416,6 @@ public class UserController {
 		}
 		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
- 
 	@PostMapping(value = "/saveMedicalInformation", consumes = "multipart/form-data")
 	public ResponseObject saveMedicalInformation(@RequestParam String id,
 			@RequestParam String pastSurgeries, 
