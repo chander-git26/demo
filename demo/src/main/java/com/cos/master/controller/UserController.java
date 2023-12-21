@@ -606,13 +606,13 @@ public class UserController {
 
 	@GetMapping("/verifyMobilenumber/{mobile}")
 	public ResponseObject verifyMobileNumber(@PathVariable("mobile") String mobile) {
-		logger.info("inside verifyMobileNumber method");
+		logger.info("inside verifyMobileNumber method "+mobile);
 		UserEntity userEntity = new UserEntity();
 		String mobileNumber = userService.verifyMobileNumber(mobile);
 		if (mobile != null) {
 			return appUtils.prepareResponse("mobile verify successfully", "successfull", "200", 1, null);
 
-		} else {
+		} else { 
 			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, null);
 		}
 	}
