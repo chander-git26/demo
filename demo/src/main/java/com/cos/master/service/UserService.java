@@ -13,7 +13,14 @@ import com.cos.master.entities.PersonalInfoResponse;
 import com.cos.master.entities.ProfessionalResponse;
 import com.cos.master.entities.UserEntity;
 import com.cos.master.repository.UserRepository;
+import java.awt.Image;
+import java.io.IOException;
+import java.sql.Blob;
 
+import java.util.Optional;
+
+
+import jakarta.transaction.Transactional;
 @Service
 public class UserService {
 	
@@ -259,5 +266,44 @@ public class UserService {
 	public int updateDiabetes(String diabetes,int id) {
 		return userRepo.updateDiabetes(diabetes,id);
 	}
+	public int uploadProfile1(int userId,Blob profile) {
+		return userRepo.uploadProfile(userId, profile);
+	}
+
+	public List<UserEntity> viewAll() {
+		return (List<UserEntity>) userRepo.findAll();
+	}
+
+	public UserEntity viewById(int id) {
+		return userRepo.findById(id).get();
+	}
+	public int updateSourceofIncome(String source_of_income,int id) {
+		return userRepo.updateSourceofIncome(source_of_income,id);
+	}
+	public int updateCompanyName(String company_name,int id) {
+		return userRepo.updateCompanyName(company_name,id);
+	}
+	public int updateBusinessName(String business_name,int id) {
+		return userRepo.updateBusinessName(business_name,id);
+	}
+	public int updateBusinessannualRevenue(int business_annual_revenue,int id) {
+		return userRepo.updateBusinessannualRevenue(business_annual_revenue,id);
+	}
+	public int updateannualIncome(int annual_income,int id) {
+		return userRepo.updateannualIncome(annual_income,id);
+	}
+	
+	public int uploadProfile(int userId,Blob image) {
+		return userRepo.uploadProfile(userId, image);
+	}
+
+	public List<UserEntity> viewAll1() {
+		return (List<UserEntity>) userRepo.findAll();
+	}
+
+	public UserEntity viewById1(int id) {
+		return userRepo.findById(id).get();
+	}
+
 	
 }
