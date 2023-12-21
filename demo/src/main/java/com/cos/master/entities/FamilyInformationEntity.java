@@ -2,6 +2,7 @@ package com.cos.master.entities;
 
 import java.io.File;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.UpdateTimestamp;
@@ -35,7 +36,7 @@ public class FamilyInformationEntity implements Serializable {
 	private String fatherOccupation;
 	
 	@Column(name = "father_upload_medical_history")
-	private String  fatherUploadMedicalHistory;
+	private Blob  fatherUploadMedicalHistory;
 	
 //	private MultipartFile  father_upload_medical_history;
 
@@ -47,7 +48,7 @@ public class FamilyInformationEntity implements Serializable {
 	private String motherOccupation;
 	
 	@Column(name = "mother_upload_medical_history")
-	private String  motherUploadMedicalHistory;
+	private Blob  motherUploadMedicalHistory;
 //	private MultipartFile   mother_upload_medical_history;
 
 	@Column(name = "spouse_name")
@@ -58,7 +59,7 @@ public class FamilyInformationEntity implements Serializable {
 	private String spouseOccupation;
 	
 	@Column(name = "spouse_upload_medical_history")
-	private String  spouseUploadMedicalHistory;
+	private Blob  spouseUploadMedicalHistory;
 //	private MultipartFile  spouse_upload_medical_history;
 
 	@Column(name = "nominee1_name")
@@ -74,13 +75,8 @@ public class FamilyInformationEntity implements Serializable {
 	@Column(name = "other_nominee_relation")
 	private String otherNomineeRelation;
 
-//	private MultipartFile 	nomine1_upload_medical_history;
-//	private MultipartFile nomine2_upload_medical_history;
+   @Column(name="upload_other_nominee_relation")
+   private Blob uploadOtherNomineeRelation;
 
-	@Column(name = "marital_status")
-	private String maritalStatus;
-
-	@Column(name = "select_number_of_children")
-	private Integer selectNumberOfChildren;
 
 }

@@ -117,9 +117,18 @@ public class UserService {
 			//medicalInfo.setBloodPressure(Integer.parseInt(setData(data, 2)));
 			//medicalInfo.setDiabetes(setData(data, 3));
 //			medicalInfo.setUpload_medical_history(setData(data, 3));
+			medicalInfo.setCovidStatus(setData(data, 2));
+			medicalInfo.setCurrentTreatments(setData(data, 3));
+			medicalInfo.setBloodPressure(setData(data, 4));
+			medicalInfo.setDiabetes(setData(data, 5));
+			medicalInfo.setHeartStroke(setData(data, 6));
+			medicalInfo.setOtherReport(setData(data, 7));
 		}
 		return medicalInfo;
 
+	}
+	public byte[] getMedicallInfo(String userId) {
+		return userRepo.getMedicalInfo(userId);
 	}
 	public int updateAddress(String address,int id) {
 		return userRepo.updateAddress(address, id);
