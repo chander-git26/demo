@@ -99,6 +99,7 @@ public class UserController {
  
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity) {
+		logger.info("Started create user method "+userEntity);
 		UserEntity user = new UserEntity();
 		UserEntity users = null;
 		try {
@@ -108,23 +109,24 @@ public class UserController {
 				String createdUserId = String.valueOf(appUtils.generateUserId());
 				user.setUserId(createdUserId);
 				String encryptPassword = aes.encrypt(userEntity.getPassword());
- 
+				logger.info("Middle of create user method ");
 				user.setPassword(encryptPassword);
 				user.setMobile(userEntity.getMobile());
 				user.setEmail(userEntity.getEmail());
- 
 				user.setCreatedDate(LocalDate.now());
 				user.setModifieddDate(LocalDate.now());
 				users = userRepo.save(user);
 //				int createUser = userService.createUser(user.getFirstname(),user.getLastname(),user.getUserId(),user.getMobile(),user.getPassword(),user.getEmail(),user.getCreatedDate(),user.getModifieddDate());
 				if (users != null) {
+					logger.info("user created successfully");
 					return new ResponseEntity<>("200", HttpStatus.CREATED);
 				} else {
+					logger.debug("empty user data");
 					return new ResponseEntity<>("400", HttpStatus.OK);
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("catch block "+e.getMessage());
 			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -319,38 +321,16 @@ public class UserController {
 			} else {
 				return appUtils.prepareResponse("Invalid source of Income", "failed", "400", 0, null);
 			}
-
-//				userprofileprofessionalUpdate
-//						.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
-//
-//				userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
-//				userprofileprofessionalUpdate.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
-//				userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
-//				userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
-//				userprofileprofessionalUpdate.setGstnumber(profileProfessionalInformationEntity.getGstnumber());
-//	            userprofileprofessionalUpdate.setBusinesstype(profileProfessionalInformationEntity.getbusinesstype());
-//			    userprofileprofessionalUpdate.setInvestamount(profileProfessionalInformationEntity.getInvestamount());
-			// userprofileprofessionalUpdate
-//						.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
-//
-//				ProfessionalInformationEntity createUserProfileProfessionalInformation = professionalInfoRepo
-//						.save(userprofileprofessionalUpdate);
-//
-//				if (createUserProfileProfessionalInformation.getId() != 0) {
-//					return appUtils.prepareResponse("Data saved Successfully", "Success", "200", 1, null);
-//				} else {
-//				}
-//          }
 		} catch (Exception e) {
 			e.printStackTrace();
-			return appUtils.prepareResponse("some error Occured", "failed", "500", 0, null);
+			return appUtils.prepareResponse("some error Occured", "failed", "500", 0, null);	
 		}
 
 	}
 
 	// define a location
 	public static final String DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/";
- 
+	
 	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
 //	    @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
  
