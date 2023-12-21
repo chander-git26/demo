@@ -2,6 +2,7 @@ package com.cos.master.entities;
 
 import java.io.File;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.UpdateTimestamp;
@@ -33,7 +34,11 @@ public class ProfileFamilyInformationEntity implements Serializable {
 	@Column(name = "father_age")
 	private Integer fatherAge;
 	private String fatherOccupation;
-//	private MultipartFile  fater_upload_medical_history;
+	
+	@Column(name = "father_upload_medical_history")
+	private Blob  fatherUploadMedicalHistory;
+	
+//	private MultipartFile  father_upload_medical_history;
 
 	@Column(name = "mother_name")
 	private String motherName;
@@ -41,6 +46,9 @@ public class ProfileFamilyInformationEntity implements Serializable {
 	private Integer motherAge;
 	@Column(name = "mother_occupation")
 	private String motherOccupation;
+	
+	@Column(name = "mother_upload_medical_history")
+	private Blob  motherUploadMedicalHistory;
 //	private MultipartFile   mother_upload_medical_history;
 
 	@Column(name = "spouse_name")
@@ -49,6 +57,9 @@ public class ProfileFamilyInformationEntity implements Serializable {
 	private Integer spouseAge;
 	@Column(name = "spouse_occupation")
 	private String spouseOccupation;
+	
+	@Column(name = "spouse_upload_medical_history")
+	private Blob  spouseUploadMedicalHistory;
 //	private MultipartFile  spouse_upload_medical_history;
 
 	@Column(name = "nominee1_name")
@@ -59,18 +70,13 @@ public class ProfileFamilyInformationEntity implements Serializable {
 
 	@Column(name = "other_nominee_name")
 	private String otherNomineeName;
-	@Column(name = "other_nominee_ge")
+	@Column(name = "other_nominee_age")
 	private Integer otherNomineeAge;
 	@Column(name = "other_nominee_relation")
 	private String otherNomineeRelation;
 
-//	private MultipartFile 	nomine1_upload_medical_history;
-//	private MultipartFile nomine2_upload_medical_history;
+   @Column(name="upload_other_nominee_relation")
+   private Blob uploadOtherNomineeRelation;
 
-	@Column(name = "marital_status")
-	private String maritalStatus;
-
-	@Column(name = "select_number_of_children")
-	private Integer selectNumberOfChildren;
 
 }

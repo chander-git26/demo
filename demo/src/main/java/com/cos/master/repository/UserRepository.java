@@ -45,7 +45,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select id,past_surgeries,blood_pressure,diabetes,upload_medical_history from medical_info where id = :userId", nativeQuery = true)
 	public List<Object[]> getMedicallInfo(@Param("userId") String userId);
 	
-	
+	@Query(value = "select upload_other_report from medical_info where id = :userId", nativeQuery = true)
+	public byte[] getMedicalInfo(@Param("userId") String userId);
 	
 //	@Query(value = "select otp from user_info where user_id =:mobile ", nativeQuery = true)
 //	public String getUserOtp(@Param("mobile") String mobile);
