@@ -18,7 +18,7 @@ import lombok.Setter;
 public class ProfessionalInformationEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private Integer id;
 	
@@ -36,6 +36,17 @@ public class ProfessionalInformationEntity implements Serializable {
 	
 	@Column(name = "business_annual_revenue")
 	private Integer businessAnnualRevenue;
+	
+	@Column(name = "gst_number")
+	private String gstNumber;
+	
+	@Column(name = "business_type")
+	private String businessType;
+	
+	@Column(name = "invest_amount")
+	private int investAmount;
+	
+	
 	
 }
 

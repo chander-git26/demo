@@ -259,7 +259,6 @@ public class UserController {
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
 				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
 				userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
-				userprofilepersonalUpdate.setBloodGroup(profilePersonalInformationEntity.getBloodGroup());
 				userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
 				userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
 				userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
@@ -279,41 +278,56 @@ public class UserController {
 		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@PostMapping("/saveProfessionalInformation")
-	public ResponseEntity<?> createUserProfileProfessionalInformation(
-			@RequestBody ProfessionalInformationEntity profileProfessionalInformationEntity) {
+	@PostMapping("/professionalInformation")
+	public ResponseObject createUserProfileProfessionalInformation(@RequestBody ProfessionalInformationEntity profileProfessionalInformationEntity) {
 		ProfessionalInformationEntity userprofileprofessionalUpdate = new ProfessionalInformationEntity();
-		ProfessionalInformationEntity userss = null;
+		ProfessionalInformationEntity users = null;
 
 		try {
-			if (profileProfessionalInformationEntity != null) {
-
-				userprofileprofessionalUpdate
-						.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
-
-				userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
-				userprofileprofessionalUpdate.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
-				userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
-				userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
-				userprofileprofessionalUpdate
-						.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
-
-				ProfessionalInformationEntity createUserProfileProfessionalInformation = professionalInfoRepo
-						.save(userprofileprofessionalUpdate);
-
-				if (createUserProfileProfessionalInformation.getId() != 0) {
-					return new ResponseEntity<>("200", HttpStatus.CREATED);
+			if (profileProfessionalInformationEntity.getSourceOfIncome().equals("business")) {
+				if (profileProfessionalInformationEntity.getId() != 0 && profileProfessionalInformationEntity.getBusinessName() != null  && profileProfessionalInformationEntity.getBusinessAnnualRevenue() != 0 && profileProfessionalInformationEntity.getGstNumber() != null && profileProfessionalInformationEntity.getBusinessType() != null && profileProfessionalInformationEntity.getInvestAmount() != 0){
+					userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
+					userprofileprofessionalUpdate.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
+					userprofileprofessionalUpdate.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
+					userprofileprofessionalUpdate.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
+					userprofileprofessionalUpdate.setGstNumber(profileProfessionalInformationEntity.getGstNumber());
+					userprofileprofessionalUpdate.setBusinessType(profileProfessionalInformationEntity.getBusinessType());
+					userprofileprofessionalUpdate.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
+					ProfessionalInformationEntity userEntity = professionalInfoRepo.save(userprofileprofessionalUpdate);
+					if (userEntity.getId() != 0) {
+						return appUtils.prepareResponse("Data Saved Successfully", "Success", "200", 1, null);
+					}else {
+						return appUtils.prepareResponse("Unable to save data", "Failed", "400", 0, null);
+					}
 				} else {
-					return new ResponseEntity<>("400", HttpStatus.OK);
+					return appUtils.prepareResponse("Mandatory fileds are missing", "failed", "500", 0, null);
 				}
-
+			} else if (profileProfessionalInformationEntity.getSourceOfIncome().equals("salaried")) {
+				if (profileProfessionalInformationEntity.getId() != 0  && profileProfessionalInformationEntity.getCompanyName() != null && profileProfessionalInformationEntity.getAnnualIncome() != null) {
+					userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
+					userprofileprofessionalUpdate.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
+					userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
+					userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
+					userprofileprofessionalUpdate.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
+					ProfessionalInformationEntity userEntity = professionalInfoRepo.save(userprofileprofessionalUpdate);
+					if (userEntity.getId() != 0) {
+						return appUtils.prepareResponse("Data Saved Successfully", "Success", "200", 1, null);
+					}else {
+						return appUtils.prepareResponse("Unable to save data", "Failed", "400", 0, null);
+					}
+				} else {
+					return appUtils.prepareResponse("Mandatory fileds are missing", "failed", "500", 0, null);
+				}
+			} else {
+				return appUtils.prepareResponse("Invalid source of Income", "failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
+			return appUtils.prepareResponse("some error Occured", "failed", "500", 0, null);
 		}
-		return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
+
 	}
+
 
 	// define a location
 	public static final String DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/";

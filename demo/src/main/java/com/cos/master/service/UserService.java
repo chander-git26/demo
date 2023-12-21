@@ -73,8 +73,10 @@ public class UserService {
 			proffesionalInfo.setSourceOfIncome(setData(data, 1));
 			proffesionalInfo.setCompanyName(setData(data, 2));
 			proffesionalInfo.setBusinessName(setData(data, 3));
-			proffesionalInfo.setBusinessAnnualRevenue(Integer.parseInt(setData(data, 4)));;
-			proffesionalInfo.setAnnualIncome(Integer.parseInt(setData(data, 5)));
+			proffesionalInfo.setAnnualIncome(Integer.parseInt(setData(data, 4)));
+			proffesionalInfo.setBusinessAnnualRevenue(Integer.parseInt(setData(data, 5)));
+			proffesionalInfo.setGstNumber(setData(data, 6));
+			proffesionalInfo.setInvestAmount(Integer.parseInt(setData(data, 7)));
 		}
 		return proffesionalInfo;
 

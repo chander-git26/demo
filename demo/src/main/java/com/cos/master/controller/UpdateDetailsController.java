@@ -509,29 +509,6 @@ public class UpdateDetailsController {
 
 		 }
 		 
-		 
-		 @PostMapping("/updateBloodGroup")
-			public ResponseObject updatebloodGroup(@RequestBody String json) {
-			ObjectMapper mapper = new ObjectMapper();
-			try {
-			
-				Map<String, Object> map = null;
-					map = mapper.readValue(json, Map.class);
-			        int id = (int) map.get("id");
-			        String bloodGroup = (String) map.get("bloodGroup");
-			        if(bloodGroup != null && id != 0 && !bloodGroup.isEmpty()) {
-					int updateDetails = userService.updateBloodGroup(bloodGroup,id);
-					if(updateDetails != 0) {
-						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
-					}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
-			        }
-				} catch (Exception e) {
-					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
-				} 
-			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
-		 }
-		 
 		 @PostMapping("/updateHeight")
 			public ResponseObject updateheight(@RequestBody String json) {
 			ObjectMapper mapper = new ObjectMapper();
