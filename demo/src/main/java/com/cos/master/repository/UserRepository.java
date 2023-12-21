@@ -37,11 +37,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	
 	
-	@Query(value = "Select id,address,gender,date_of_birth,state,country,marital_status,blood_group,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
+	@Query(value = "Select id,address,gender,date_of_birth,state,country,marital_status,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
 	public List<Object[]> getPersonalInfo(@Param("userId") String userId);
 	
-	@Query(value = "select id,source_of_income,company_name,business_name, annual_income, business_annual_revenue from professional_info where id =:userId", nativeQuery = true)
+	@Query(value = "select id,source_of_income,company_name,business_name, annual_income, business_annual_revenue,gst_number,invest_amount from professional_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getProfessionallInfo(@Param("userId") String userId);
+
 	
 	@Query(value = "select id,father_name,father_age,father_occupation,father_upload_medical_history,mother_name,mother_age,mother_occupation,mother_upload_medical_history,spouse_name,spouse_age,spouse_occupation,spouse_upload_medical_history,nominee1_name,nominee2_name,other_nominee_name,other_nominee_age,other_nominee_relation,marital_status,select_number_of_children from family_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getFamilylInfo(@Param("userId") String userId);
@@ -49,7 +50,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select id,past_surgeries,blood_pressure,diabetes,upload_medical_history from medical_info where id = :userId", nativeQuery = true)
 	public List<Object[]> getMedicallInfo(@Param("userId") String userId);
 	
-	
+	@Query(value = "select upload_other_report from medical_info where id = :userId", nativeQuery = true)
+	public byte[] getMedicalInfo(@Param("userId") String userId);
 	
 //	@Query(value = "select otp from user_info where user_id =:mobile ", nativeQuery = true)
 //	public String getUserOtp(@Param("mobile") String mobile);

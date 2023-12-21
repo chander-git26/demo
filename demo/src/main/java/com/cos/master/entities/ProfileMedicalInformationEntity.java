@@ -1,6 +1,8 @@
 package com.cos.master.entities;
 
 import java.io.Serializable;
+import java.sql.Blob;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,15 +24,15 @@ public class ProfileMedicalInformationEntity implements Serializable {
 	private String pastSurgeries;
 
 	@Column(name = "upload_bp_report")
-	private String uploadBloodPressure;
+	private Blob uploadBloodPressure;
     @Column(name="upload_diabetes_report")
-	private String uploadDiabetes;
+	private Blob uploadDiabetes;
 	
 	@Column(name = "upload_heart_stroke_report")
-	private String uploadHeartStroke;
+	private Blob uploadHeartStroke;
 
 	@Column(name="upload_other_report")
-	private String upload_OtherReport;
+	private Blob uploadOtherReport;
 	
 	@Column(name="current_treatments")
 	private String currentTreatments;

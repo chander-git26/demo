@@ -36,8 +36,6 @@ public class PersonalInformationEntity implements Serializable {
 	private String country;
 	@Column(name = "marital_status")
 	private String maritalStatus;
-	@Column(name = "blood_group")
-	private String bloodGroup;
 	private Integer height;
 	private Integer weight;
 	private String smoking;

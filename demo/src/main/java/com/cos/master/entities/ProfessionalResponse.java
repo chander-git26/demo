@@ -25,20 +25,20 @@ public class ProfessionalResponse implements Serializable {
 	
 	private Integer id;
 	
-	@Column(name = "source_of_income")
 	private String sourceOfIncome;
 	
-	@Column(name = "company_name")
 	private String companyName;
 	
-	@Column(name = "business_name")
 	private String businessName;
 	
-	@Column(name = "annual_income")
 	private Integer annualIncome;
 	
-	@Column(name = "business_annual_revenue")
 	private Integer businessAnnualRevenue;
+	
+	private String gstNumber;
+	
+	private Integer investAmount;
+	
 	
 }
 
