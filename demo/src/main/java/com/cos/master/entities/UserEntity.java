@@ -3,7 +3,6 @@ package com.cos.master.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,8 +17,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "user_info")
-public class UserEntity implements Serializable{
-	
+public class UserEntity implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -28,16 +27,12 @@ public class UserEntity implements Serializable{
 	private String lastname;
 	@Column(name = "user_id")
 	private String userId;
-	
+
 	private String mobile;
 	private String password;
 
 	private String email;
 	private String otp;
-	
-	
-
-	
 	@Column(name = "created_date")
 	private LocalDate createdDate;
 	@Column(name = "modified_date")
