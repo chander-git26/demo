@@ -164,8 +164,7 @@ public class UserController {
 				return appUtils.prepareResponse("user id cannot be 0", "failed", "500", 0, null);
 			}
 		} catch (Exception e) {
-		
-			return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
+          return appUtils.prepareResponse("some error occured", "Failed", "500", 0, null);
 		}
 
 	}
@@ -250,7 +249,7 @@ public class UserController {
 	}
 
 	@PostMapping("/savePersonalInformation")
-	public ResponseEntity<?> createUserProfilePersonalInformation(
+	public ResponseEntity createUserProfilePersonalInformation(
 			@RequestBody PersonalInformationEntity profilePersonalInformationEntity) {
 		PersonalInformationEntity userprofilepersonalUpdate = new PersonalInformationEntity();
 		PersonalInformationEntity userss = null;
@@ -264,14 +263,13 @@ public class UserController {
 				String newDate = LocalDate.parse(startDateString, formatter2).format(formatter2);
 				userprofilepersonalUpdate.setDateOfBirth(newDate);
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
-				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
+				userprofilepersonalUpdate.setPincode(profilePersonalInformationEntity.getPincode());
 				userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
 				userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
 				userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
 				userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
 				userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
-				PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo
-						.save(userprofilepersonalUpdate);
+				PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo.save(userprofilepersonalUpdate);
 				if (createUserProfilePersonalInformation.getId() != 0) {
 					return new ResponseEntity<>("200", HttpStatus.CREATED);
 				} else {
@@ -294,24 +292,14 @@ public class UserController {
 
 		try {
 			if (profileProfessionalInformationEntity.getSourceOfIncome().equals("business")) {
-				if (profileProfessionalInformationEntity.getId() != 0
-						&& profileProfessionalInformationEntity.getBusinessName() != null
-						&& profileProfessionalInformationEntity.getBusinessAnnualRevenue() != 0
-						&& profileProfessionalInformationEntity.getGstNumber() != null
-						&& profileProfessionalInformationEntity.getBusinessType() != null
-						&& profileProfessionalInformationEntity.getInvestAmount() != 0) {
+				if (profileProfessionalInformationEntity.getId() != 0 && profileProfessionalInformationEntity.getBusinessName() != null && profileProfessionalInformationEntity.getBusinessAnnualRevenue() != 0 && profileProfessionalInformationEntity.getGstNumber() != null && profileProfessionalInformationEntity.getBusinessType() != null && profileProfessionalInformationEntity.getInvestAmount() != 0) {
 					userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
-					userprofileprofessionalUpdate
-							.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
-					userprofileprofessionalUpdate
-							.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
-					userprofileprofessionalUpdate
-							.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
+					userprofileprofessionalUpdate.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
+					userprofileprofessionalUpdate.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
+					userprofileprofessionalUpdate.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
 					userprofileprofessionalUpdate.setGstNumber(profileProfessionalInformationEntity.getGstNumber());
-					userprofileprofessionalUpdate
-							.setBusinessType(profileProfessionalInformationEntity.getBusinessType());
-					userprofileprofessionalUpdate
-							.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
+					userprofileprofessionalUpdate.setBusinessType(profileProfessionalInformationEntity.getBusinessType());
+					userprofileprofessionalUpdate.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
 					ProfessionalInformationEntity userEntity = professionalInfoRepo.save(userprofileprofessionalUpdate);
 					if (userEntity.getId() != 0) {
 						return appUtils.prepareResponse("Data Saved Successfully", "Success", "200", 1, null);
@@ -322,17 +310,12 @@ public class UserController {
 					return appUtils.prepareResponse("Mandatory fileds are missing", "failed", "500", 0, null);
 				}
 			} else if (profileProfessionalInformationEntity.getSourceOfIncome().equals("salaried")) {
-				if (profileProfessionalInformationEntity.getId() != 0
-						&& profileProfessionalInformationEntity.getCompanyName() != null
-						&& profileProfessionalInformationEntity.getAnnualIncome() != null) {
+				if (profileProfessionalInformationEntity.getId() != 0 && profileProfessionalInformationEntity.getCompanyName() != null && profileProfessionalInformationEntity.getAnnualIncome() != null) {
 					userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
-					userprofileprofessionalUpdate
-							.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
+					userprofileprofessionalUpdate.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
 					userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
-					userprofileprofessionalUpdate
-							.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
-					userprofileprofessionalUpdate
-							.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
+					userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
+					userprofileprofessionalUpdate.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
 					ProfessionalInformationEntity userEntity = professionalInfoRepo.save(userprofileprofessionalUpdate);
 					if (userEntity.getId() != 0) {
 						return appUtils.prepareResponse("Data Saved Successfully", "Success", "200", 1, null);
@@ -359,17 +342,13 @@ public class UserController {
 //	    @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
 
 //	public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
-	public ResponseObject createUserProfileFamilyInformation(@RequestParam String id, String fatherName,
-			Integer fatherAge, String fatherOccupation,
-			@RequestParam("fatherUploadMedicalHistory") List<MultipartFile> fatherUploadMedicalHistory,
-			String motherName, Integer motherAge, String motherOccupation,
-			@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
-			String spouseName, Integer spouseAge, String spouseOccupation,
-			@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
-			@RequestParam("uploadOtherNomineeRelation") List<MultipartFile> uploadOtherNomineeRelation,
-			String nominee1Name, String nominee2Name, String otherNomineeName, Integer otherNomineeAge,
-			String otherNomineeRelation, String maritalStatus, Integer selectNumberOfChildren
-
+	public ResponseObject createUserProfileFamilyInformation(@RequestParam String id, String fatherName,Integer fatherAge, String fatherOccupation,@RequestParam("fatherUploadMedicalHistory") List<MultipartFile> fatherUploadMedicalHistory,
+			String motherName, Integer motherAge, String motherOccupation,@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
+			
+			String spouseName, Integer spouseAge, String spouseOccupation,@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
+			
+			String otherNomineeName, Integer otherNomineeAge, String otherNomineeOccupation, @RequestParam("uploadOtherNomineeMedicalHistory") List<MultipartFile> uploadOtherNomineeMedicalHistory
+			
 	) {
 		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
 		FamilyInformationEntity userss = null;
@@ -389,12 +368,13 @@ public class UserController {
 				userProfileFamilyUpdate.setSpouseName(spouseName);
 				userProfileFamilyUpdate.setSpouseAge(spouseAge);
 				userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);
-//				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);	
-				userProfileFamilyUpdate.setNominee1Name(nominee1Name);
-				userProfileFamilyUpdate.setNominee2Name(nominee2Name);
+//				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);
 				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
 				userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
-
+				userProfileFamilyUpdate.setOtherNomineeOccupation(otherNomineeOccupation);
+//				userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(otherNomineeUploadMedicalHistory);
+				
+				
 				List<String> filenames = new ArrayList<>();
 				for (MultipartFile file : fatherUploadMedicalHistory) {
 					String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -426,19 +406,16 @@ public class UserController {
 					userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
 				}
 
-				for (MultipartFile file : uploadOtherNomineeRelation) {
+				for (MultipartFile file : uploadOtherNomineeMedicalHistory) {
 					String filename = StringUtils.cleanPath(file.getOriginalFilename());
 					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
 					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
 					filenames.add(filename);
 				}
 				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setUploadOtherNomineeRelation(filenames.get(i));
-
-				}
-
-				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo
-						.save(userProfileFamilyUpdate);
+					userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(filenames.get(i));
+    }
+               FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
 				if (createUserProfileFamilyInformation.getId() != 0) {
 					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
 							createUserProfileFamilyInformation);
@@ -619,32 +596,32 @@ public class UserController {
 
 
 	// display image
-	@GetMapping("/display")
-	public ResponseEntity<byte[]> displayImage(@RequestParam("userId") int userId) throws IOException, SQLException {
+//	@GetMapping("/display")
+//	public ResponseEntity<byte[]> displayImage(@RequestParam("userId") int userId) throws IOException, SQLException {
 //    	UserService userService = null;
-		UserEntity profile = userService.viewById(userId);
-		byte[] imageBytes = null;
-		imageBytes = profile.getProfile().getBytes(1, (int) profile.getProfile().length());
-		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-	}
-
-	// add image - post
-	@PostMapping("/uploadImage")
-	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
-		try {
-			byte[] bytes = file.getBytes();
-			Blob blob = new SerialBlob(bytes);
-
-			UserEntity userEntity = new UserEntity();
-			userEntity.setProfile(blob);
-			int rows = userService.uploadProfile(UserId, userEntity.getProfile());
-			if (rows != 0) {
-				return appUtils.prepareResponse("profile updated successfully", "success", "200", 1, null);
-			} else {
-				return appUtils.prepareResponse("failed to update profile", "failed", "400", 0, null);
-			}
-		} catch (Exception e) {
-			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
-		}
-	}
+//		UserEntity profile = userService.viewById(userId);
+//		byte[] imageBytes = null;
+//		imageBytes = profile.getProfile().getBytes(1, (int) profile.getProfile().length());
+//		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
+//	}
+//
+//	// add image - post
+//	@PostMapping("/uploadImage")
+//	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
+//		try {
+//			byte[] bytes = file.getBytes();
+//			Blob blob = new SerialBlob(bytes);
+//
+//			UserEntity userEntity = new UserEntity();
+//			userEntity.setProfile(blob);
+//			int rows = userService.uploadProfile(UserId, userEntity.getProfile());
+//			if (rows != 0) {
+//				return appUtils.prepareResponse("profile updated successfully", "success", "200", 1, null);
+//			} else {
+//				return appUtils.prepareResponse("failed to update profile", "failed", "400", 0, null);
+//			}
+//		} catch (Exception e) {
+//			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+//		}
+//	}
 }
