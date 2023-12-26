@@ -33,7 +33,7 @@ public class PersonalInformationEntity implements Serializable {
 	private String dateOfBirth;
 	
 	private String state;
-	private String country;
+	private Integer pincode;
 	@Column(name = "marital_status")
 	private String maritalStatus;
 	private Integer height;

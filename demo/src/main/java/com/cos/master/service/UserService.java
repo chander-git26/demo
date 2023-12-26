@@ -62,7 +62,7 @@ public class UserService {
 			personalInfo.setGender(setData(data, 2));
 			personalInfo.setDateOfBirth(setData(data, 3));
 			personalInfo.setState(setData(data, 4));
-			personalInfo.setCountry(setData(data, 5));
+			personalInfo.setPincode(Integer.parseInt(setData(data, 5)));
 			personalInfo.setMaritalStatus(setData(data, 6));
 			personalInfo.setHeight(Integer.parseInt(setData(data, 7)));
 			personalInfo.setWeight(Integer.parseInt(setData(data, 8)));
@@ -108,11 +108,10 @@ public class UserService {
 			familyInfo.setSpouseAge(Integer.parseInt(setData(data, 10)));
 			familyInfo.setSpouseOccupation(setData(data, 11));
 			familyInfo.setSpouseUploadMedicalHistory(setData(data, 12));
-			familyInfo.setNominee1Name(setData(data, 13));
-			familyInfo.setNominee2Name(setData(data, 14));
-			familyInfo.setOtherNomineeName(setData(data, 15));
-			familyInfo.setOtherNomineeAge(Integer.parseInt(setData(data, 16)));
-			familyInfo.setOtherNomineeRelation(setData(data, 17));
+			familyInfo.setOtherNomineeName(setData(data, 13));
+			familyInfo.setOtherNomineeAge(Integer.parseInt(setData(data, 14)));
+		    familyInfo.setOtherNomineeOccupation(setData(data,15));
+		    familyInfo.setOtherNomineeUploadMedicalHistory(setData(data, 16));
 			
 		}
 		return familyInfo;
@@ -158,17 +157,17 @@ public class UserService {
 		return userRepo.updatestate(state,id);
 	}
 	
-	public int updateCountry(String country,int id) {
-		return userRepo.updatecountry(country,id);
+	public int updatePincode(int pincode,int id) {
+		return userRepo.updatepincode(pincode,id);
 	}
 	
 	public int updateMaritalStatus(String maritalStatus,int id) {
 		return userRepo.updateMaritalStatus(maritalStatus,id);
 	}
 
-	public int updateBloodGroup(String bloodGroup,int id) {
-		return userRepo.updateBloodGroup(bloodGroup,id);
-	}
+//	public int updateBloodGroup(String bloodGroup,int id) {
+//		return userRepo.updateBloodGroup(bloodGroup,id);
+//	}
 	
 	public int updateHeight(int height,int id) {
 		return userRepo.updateHeight(height,id);
@@ -234,13 +233,13 @@ public class UserService {
 		return userRepo.updateSpouseOccupation(spouse_occupation,id);
 	}
 	
-	public int updateNominee1Name(String nominee1_name,int id) {
-		return userRepo.updateNominee1Name(nominee1_name,id);
-	}
-	
-	public int updateNominee2Name(String other_nominee_name,int id) {
-		return userRepo.updateNominee2Name(other_nominee_name,id);
-	}
+//	public int updateNominee1Name(String nominee1_name,int id) {
+//		return userRepo.updateNominee1Name(nominee1_name,id);
+//	}
+//	
+//	public int updateNominee2Name(String other_nominee_name,int id) {
+//		return userRepo.updateNominee2Name(other_nominee_name,id);
+//	}
 	
 	public int updateOtherNomineeName(String other_nominee_name,int id) {
 		return userRepo.updateOtherNomineeName(other_nominee_name,id);
@@ -250,13 +249,17 @@ public class UserService {
 		return userRepo.updateOtherNomineeAge(other_nominee_age,id);
 	}
 	
-	public int updateOtherNomineeRelation(String other_nominee_relation,int id) {
-		return userRepo.updateOtherNomineeRelation(other_nominee_relation,id);
+	public int updateOtherNomineeOccupation(String other_nominee_occupation,int id) {
+		return userRepo.updateOtherNomineeOccupation(other_nominee_occupation,id);
 	}
-
-	public int updateSelectNumberOfChildren(int select_number_of_children,int id) {
-		return userRepo.updateSelectNumberOfChildren(select_number_of_children,id);
-	}
+	
+//	public int updateOtherNomineeRelation(String other_nominee_relation,int id) {
+//		return userRepo.updateOtherNomineeRelation(other_nominee_relation,id);
+//	}
+//
+//	public int updateSelectNumberOfChildren(int select_number_of_children,int id) {
+//		return userRepo.updateSelectNumberOfChildren(select_number_of_children,id);
+//	}
 	
 	public int updatePastSurgeries(String past_surgeries,int id) {
 		return userRepo.updatePastSurgeries(past_surgeries,id);

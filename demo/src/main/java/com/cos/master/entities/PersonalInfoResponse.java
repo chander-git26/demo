@@ -28,7 +28,7 @@ public class PersonalInfoResponse implements Serializable{
 	private String dateOfBirth;
 	
 	private String state;
-	private String country;
+	private Integer pincode;
 	
 	@Column(name = "marital_status")
 	private String maritalStatus;

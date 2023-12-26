@@ -65,14 +65,11 @@ public class FamilyResponse implements Serializable {
 	private String  spouseUploadMedicalHistory;
 	
 
-	
-	
-
-	@Column(name = "nominee1_name")
-	private String nominee1Name;
-
-	@Column(name = "nominee2_name")
-	private String nominee2Name;
+//	@Column(name = "nominee1_name")
+//	private String nominee1Name;
+//
+//	@Column(name = "nominee2_name")
+//	private String nominee2Name;
 	
 
 	@Column(name = "other_nominee_name")
@@ -81,15 +78,18 @@ public class FamilyResponse implements Serializable {
 	@Column(name = "other_nominee_age")
 	private Integer otherNomineeAge;
 	
-	@Column(name = "other_nominee_relation")
-	private String otherNomineeRelation;
-
-
-	@Column(name = "marital_status")
-	private String maritalStatus;
-
-	@Column(name = "select_number_of_children")
-	private Integer selectNumberOfChildren;
+	@Column(name = "other_nominee_occupation")
+	private String otherNomineeOccupation;
+	
+	@Column(name = "other_nominee_upload_medical_history")
+	private String otherNomineeUploadMedicalHistory;
+	
+//	@Column(name = "other_nominee_relation")
+//	private String otherNomineeRelation;
+//	@Column(name = "marital_status")
+//	private String maritalStatus;
+//	@Column(name = "select_number_of_children")
+//	private Integer selectNumberOfChildren;
 
 }
 
