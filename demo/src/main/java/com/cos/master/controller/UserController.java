@@ -67,6 +67,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -284,13 +285,14 @@ public class UserController {
 			if (profilePersonalInformationEntity != null) {
 				userprofilepersonalUpdate.setAddress(profilePersonalInformationEntity.getAddress());
 				userprofilepersonalUpdate.setGender(profilePersonalInformationEntity.getGender());
-				String startDateString = profilePersonalInformationEntity.getDateOfBirth();
+				Date startDateString = profilePersonalInformationEntity.getDateOfBirth();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 				DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				String newDate = LocalDate.parse(startDateString, formatter2).format(formatter2);
-				userprofilepersonalUpdate.setDateOfBirth(newDate);
+				//String newDate = LocalDate.parse(startDateString, formatter2).format(formatter2);
+				userprofilepersonalUpdate.setDateOfBirth(startDateString);
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
-				userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
+				userprofilepersonalUpdate.setPincode(profilePersonalInformationEntity.getPincode());
+				//userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
 				userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
 				userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
 				userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
@@ -424,8 +426,8 @@ public class UserController {
 				userProfileFamilyUpdate.setSpouseAge(spouseAge);
 				userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);
 //				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);	
-				userProfileFamilyUpdate.setNominee1Name(nominee1Name);
-				userProfileFamilyUpdate.setNominee2Name(nominee2Name);
+//				userProfileFamilyUpdate.setNominee1Name(nominee1Name);
+//				userProfileFamilyUpdate.setNominee2Name(nominee2Name);
 				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
 				userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
 
@@ -467,7 +469,7 @@ public class UserController {
 					filenames.add(filename);
 				}
 				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setUploadOtherNomineeRelation(filenames.get(i));
+					userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(filenames.get(i));
 
 				}
 

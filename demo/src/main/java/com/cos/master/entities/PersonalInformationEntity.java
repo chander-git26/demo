@@ -1,6 +1,7 @@
 package com.cos.master.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,7 +31,7 @@ public class PersonalInformationEntity implements Serializable {
 	
 
 	@Column(name = "date_of_birth")
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	
 	private String state;
 	private Integer pincode;
