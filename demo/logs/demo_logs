@@ -1,0 +1,9 @@
+dd2023-12-21 15:50:44 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@11b8360
+2023-12-21 15:55:40 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@7888335f
+2023-12-21 15:55:56 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@a66b051
+2023-12-21 15:58:48 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@47002ff8
+2023-12-21 15:58:48 INFO  UserController:112 - Middle of create user method 
+2023-12-21 15:58:48 ERROR UserController:129 - catch block could not execute statement [Unknown column 'password' in 'field list'] [insert into user_info (created_date,email,firstname,lastname,mobile,modified_date,otp,password,user_id) values (?,?,?,?,?,?,?,?,?)]; SQL [insert into user_info (created_date,email,firstname,lastname,mobile,modified_date,otp,password,user_id) values (?,?,?,?,?,?,?,?,?)]
+2023-12-21 15:59:55 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@5616a327
+2023-12-21 15:59:55 INFO  UserController:112 - Middle of create user method 
+2023-12-21 15:59:55 INFO  UserController:121 - Success from user repo
