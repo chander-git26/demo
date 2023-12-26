@@ -1,5 +1,6 @@
 package com.cos.master.repository;
 
+import org.hibernate.annotations.PartitionKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -47,7 +48,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value = "select id,father_name,father_age,father_occupation,father_upload_medical_history,mother_name,mother_age,mother_occupation,mother_upload_medical_history,spouse_name,spouse_age,spouse_occupation,spouse_upload_medical_history,nominee1_name,nominee2_name,other_nominee_name,other_nominee_age,other_nominee_relation,marital_status,select_number_of_children from family_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getFamilylInfo(@Param("userId") String userId);
 	
-	@Query(value = "select id,past_surgeries,blood_pressure,diabetes,upload_medical_history from medical_info where id = :userId", nativeQuery = true)
+	@Query(value = "select id,past_surgeries,upload_bp_report,upload_diabetes_report,upload_heart_stroke_report,upload_other_report,current_treatments,covid_status from medical_info where id = :userId", nativeQuery = true)
 	public List<Object[]> getMedicallInfo(@Param("userId") String userId);
 	
 	@Query(value = "select upload_other_report from medical_info where id = :userId", nativeQuery = true)
@@ -61,7 +62,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
 	public String getMobileNumber(String  mobileNumber);
-
+    
+	@Query(value = "select profile from user_info where userId =:userId",nativeQuery = true)
+	public String findById(@Param("userId") String userId);
+	
 	@Modifying
 	@Transactional
 

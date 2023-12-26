@@ -1,9 +1,55 @@
-dd2023-12-21 15:50:44 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@11b8360
-2023-12-21 15:55:40 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@7888335f
-2023-12-21 15:55:56 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@a66b051
-2023-12-21 15:58:48 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@47002ff8
-2023-12-21 15:58:48 INFO  UserController:112 - Middle of create user method 
-2023-12-21 15:58:48 ERROR UserController:129 - catch block could not execute statement [Unknown column 'password' in 'field list'] [insert into user_info (created_date,email,firstname,lastname,mobile,modified_date,otp,password,user_id) values (?,?,?,?,?,?,?,?,?)]; SQL [insert into user_info (created_date,email,firstname,lastname,mobile,modified_date,otp,password,user_id) values (?,?,?,?,?,?,?,?,?)]
-2023-12-21 15:59:55 INFO  UserController:102 - Started create user method com.cos.master.entities.UserEntity@5616a327
-2023-12-21 15:59:55 INFO  UserController:112 - Middle of create user method 
-2023-12-21 15:59:55 INFO  UserController:121 - Success from user repo
+
+2023-12-21 18:14:41 INFO  UserController:68 - validateOtp method {
+    "mobile": "8309262783",
+    "otp": "45456"
+}
+2023-12-21 18:22:41 INFO  UserController:147 - Fetch getUserDetails method110
+2023-12-21 18:23:31 INFO  UserController:147 - Fetch getUserDetails method110
+2023-12-21 18:26:02 INFO  UserController:160 - Display getPersonalInfo method101
+2023-12-21 18:46:23 INFO  UserController:634 - inside updatePassword method{
+"mobile":"8309262783",
+"password":"raju343"
+
+}
+2023-12-21 18:51:00 INFO  UserController:406 - saveFamilyInformation  methodcom.cos.master.entities.FamilyInformationEntity@222ea282
+2023-12-22 10:39:19 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@107e1a5b
+2023-12-22 10:47:42 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@fc12440
+2023-12-22 10:48:32 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@1fb173a0
+2023-12-22 10:49:03 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@5047177b
+2023-12-22 10:55:55 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@38b3867e
+2023-12-22 10:55:59 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@11ea05f4
+2023-12-22 10:57:05 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@443cfb43
+2023-12-22 10:58:56 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@3c068fa1
+2023-12-22 10:59:27 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@75604b7a
+2023-12-22 10:59:53 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@5b8bd39e
+2023-12-22 11:27:44 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@5198bde9
+2023-12-22 11:29:01 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@428e02d8
+2023-12-22 11:32:45 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@27ab5d03
+2023-12-22 11:34:00 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@1634247
+2023-12-22 11:34:21 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@559ea7b7
+2023-12-22 11:37:59 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@6ad59871
+2023-12-22 11:38:14 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@5c196784
+2023-12-22 11:40:19 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@4c398d49
+2023-12-22 11:41:24 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@440658b5
+2023-12-22 11:42:47 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@78000ec2
+2023-12-22 11:50:19 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@2ad996b
+2023-12-22 12:17:06 INFO  UserController:686 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@737bc315
+2023-12-26 10:20:38 INFO  UserController:234 - Display getMedicalInfo method101
+2023-12-26 10:20:38 INFO  UserController:250 - inside catch blockJDBC exception executing SQL [select id,past_surgeries,blood_pressure,diabetes,upload_medical_history from medical_info where id = ?] [Unknown column 'blood_pressure' in 'field list'] [n/a]; SQL [n/a]
+2023-12-26 10:31:51 INFO  UserController:234 - Display getMedicalInfo method101
+2023-12-26 10:47:59 INFO  UserController:72 - validateOtp method {
+    "mobile": "8309262783",
+    "otp": "45456"
+}
+2023-12-26 10:48:14 INFO  UserController:660 - inside verifyMobileNumber method 8309262782
+2023-12-26 10:50:57 INFO  UserController:161 - Display getPersonalInfo method101
+2023-12-26 10:51:12 INFO  UserController:185 - Display getProfessionalInfo method101
+2023-12-26 10:51:12 INFO  UserController:200 - inside catch blockJDBC exception executing SQL [select id,source_of_income,company_name,business_name, annual_income, business_annual_revenue,gst_number,invest_amount from professional_info where id =?] [Unknown column 'gst_number' in 'field list'] [n/a]; SQL [n/a]
+2023-12-26 10:51:14 INFO  UserController:161 - Display getPersonalInfo method101
+2023-12-26 10:52:57 INFO  UserController:161 - Display getPersonalInfo method101
+2023-12-26 10:53:30 INFO  UserController:161 - Display getPersonalInfo method101
+2023-12-26 10:53:30 INFO  UserController:161 - Display getPersonalInfo method101
+2023-12-26 10:53:30 INFO  UserController:161 - Display getPersonalInfo method101
+2023-12-26 10:53:31 INFO  UserController:161 - Display getPersonalInfo method101
+2023-12-26 10:53:37 INFO  UserController:161 - Display getPersonalInfo method101
+2023-12-26 10:54:23 INFO  UserController:161 - Display getPersonalInfo method101

@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
@@ -606,7 +607,7 @@ public class UserController {
 	@GetMapping("/getUserId/{email}")
 	public ResponseObject getUserId(@PathVariable("email") String email) {
 		logger.info("getUserId method"+email);
-
+ 
 		UserEntity userEntity = new UserEntity();
 		String user = userService.getUserEmail(email);
 		logger.info("user mail"+user);
@@ -666,21 +667,9 @@ public class UserController {
 			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, null);
 		}
 	}
+	
 
 
-	// display image
-	@GetMapping("/display")
-	public ResponseEntity<byte[]> displayImage(@RequestParam("userId") int userId) throws IOException, SQLException {
-		logger.info("image display method"+userId);
-
-//    	UserService userService = null;
-		UserEntity profile = userService.viewById(userId);
-		byte[] imageBytes = null;
-		imageBytes = profile.getProfile().getBytes(1, (int) profile.getProfile().length());
-		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-	}
-
-	// add image - post
 	@PostMapping("/uploadImage")
 	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
 		logger.info("upload image method"+file);
@@ -703,4 +692,41 @@ public class UserController {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
 	}
-}
+	
+	
+	
+//	@GetMapping("/display")
+//	public ResponseEntity<byte[]> display(@RequestParam("id") int id)  {
+//		logger.info("image display method"+id);
+//		try {
+////    	UserService userService = null;
+//		UserEntity profile = userService.viewById(id);
+//		byte[] imageBytes = null;
+//		imageBytes = profile.getProfile().getBytes(1, (int) profile.getProfile().length());
+//		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//			e.getMessage();
+//		}
+//		return null;
+//		}
+	
+	
+	
+	@GetMapping("display/{id}")
+    public ResponseEntity<byte[]> fromDatabaseAsResEntity(@PathVariable("id") Integer id) throws SQLException {
+
+        Optional<UserEntity> userImage = userRepo.findById(id);
+        byte[] imageBytes = null;
+        if (userImage.isPresent()) {
+
+            imageBytes = userImage.get().getProfile().getBytes(1,
+                    (int) userImage.get().getProfile().length());
+        }
+
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
+    }
+	
+	}
+
