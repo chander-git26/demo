@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.repository.UserRepository;
 
@@ -28,16 +27,23 @@ public class AppUtils {
 	@Autowired
 	UserRepository userRepo;
 	
-	public long generateUserId() {
-		long userId = 1000;
-		String newUserId = userRepo.generateUserId();
-		if(newUserId.isEmpty() || newUserId.equals("null")) {
+	public String generateUserId(String firstName, String mobile) {
+		String userId = "";
+		try {
+			
+			for (int i = 0; i < firstName.length()-1; i++) {
+				if (mobile.substring(0,10) !=null) {
+					userId += firstName.charAt(i);
+					userId += mobile.charAt(i);
+				}else {
+					return userId;
+				}
+			}
 			return userId;
-		}else {
-			long id = Long.parseLong(newUserId);
-			++id;
-			return id;
+		} catch (Exception e) {
+			return userId;
 		}
+		
 	}
 	public String generateOtp() {
 		String generatedOtp = "";
@@ -73,14 +79,5 @@ public class AppUtils {
 
 		return token;
 	}
-//   public static final int HALF_AN_HOUR_IN_MILLISECONDS = 30 * 60 * 1000;
-//
-//   @Scheduled(fixedRate = HALF_AN_HOUR_IN_MILLISECONDS)
-//    public String generateNewToken() {
-//        return UUID.randomUUID().toString();
-//   }
-//	
-//   
-//  }
 
 }

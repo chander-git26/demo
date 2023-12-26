@@ -1,7 +1,5 @@
 package com.cos.master.service;
 
-import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,26 +11,21 @@ import com.cos.master.entities.PersonalInfoResponse;
 import com.cos.master.entities.ProfessionalResponse;
 import com.cos.master.entities.UserEntity;
 import com.cos.master.repository.UserRepository;
-import java.awt.Image;
-import java.io.IOException;
+import com.cos.master.security.AES;
+
 import java.sql.Blob;
 
-import java.util.Optional;
-
-
-import jakarta.transaction.Transactional;
 @Service
 public class UserService {
 	
 	@Autowired
 	UserRepository userRepo;
 	
-//	public int createUser(String firstname, String lastname, String userId, String mobile, String password, String email, LocalDate createdDate, LocalDate modifiedDate){
-//		return userRepo.createUser(firstname, lastname, userId, mobile, password, email,  createdDate, modifiedDate);
-//	}
-	
+	@Autowired
+	AES aes;
 	
 	public UserEntity getUserInfo(String userId) {
+		
 		return userRepo.fetchByUserId(userId);
 	}
 	

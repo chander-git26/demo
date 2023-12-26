@@ -120,13 +120,15 @@ public class UserController {
 		UserEntity users = null;
 		try {
 			if (userEntity != null) {
-				user.setFirstname(userEntity.getFirstname());
-				user.setLastname(userEntity.getLastname());
-				String createdUserId = String.valueOf(appUtils.generateUserId());
-				user.setUserId(createdUserId);
-				String encryptPassword = aes.encrypt(userEntity.getPassword());
+				String firstName =userEntity.getFirstname();
+				String mobile =userEntity.getMobile();
+				String createdUserId = appUtils.generateUserId(firstName,mobile);
+				System.out.println("user id : "+createdUserId);
+				String encryptedUserId = aes.encrypt(createdUserId);
+				user.setUserId(encryptedUserId);
+				String encryptedPassword = aes.encrypt(userEntity.getPassword());
 				logger.info("Middle of create user method ");
-				user.setPassword(encryptPassword);
+				user.setPassword(encryptedPassword);
 				user.setMobile(userEntity.getMobile());
 				user.setEmail(userEntity.getEmail());
 				user.setCreatedDate(LocalDate.now());
