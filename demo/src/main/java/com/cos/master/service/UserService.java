@@ -39,6 +39,9 @@ public class UserService {
 	public String getUserEmail(String email) {
 		return userRepo.getUserEmail(email);
 	}
+	public int getUserOtp(String mobile) {
+		return userRepo.getUserOtp(mobile);
+	}
 	
 //	public int updatePassword(String password,String mobile)
 //	{
