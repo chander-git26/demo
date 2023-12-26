@@ -36,7 +36,7 @@ public class FamilyInformationEntity implements Serializable {
 	private String fatherOccupation;
 	
 	@Column(name = "father_upload_medical_history")
-	private Blob  fatherUploadMedicalHistory;
+	private String  fatherUploadMedicalHistory;
 	
 //	private MultipartFile  father_upload_medical_history;
 
@@ -48,7 +48,7 @@ public class FamilyInformationEntity implements Serializable {
 	private String motherOccupation;
 	
 	@Column(name = "mother_upload_medical_history")
-	private Blob  motherUploadMedicalHistory;
+	private String  motherUploadMedicalHistory;
 //	private MultipartFile   mother_upload_medical_history;
 
 	@Column(name = "spouse_name")
@@ -59,24 +59,29 @@ public class FamilyInformationEntity implements Serializable {
 	private String spouseOccupation;
 	
 	@Column(name = "spouse_upload_medical_history")
-	private Blob  spouseUploadMedicalHistory;
+	private String  spouseUploadMedicalHistory;
 //	private MultipartFile  spouse_upload_medical_history;
 
-	@Column(name = "nominee1_name")
-	private String nominee1Name;
-
-	@Column(name = "nominee2_name")
-	private String nominee2Name;
+//	@Column(name = "nominee1_name")
+//	private String nominee1Name;
+//
+//	@Column(name = "nominee2_name")
+//	private String nominee2Name;
 
 	@Column(name = "other_nominee_name")
 	private String otherNomineeName;
+	
 	@Column(name = "other_nominee_age")
 	private Integer otherNomineeAge;
-	@Column(name = "other_nominee_relation")
-	private String otherNomineeRelation;
-
-   @Column(name="upload_other_nominee_relation")
-   private Blob uploadOtherNomineeRelation;
-
+	
+	@Column(name = "other_nominee_occupation")
+	private String otherNomineeOccupation;
+	
+	@Column(name = "other_nominee_upload_medical_history")
+	private String otherNomineeUploadMedicalHistory;
+	
+//
+//   @Column(name="upload_other_nominee_relation")
+//   private String uploadOtherNomineeRelation;
 
 }

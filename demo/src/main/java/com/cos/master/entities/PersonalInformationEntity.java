@@ -1,6 +1,7 @@
 package com.cos.master.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,12 +29,12 @@ public class PersonalInformationEntity implements Serializable {
 	private String address;
 	private String gender;
 	
-//	private String dateofbirth;
+
 	@Column(name = "date_of_birth")
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	
 	private String state;
-	private String country;
+	private Integer pincode;
 	@Column(name = "marital_status")
 	private String maritalStatus;
 	private Integer height;
