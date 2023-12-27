@@ -50,7 +50,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Query(value = "select id,father_name,father_age,father_occupation,father_upload_medical_history,mother_name,mother_age,mother_occupation,mother_upload_medical_history,spouse_name,spouse_age,spouse_occupation,spouse_upload_medical_history,other_nominee_name,other_nominee_age,other_nominee_occupation,other_nominee_upload_medical_history from family_info where id =:userId", nativeQuery = true)
 	public List<Object[]> getFamilylInfo(@Param("userId") String userId);
-	
+
 	@Query(value = "select id,past_surgeries,upload_bp_report,upload_diabetes_report,upload_heart_stroke_report,upload_other_report,current_treatments,covid_status from medical_info where id = :userId", nativeQuery = true)
 	public List<Object[]> getMedicallInfo(@Param("userId") String userId);
 	
@@ -160,10 +160,16 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Modifying
 	@Transactional
+	@Query(value ="update family_info set father_upload_medical_history =:father_upload_medical_history where id =:id", nativeQuery = true)
+	public int updateFatherUploadMedicalHistory(@Param("father_upload_medical_history") byte father_upload_medical_history,@Param("id") int id);
+	@Modifying
+	@Transactional
 	@Query(value ="update family_info set mother_age =:mother_age where id =:id", nativeQuery = true)
 	public int updateMotherAge(@Param("mother_age") int mother_age,@Param("id") int id);
 	
 	@Modifying
+	
+	
 	@Transactional
 	@Query(value ="update family_info set mother_Name =:mother_Name where id =:id", nativeQuery = true)
 	public int upadteMotherName(@Param("mother_Name") String mother_Name,@Param("id") int id);
@@ -175,8 +181,16 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Modifying
 	@Transactional
+	@Query(value ="update family_info set mother_upload_medical_history =:mother_upload_medical_history where id =:id", nativeQuery = true)
+	public int updateMotherUploadMedicalHistory(@Param("mother_upload_medical_history") byte mother_upload_medical_history,@Param("id") int id);
+	
+	
+	@Modifying
+	@Transactional
 	@Query(value ="update family_info set spouse_name =:spouse_name where id =:id", nativeQuery = true)
 	public int upadteSpouseName(@Param("spouse_name") String spouse_name,@Param("id") int id);
+	
+	
 	
 	@Modifying
 	@Transactional
@@ -188,6 +202,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Transactional
 	@Query(value ="update family_info set spouse_occupation =:spouse_occupation where id =:id", nativeQuery = true)
 	public int updateSpouseOccupation(@Param("spouse_occupation") String spouse_occupation,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set spouse_upload_medical_history =:spouse_upload_medical_history where id =:id", nativeQuery = true)
+	public int updateSpouseUploadMedicalHistory(@Param("spouse_upload_medical_history") byte spouse_upload_medical_history,@Param("id") int id);
+	
 	
 //	@Modifying
 //	@Transactional
@@ -213,6 +233,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Transactional
 	@Query(value ="update family_info set other_nominee_occupation =:other_nominee_occupation where id =:id", nativeQuery = true)
 	public int updateOtherNomineeOccupation(@Param("other_nominee_occupation") String other_nominee_occupation,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set other_nominee_upload_medical_history =:other_nominee_upload_medical_history where id =:id", nativeQuery = true)
+	public int updateOtherNomineeUploadMedicalHistory(@Param("other_nominee_upload_medical_history") byte other_nominee_upload_medical_history,@Param("id") int id);
+	
 	
 	
 //	@Modifying
@@ -270,7 +296,32 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Modifying
 	@Transactional
 	@Query(value ="update professional_info set annual_income =:annual_income where id =:id", nativeQuery = true)
-    public int updateannualIncome(int annual_income, int id);
+    public int updateAnnualIncome(int annual_income, int id);
 	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set gst_number =:gst_number where id =:id", nativeQuery = true)
+    public int updateGstNumber(int gst_number, int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set invest_amount =:invest_amount where id =:id", nativeQuery = true)
+    public int updateInvestAmount(int invest_amount, int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set business_type =:business_type where id =:id", nativeQuery = true)
+    public int updateBusinessType(String business_type, int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update medical_info set current_treatments =:current_treatments where id =:id", nativeQuery = true)
+	public int updateCurrentTreatments(@Param("current_treatments") String current_treatments,@Param("id") int id);
+	
+ 
+	@Modifying
+	@Transactional
+	@Query(value ="update medical_info set covid_status =:covid_status where id =:id", nativeQuery = true)
+	public int updateCovidStatus(@Param("covid_status") String covid_status,@Param("id") int id);
 }
 

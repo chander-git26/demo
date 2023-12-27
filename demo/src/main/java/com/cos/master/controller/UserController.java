@@ -401,108 +401,7 @@ public class UserController {
 
 	// define a location
 	public static final String DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/";
-	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
-//	    @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
 
-//	public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
-	public ResponseObject createUserProfileFamilyInformation(@RequestParam String id, String fatherName,
-			Integer fatherAge, String fatherOccupation,
-			@RequestParam("fatherUploadMedicalHistory") List<MultipartFile> fatherUploadMedicalHistory,
-			String motherName, Integer motherAge, String motherOccupation,
-			@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
-			String spouseName, Integer spouseAge, String spouseOccupation,
-			@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
-			 String otherNomineeName, Integer otherNomineeAge,String otherNomineeOccupation,
-			@RequestParam("otherNomineeMedicalHistory") List<MultipartFile> otherNomineeMedicalHistory
-
-	) {
-		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
-		logger.info("saveFamilyInformation  method"+userProfileFamilyUpdate);
-		FamilyInformationEntity userss = null;
-
-		try {
-//			if (profileFamilyUpdate != null) {
-			if (id != null) {
-				userProfileFamilyUpdate.setId(Integer.parseInt(id));
-				userProfileFamilyUpdate.setFatherName(fatherName);
-//				userProfileFamilyUpdate.setFatherAge(Integer.parseInt(fatherAge));
-				userProfileFamilyUpdate.setFatherAge(fatherAge);
-				userProfileFamilyUpdate.setFatherOccupation(fatherOccupation);
-//				userProfileFamilyUpdate.setFatherUploadMedicalHistory(fatherUploadMedicalHistory);
-				userProfileFamilyUpdate.setMotherName(motherName);
-				userProfileFamilyUpdate.setMotherAge(motherAge);
-				userProfileFamilyUpdate.setMotherOccupation(motherOccupation);
-//				userProfileFamilyUpdate.setMotherUploadMedicalHistory(motherUploadMedicalHistory);
-				userProfileFamilyUpdate.setSpouseName(spouseName);
-				userProfileFamilyUpdate.setSpouseAge(spouseAge);
-				userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);
-//				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);	
-//				userProfileFamilyUpdate.setNominee1Name(nominee1Name);
-//				userProfileFamilyUpdate.setNominee2Name(nominee2Name);
-				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
-				userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
-				userProfileFamilyUpdate.setOtherNomineeOccupation(otherNomineeOccupation);
-
-				List<String> filenames = new ArrayList<>();
-				for (MultipartFile file : fatherUploadMedicalHistory) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
-
-				}
-				for (MultipartFile file : motherUploadMedicalHistory) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
-
-				}
-				for (MultipartFile file : spouseUploadMedicalHistory) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
-				}
-
-				for (MultipartFile file : otherNomineeMedicalHistory) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(filenames.get(i));
-
-				}
-
-				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo
-						.save(userProfileFamilyUpdate);
-				if (createUserProfileFamilyInformation.getId() != 0) {
-					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
-							createUserProfileFamilyInformation);
-				} else {
-					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.info("inside catch block"+e.getMessage());
-
-			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
-					HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
 
 	@PostMapping(value = "/saveMedicalInformation", consumes = "multipart/form-data")
 	public ResponseObject saveMedicalInformation(@RequestParam String id, @RequestParam String pastSurgeries,
@@ -511,10 +410,9 @@ public class UserController {
 			@RequestParam("uploadHeartStrokeReport") List<MultipartFile> uploadHeartStrokeReport,
 			@RequestParam("uploadOtherReport") List<MultipartFile> uploadOtherReport,
 			@RequestParam String currentTreatments, @RequestParam String covidStatus) throws IOException {
-		
 
 		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
-		logger.info("saveMedicalInformation  method"+userprofilemedicalUpdate);
+		logger.info("saveMedicalInformation  method" + userprofilemedicalUpdate);
 		try {
 			if (id != null) {
 				userprofilemedicalUpdate.setId(Integer.parseInt(id));
@@ -522,7 +420,7 @@ public class UserController {
 
 				userprofilemedicalUpdate.setCurrentTreatments(currentTreatments);
 				userprofilemedicalUpdate.setCovidStatus(covidStatus);
-				
+
 				List<byte[]> byteArraysBp = new ArrayList<>();
 				List<byte[]> byteArraysDiabetes = new ArrayList<>();
 				List<byte[]> byteArraysHeartStroke = new ArrayList<>();
@@ -635,18 +533,17 @@ public class UserController {
 				for (byte[] byteArray3 : byteArraysOther) {
 		            userprofilemedicalUpdate.setUploadOtherReport(byteArraysOther.isEmpty() ? null : byteArraysOther.get(0));
 				}
-				
+
 				MedicalInformationEntity saveMedicalInformation = medicalInfoRepo.save(userprofilemedicalUpdate);
 				if (saveMedicalInformation.getId() != 0) {
-					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
-							saveMedicalInformation);
+					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,null);
 				} else {
 					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("inside catch block"+e.getMessage());
+			logger.info("inside catch block" + e.getMessage());
 
 			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
 					HttpStatus.INTERNAL_SERVER_ERROR);
@@ -756,28 +653,28 @@ public class UserController {
 	
 
 
-	@PostMapping("/uploadImage")
-	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
-		logger.info("upload image method"+file);
-
-		try {
-			byte[] bytes = file.getBytes();
-			Blob blob = new SerialBlob(bytes);
-
-			UserEntity userEntity = new UserEntity();
-			userEntity.setProfile(blob);
-			int rows = userService.uploadProfile(UserId, userEntity.getProfile());
-			if (rows != 0) {
-				return appUtils.prepareResponse("profile updated successfully", "success", "200", 1, null);
-			} else {
-				return appUtils.prepareResponse("failed to update profile", "failed", "400", 0, null);
-			}
-		} catch (Exception e) {
-			logger.info("inside catch block"+e.getMessage());
-
-			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
-		}
-	}
+//	@PostMapping("/uploadImage")
+//	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
+//		logger.info("upload image method"+file);
+//
+//		try {
+//			byte[] bytes = file.getBytes();
+//			Blob blob = new SerialBlob(bytes);
+//
+//			UserEntity userEntity = new UserEntity();
+//			userEntity.setProfile(blob);
+//			int rows = userService.uploadProfile(UserId, userEntity.getProfile());
+//			if (rows != 0) {
+//				return appUtils.prepareResponse("profile updated successfully", "success", "200", 1, null);
+//			} else {
+//				return appUtils.prepareResponse("failed to update profile", "failed", "400", 0, null);
+//			}
+//		} catch (Exception e) {
+//			logger.info("inside catch block"+e.getMessage());
+//
+//			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+//		}
+//	}
 	
 	
 	
@@ -800,19 +697,19 @@ public class UserController {
 	
 	
 	
-	@GetMapping("display/{id}")
-    public ResponseEntity<byte[]> fromDatabaseAsResEntity(@PathVariable("id") Integer id) throws SQLException {
-
-        Optional<UserEntity> userImage = userRepo.findById(id);
-        byte[] imageBytes = null;
-        if (userImage.isPresent()) {
-
-            imageBytes = userImage.get().getProfile().getBytes(1,
-                    (int) userImage.get().getProfile().length());
-        }
-
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-    }
+//	@GetMapping("display/{id}")
+//    public ResponseEntity<byte[]> fromDatabaseAsResEntity(@PathVariable("id") Integer id) throws SQLException {
+//
+//        Optional<UserEntity> userImage = userRepo.findById(id);
+//        byte[] imageBytes = null;
+//        if (userImage.isPresent()) {
+//
+//            imageBytes = userImage.get().getProfile().getBytes(1,
+//                    (int) userImage.get().getProfile().length());
+//        }
+//
+//        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
+//    }
 	
 	}
 
