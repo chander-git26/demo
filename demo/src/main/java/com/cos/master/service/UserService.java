@@ -292,9 +292,23 @@ public class UserService {
 		return userRepo.updateannualIncome(annual_income,id);
 	}
 	
+  public int updateGstNumber(int gst_umber,int id) {
+	  return userRepo.updateGstNumber(gst_umber, id);
+  }
+  
+  public int updateBusinessType(String business_type,int id) {
+	  return userRepo.updateBusinessType(business_type, id);
+  }
+	
+  public int updateInvestAmount(int invest_amount,int id) {
+	  return userRepo.updateInvestAmount(invest_amount, id);
+}
+  
 	public int uploadProfile(int userId,Blob image) {
 		return userRepo.uploadProfile(userId, image);
 	}
+	
+	
 
 	public List<UserEntity> viewAll1() {
 		return (List<UserEntity>) userRepo.findAll();
