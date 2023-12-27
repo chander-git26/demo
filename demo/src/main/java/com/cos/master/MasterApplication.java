@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @SpringBootApplication
-//@EnableJpaRepositories("com.cos.master")
+@EnableJpaRepositories("com.cos.master")
 public class MasterApplication {
 
 	public static void main(String[] args) {

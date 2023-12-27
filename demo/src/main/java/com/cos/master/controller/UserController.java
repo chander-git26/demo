@@ -44,7 +44,6 @@ import com.cos.master.repository.PersonalInformationRepository;
 import com.cos.master.repository.ProfessionalInformationRepository;
 import com.cos.master.repository.UserRepository;
 import com.cos.master.security.AES;
-import com.cos.master.security.Security;
 import com.cos.master.service.UserService;
 import com.cos.master.utils.AppUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -86,8 +85,6 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	Security security;
-
 	@Autowired
 	AppUtils appUtils;
 
@@ -121,14 +118,13 @@ public class UserController {
 				String mobile =userEntity.getMobile();
 				String createdUserId = appUtils.generateUserId(firstName,mobile);
 				String encryptedUserId = aes.encrypt(createdUserId);
+//				String encryptedUserId = security.encryptString(createdUserId);
 				user.setUserId(encryptedUserId);
 				String encryptedPassword = aes.encrypt(userEntity.getPassword());
 				logger.info("Middle of create user method ");
 				user.setPassword(encryptedPassword);
 				user.setFirstname(firstName);
 				user.setLastname(userEntity.getLastname());
-				String encryptPassword = aes.encrypt(userEntity.getPassword());
-				user.setPassword(encryptPassword);
 				user.setMobile(mobile);
 				user.setEmail(userEntity.getEmail());
 				user.setCreatedDate(LocalDate.now());
