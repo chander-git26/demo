@@ -288,8 +288,8 @@ public class UserService {
 	public int updateBusinessannualRevenue(int business_annual_revenue,int id) {
 		return userRepo.updateBusinessannualRevenue(business_annual_revenue,id);
 	}
-	public int updateannualIncome(int annual_income,int id) {
-		return userRepo.updateannualIncome(annual_income,id);
+	public int updateAnnualIncome(int annual_income,int id) {
+		return userRepo.updateAnnualIncome(annual_income,id);
 	}
 	
   public int updateGstNumber(int gst_umber,int id) {

@@ -270,7 +270,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Modifying
 	@Transactional
 	@Query(value ="update professional_info set annual_income =:annual_income where id =:id", nativeQuery = true)
-    public int updateannualIncome(int annual_income, int id);
+    public int updateAnnualIncome(int annual_income, int id);
 	
 	@Modifying
 	@Transactional

@@ -710,4 +710,87 @@ public class UpdateDetailsController {
 				return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
 		 }
 		 
+		 
+		 @PostMapping("/updateSourceofIncome")
+			public ResponseObject updateSourceofIncome(@RequestBody String json) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				Map<String, Object> map = null;
+					map = mapper.readValue(json, Map.class);
+			      int id =(int) map.get("id");
+			       String sourceOfIncome = (String) map.get("sourceOfIncome");
+			        if(sourceOfIncome != null && id != 0 && !sourceOfIncome.isEmpty()) {
+					int updateDetails = userService.updateSourceofIncome(sourceOfIncome,id);
+					if(updateDetails != 0) {
+						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					}
+				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+			        }
+				} catch (Exception e) {
+					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+				} 
+			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
+		 }
+		 @PostMapping("/updateCompanyName")
+			public ResponseObject updatecompanyName(@RequestBody String json) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				Map<String, Object> map = null;
+					map = mapper.readValue(json, Map.class);
+			      int id =(int) map.get("id");
+			       String companyName = (String) map.get("companyName");
+			        if(companyName != null && id != 0 && !companyName.isEmpty()) {
+					int updateDetails = userService.updateCompanyName(companyName,id);
+					if(updateDetails != 0) {
+						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					}
+				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+			        }
+				} catch (Exception e) {
+					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+				} 
+			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
+		 }
+		 @PostMapping("/updateBusinessName")
+			public ResponseObject updatebusinessName(@RequestBody String json) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				Map<String, Object> map = null;
+					map = mapper.readValue(json, Map.class);
+			      int id =(int) map.get("id");
+			       String businessName = (String) map.get("businessName");
+			        if(businessName != null && id != 0 && !businessName.isEmpty()) {
+					int updateDetails = userService.updateBusinessName(businessName,id);
+					if(updateDetails != 0) {
+						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					}
+				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+			        }
+				} catch (Exception e) {
+					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+				} 
+			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
+		 }
+		 @PostMapping("/updateAnnualIncome")
+			public ResponseObject updateAnnualIncome(@RequestBody String json) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				Map<String, Object> map = null;
+					map = mapper.readValue(json, Map.class);
+			      int id =(int) map.get("id");
+			       int annualIncome = (int) map.get("annualIncome");
+			        if(annualIncome != 0 && id !=0) {
+					int updateDetails = userService.updateAnnualIncome(annualIncome,id);
+					if(updateDetails != 0) {
+						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					}
+				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+			        }
+				} catch (Exception e) {
+					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+				} 
+			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
+		 }
+
+		 
 }
