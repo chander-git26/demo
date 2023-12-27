@@ -392,107 +392,97 @@ public class UserController {
 	// define a location
 	public static final String DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/";
 	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
-//	    @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
+//    @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
 
-//	public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
-	public ResponseObject createUserProfileFamilyInformation(@RequestParam String id, String fatherName,
-			Integer fatherAge, String fatherOccupation,
-			@RequestParam("fatherUploadMedicalHistory") List<MultipartFile> fatherUploadMedicalHistory,
-			String motherName, Integer motherAge, String motherOccupation,
-			@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
-			String spouseName, Integer spouseAge, String spouseOccupation,
-			@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
-			@RequestParam("uploadOtherNomineeRelation") List<MultipartFile> uploadOtherNomineeRelation,
-			String nominee1Name, String nominee2Name, String otherNomineeName, Integer otherNomineeAge,
-			String otherNomineeRelation, String maritalStatus, Integer selectNumberOfChildren
-
-	) {
-		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
-		logger.info("saveFamilyInformation  method"+userProfileFamilyUpdate);
-		FamilyInformationEntity userss = null;
-
-		try {
-//			if (profileFamilyUpdate != null) {
-			if (id != null) {
-				userProfileFamilyUpdate.setId(Integer.parseInt(id));
-				userProfileFamilyUpdate.setFatherName(fatherName);
-//				userProfileFamilyUpdate.setFatherAge(Integer.parseInt(fatherAge));
-				userProfileFamilyUpdate.setFatherAge(fatherAge);
-				userProfileFamilyUpdate.setFatherOccupation(fatherOccupation);
-//				userProfileFamilyUpdate.setFatherUploadMedicalHistory(fatherUploadMedicalHistory);
-				userProfileFamilyUpdate.setMotherName(motherName);
-				userProfileFamilyUpdate.setMotherAge(motherAge);
-				userProfileFamilyUpdate.setMotherOccupation(motherOccupation);
-//				userProfileFamilyUpdate.setMotherUploadMedicalHistory(motherUploadMedicalHistory);
-				userProfileFamilyUpdate.setSpouseName(spouseName);
-				userProfileFamilyUpdate.setSpouseAge(spouseAge);
-				userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);
-//				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);	
-//				userProfileFamilyUpdate.setNominee1Name(nominee1Name);
-//				userProfileFamilyUpdate.setNominee2Name(nominee2Name);
-				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
-				userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
-
-				List<String> filenames = new ArrayList<>();
-				for (MultipartFile file : fatherUploadMedicalHistory) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
-
-				}
-				for (MultipartFile file : motherUploadMedicalHistory) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
-
-				}
-				for (MultipartFile file : spouseUploadMedicalHistory) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
-				}
-
-				for (MultipartFile file : uploadOtherNomineeRelation) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(filenames.get(i));
-
-				}
-
-				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo
-						.save(userProfileFamilyUpdate);
-				if (createUserProfileFamilyInformation.getId() != 0) {
-					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
-							createUserProfileFamilyInformation);
-				} else {
-					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
-				}
+//public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
+public ResponseObject createUserProfileFamilyInformation(@RequestParam String id, String fatherName,Integer fatherAge, String fatherOccupation,@RequestParam("fatherUploadMedicalHistory") List<MultipartFile> fatherUploadMedicalHistory,
+		String motherName, Integer motherAge, String motherOccupation,@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
+		
+		String spouseName, Integer spouseAge, String spouseOccupation,@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
+		
+		String otherNomineeName, Integer otherNomineeAge, String otherNomineeOccupation, @RequestParam("uploadOtherNomineeMedicalHistory") List<MultipartFile> uploadOtherNomineeMedicalHistory
+		
+) {
+	FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
+	FamilyInformationEntity userss = null;
+	try {
+//		if (profileFamilyUpdate != null) {
+		if (id != null) {
+			userProfileFamilyUpdate.setId(Integer.parseInt(id));
+			userProfileFamilyUpdate.setFatherName(fatherName);
+//			userProfileFamilyUpdate.setFatherAge(Integer.parseInt(fatherAge));
+			userProfileFamilyUpdate.setFatherAge(fatherAge);
+			userProfileFamilyUpdate.setFatherOccupation(fatherOccupation);
+//			userProfileFamilyUpdate.setFatherUploadMedicalHistory(fatherUploadMedicalHistory);
+			userProfileFamilyUpdate.setMotherName(motherName);
+			userProfileFamilyUpdate.setMotherAge(motherAge);
+			userProfileFamilyUpdate.setMotherOccupation(motherOccupation);
+//			userProfileFamilyUpdate.setMotherUploadMedicalHistory(motherUploadMedicalHistory);
+			userProfileFamilyUpdate.setSpouseName(spouseName);
+			userProfileFamilyUpdate.setSpouseAge(spouseAge);
+			userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);
+//			userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);
+			userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
+			userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
+			userProfileFamilyUpdate.setOtherNomineeOccupation(otherNomineeOccupation);
+//			userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(otherNomineeUploadMedicalHistory);
+			
+			
+			List<String> filenames = new ArrayList<>();
+			for (MultipartFile file : fatherUploadMedicalHistory) {
+				String filename = StringUtils.cleanPath(file.getOriginalFilename());
+				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+				filenames.add(filename);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.info("inside catch block"+e.getMessage());
+			for (int i = 0; i < filenames.size(); i++) {
+				userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
 
-			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
-					HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			for (MultipartFile file : motherUploadMedicalHistory) {
+				String filename = StringUtils.cleanPath(file.getOriginalFilename());
+				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+				filenames.add(filename);
+			}
+			for (int i = 0; i < filenames.size(); i++) {
+				userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
+
+			}
+			for (MultipartFile file : spouseUploadMedicalHistory) {
+				String filename = StringUtils.cleanPath(file.getOriginalFilename());
+				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+				filenames.add(filename);
+			}
+			for (int i = 0; i < filenames.size(); i++) {
+				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
+			}
+
+			for (MultipartFile file : uploadOtherNomineeMedicalHistory) {
+				String filename = StringUtils.cleanPath(file.getOriginalFilename());
+				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+				filenames.add(filename);
+			}
+			for (int i = 0; i < filenames.size(); i++) {
+				userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(filenames.get(i));
+}
+           FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
+			if (createUserProfileFamilyInformation.getId() != 0) {
+				return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
+						createUserProfileFamilyInformation);
+			} else {
+				return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
+			}
 		}
-		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
+	} catch (Exception e) {
+		e.printStackTrace();
+		return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
+				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
+}
 
 	@PostMapping(value = "/saveMedicalInformation", consumes = "multipart/form-data")
 	public ResponseObject saveMedicalInformation(@RequestParam String id, @RequestParam String pastSurgeries,
