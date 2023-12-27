@@ -65,6 +65,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -82,6 +83,7 @@ public class UserController {
 	// public static final Logger logger = (Logger)
 	// LoggerFactory.getLogger(UserController.class.getName());
 	public static final Logger logger = Logger.getLogger(UserController.class);
+	
 	@Autowired
 	UserService userService;
 
@@ -116,6 +118,7 @@ public class UserController {
 			if (userEntity != null) {
 				String firstName =userEntity.getFirstname();
 				String mobile =userEntity.getMobile();
+				
 				String createdUserId = appUtils.generateUserId(firstName,mobile);
 				String encryptedUserId = aes.encrypt(createdUserId);
 //				String encryptedUserId = security.encryptString(createdUserId);
@@ -123,6 +126,7 @@ public class UserController {
 				String encryptedPassword = aes.encrypt(userEntity.getPassword());
 				logger.info("Middle of create user method ");
 				user.setPassword(encryptedPassword);
+				
 				user.setFirstname(firstName);
 				user.setLastname(userEntity.getLastname());
 				user.setMobile(mobile);
@@ -156,6 +160,25 @@ public class UserController {
 		} else {
 
 			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, user);
+		}
+	}
+	
+	@PostMapping("/signin")
+	public ResponseEntity<String> signin(@RequestBody UserEntity userInf) throws Exception {
+		logger.info("signin  method"+userInf);
+
+		UserEntity user = new UserEntity();
+
+		String email = userInf.getEmail();
+		String password = userInf.getPassword();
+//	    String encryptPassword = aes.encrypt(password);
+		String userpassword = userService.getusername(email);
+		String decryptPassword = aes.decrypt(userpassword);
+//      	users = userRepo.save(user);
+		if (password.equals(decryptPassword)) {
+			return new ResponseEntity<>("Successfully signed in", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -257,24 +280,7 @@ public class UserController {
 
 	}
 
-	@PostMapping("/signin")
-	public ResponseEntity<String> signin(@RequestBody UserEntity userInf) throws Exception {
-		logger.info("signin  method"+userInf);
-
-		UserEntity user = new UserEntity();
-
-		String email = userInf.getEmail();
-		String password = userInf.getPassword();
-//	    String encryptPassword = aes.encrypt(password);
-		String userpassword = userService.getusername(email);
-		String decryptPassword = aes.decrypt(userpassword);
-//      	users = userRepo.save(user);
-		if (password.equals(decryptPassword)) {
-			return new ResponseEntity<>("Successfully signed in", HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);
-		}
-	}
+	
 
 	@PostMapping("/savePersonalInformation")
 	public ResponseEntity<?> createUserProfilePersonalInformation(
@@ -285,13 +291,17 @@ public class UserController {
 		PersonalInformationEntity userss = null;
 		try {
 			if (profilePersonalInformationEntity != null) {
+			
+				userprofilepersonalUpdate.setId(profilePersonalInformationEntity.getId());
 				userprofilepersonalUpdate.setAddress(profilePersonalInformationEntity.getAddress());
 				userprofilepersonalUpdate.setGender(profilePersonalInformationEntity.getGender());
+				
 				Date startDateString = profilePersonalInformationEntity.getDateOfBirth();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 				DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				//String newDate = LocalDate.parse(startDateString, formatter2).format(formatter2);
 				userprofilepersonalUpdate.setDateOfBirth(startDateString);
+				
 				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
 				userprofilepersonalUpdate.setPincode(profilePersonalInformationEntity.getPincode());
 				//userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
@@ -402,9 +412,8 @@ public class UserController {
 			@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
 			String spouseName, Integer spouseAge, String spouseOccupation,
 			@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
-			@RequestParam("uploadOtherNomineeRelation") List<MultipartFile> uploadOtherNomineeRelation,
-			String nominee1Name, String nominee2Name, String otherNomineeName, Integer otherNomineeAge,
-			String otherNomineeRelation, String maritalStatus, Integer selectNumberOfChildren
+			 String otherNomineeName, Integer otherNomineeAge,String otherNomineeOccupation,
+			@RequestParam("otherNomineeMedicalHistory") List<MultipartFile> otherNomineeMedicalHistory
 
 	) {
 		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
@@ -432,6 +441,7 @@ public class UserController {
 //				userProfileFamilyUpdate.setNominee2Name(nominee2Name);
 				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
 				userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
+				userProfileFamilyUpdate.setOtherNomineeOccupation(otherNomineeOccupation);
 
 				List<String> filenames = new ArrayList<>();
 				for (MultipartFile file : fatherUploadMedicalHistory) {
@@ -464,7 +474,7 @@ public class UserController {
 					userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
 				}
 
-				for (MultipartFile file : uploadOtherNomineeRelation) {
+				for (MultipartFile file : otherNomineeMedicalHistory) {
 					String filename = StringUtils.cleanPath(file.getOriginalFilename());
 					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
 					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
@@ -512,48 +522,120 @@ public class UserController {
 
 				userprofilemedicalUpdate.setCurrentTreatments(currentTreatments);
 				userprofilemedicalUpdate.setCovidStatus(covidStatus);
-				List<String> filenames = new ArrayList<>();
+				
+				List<byte[]> byteArraysBp = new ArrayList<>();
+				List<byte[]> byteArraysDiabetes = new ArrayList<>();
+				List<byte[]> byteArraysHeartStroke = new ArrayList<>();
+				List<byte[]> byteArraysOther = new ArrayList<>();
+
+
 				for (MultipartFile file : uploadBpReport) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
+					try {
+						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+
+						String filename = "sample_pdf.pdf";
+
+						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+
+						Files.write(fileStorage, bytes);
+
+						byteArraysBp.add(bytes);
+
+						System.out.println("File saved successfully at: " + fileStorage.toString());
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userprofilemedicalUpdate.setUploadBloodPressure(filenames.get(i));
+
+				// Usage of byte arrays
+				for (byte[] byteArray : byteArraysBp) {
+		            userprofilemedicalUpdate.setUploadBpReport(byteArraysBp.isEmpty() ? null : byteArraysBp.get(0));
 
 				}
+
+
 				for (MultipartFile file : uploadDiabetesReport) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
+					try {
+						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
 
-					userprofilemedicalUpdate.setUploadDiabetes(filenames.get(i));
+						String filename = "sample_pdf.pdf";
 
+						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+
+						Files.write(fileStorage, bytes);
+
+						byteArraysDiabetes.add(bytes);
+						
+				        System.out.println("File saved successfully at: " + fileStorage.toString());
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+
+				for (byte[] byteArray1 : byteArraysDiabetes) {
+		            userprofilemedicalUpdate.setUploadDiabetesReport(byteArraysDiabetes.isEmpty() ? null : byteArraysDiabetes.get(0));
+				}
+
 				for (MultipartFile file : uploadHeartStrokeReport) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
+					try {
+						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+						
+						   String filename = "sample_pdf.pdf";
+			                
+			                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+
+					        Files.write(fileStorage, bytes);
+						
+					        byteArraysHeartStroke.add(bytes);
+						
+				        System.out.println("File saved successfully at: " + fileStorage.toString());
+
+						
+					} catch (IOException e) {
+						// Handle exception (e.g., log or throw)
+						e.printStackTrace();
+					}
 				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userprofilemedicalUpdate.setUploadHeartStroke(filenames.get(i));
+
+				for (byte[] byteArray2 : byteArraysHeartStroke) {
+					
+		            userprofilemedicalUpdate.setUploadHeartStrokeReport(byteArraysHeartStroke.isEmpty() ? null : byteArraysHeartStroke.get(0));
 
 				}
+
+
 				for (MultipartFile file : uploadOtherReport) {
-					String filename = StringUtils.cleanPath(file.getOriginalFilename());
-					Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-					copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-					filenames.add(filename);
-				}
-				for (int i = 0; i < filenames.size(); i++) {
-					userprofilemedicalUpdate.setUpload_OtherReport(filenames.get(i));
+					try {
+						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+						
+						String filename = "sample_pdf.pdf";
+		                
+		                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
 
+				        Files.write(fileStorage, bytes);
+						
+				        byteArraysOther.add(bytes);
+						
+				        System.out.println("File saved successfully at: " + fileStorage.toString());
+
+						
+					} catch (IOException e) {
+						// Handle exception (e.g., log or throw)
+						e.printStackTrace();
+					}
 				}
+
+				// Usage of byte arrays
+				for (byte[] byteArray3 : byteArraysOther) {
+		            userprofilemedicalUpdate.setUploadOtherReport(byteArraysOther.isEmpty() ? null : byteArraysOther.get(0));
+				}
+				
 				MedicalInformationEntity saveMedicalInformation = medicalInfoRepo.save(userprofilemedicalUpdate);
 				if (saveMedicalInformation.getId() != 0) {
 					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,

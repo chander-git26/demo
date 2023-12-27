@@ -22,15 +22,16 @@ public class MedicalInformationEntity implements Serializable {
 	private String pastSurgeries;
 
 	@Column(name = "upload_bp_report")
-	private String uploadBloodPressure;
-    @Column(name="upload_diabetes_report")
-	private String uploadDiabetes;
+	private byte[] uploadBpReport;
+	
+	@Column(name = "upload_diabetes_report")
+	private byte[] uploadDiabetesReport;
 	
 	@Column(name = "upload_heart_stroke_report")
-	private String uploadHeartStroke;
+	private byte[] uploadHeartStrokeReport;
 
-	@Column(name="upload_other_report")
-	private String upload_OtherReport;
+	@Column(name = "upload_other_report")
+	private byte[] uploadOtherReport;
 	
 	@Column(name="current_treatments")
 	private String currentTreatments;

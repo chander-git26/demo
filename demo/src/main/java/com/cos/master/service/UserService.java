@@ -13,6 +13,7 @@ import com.cos.master.entities.UserEntity;
 import com.cos.master.repository.UserRepository;
 import com.cos.master.security.AES;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Blob;
 
 @Service
@@ -115,17 +116,15 @@ public class UserService {
 		List<Object[]> professionalInfoList = userRepo.getMedicallInfo(userId);
 		for (int i = 0; i < professionalInfoList.size(); i++) {
 			Object[] data = professionalInfoList.get(i);
+			
 			medicalInfo.setId(Integer.parseInt(setData(data, 0)));
 			medicalInfo.setPastSurgeries(setData(data, 1));
-			//medicalInfo.setBloodPressure(Integer.parseInt(setData(data, 2)));
-			//medicalInfo.setDiabetes(setData(data, 3));
-//			medicalInfo.setUpload_medical_history(setData(data, 3));
-			medicalInfo.setCovidStatus(setData(data, 2));
-			medicalInfo.setCurrentTreatments(setData(data, 3));
-			medicalInfo.setBloodPressure(setData(data, 4));
-			medicalInfo.setDiabetes(setData(data, 5));
-			medicalInfo.setHeartStroke(setData(data, 6));
-			medicalInfo.setOtherReport(setData(data, 7));
+	        medicalInfo.setUploadBpReport(convertStringToByteArray(setData(data, 2)));
+	        medicalInfo.setUploadDiabetesReport(convertStringToByteArray(setData(data, 3)));
+	        medicalInfo.setUploadHeartStrokeReport(convertStringToByteArray(setData(data, 4)));
+	        medicalInfo.setUploadOtherReport(convertStringToByteArray(setData(data, 5)));
+	        medicalInfo.setCurrentTreatments(setData(data, 6));
+	        medicalInfo.setCovidStatus(setData(data, 7));
 		}
 		return medicalInfo;
 
@@ -133,6 +132,14 @@ public class UserService {
 	public byte[] getMedicallInfo(String userId) {
 		return userRepo.getMedicalInfo(userId);
 	}
+	
+	// Method to convert String to byte[]
+	private byte[] convertStringToByteArray(String data) {
+	    // Example conversion using UTF-8 encoding
+	    return data.getBytes(StandardCharsets.UTF_8);
+	}
+	
+	//Personal:--------
 	public int updateAddress(String address,int id) {
 		return userRepo.updateAddress(address, id);
 	}
@@ -191,6 +198,7 @@ public class UserService {
 		return userRepo.fetchByUserInfo(email);
 	}
 	
+	//Family:-----
 	public int updateFatherName(String father_name,int id) {
 		return userRepo.updateFatherName(father_name,id);
 	}
@@ -265,6 +273,8 @@ public class UserService {
 	public int updateDiabetes(String diabetes,int id) {
 		return userRepo.updateDiabetes(diabetes,id);
 	}
+	
+	//Profile Upload:--
 	public int uploadProfile1(int userId,Blob profile) {
 		return userRepo.uploadProfile(userId, profile);
 	}
@@ -276,6 +286,8 @@ public class UserService {
 	public UserEntity viewById(int id) {
 		return userRepo.findById(id).get();
 	}
+	
+	//Personal:----
 	public int updateSourceofIncome(String source_of_income,int id) {
 		return userRepo.updateSourceofIncome(source_of_income,id);
 	}
@@ -285,13 +297,14 @@ public class UserService {
 	public int updateBusinessName(String business_name,int id) {
 		return userRepo.updateBusinessName(business_name,id);
 	}
-	public int updateBusinessannualRevenue(int business_annual_revenue,int id) {
-		return userRepo.updateBusinessannualRevenue(business_annual_revenue,id);
-	}
 	public int updateannualIncome(int annual_income,int id) {
 		return userRepo.updateannualIncome(annual_income,id);
 	}
+	public int updateBusinessannualRevenue(int business_annual_revenue,int id) {
+		return userRepo.updateBusinessannualRevenue(business_annual_revenue,id);
+	}
 	
+	//Profile:---
 	public int uploadProfile(int userId,Blob image) {
 		return userRepo.uploadProfile(userId, image);
 	}
