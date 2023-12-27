@@ -233,14 +233,14 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 
 	@Modifying
 	@Transactional
-	@Query(value ="update medical_info set blood_pressure =:blood_pressure where id =:id", nativeQuery = true)
-	public int updateBloodPressure(@Param("blood_pressure") String blood_pressure,@Param("id") int id);
+	@Query(value ="update medical_info set current_treatments =:current_treatments where id =:id", nativeQuery = true)
+	public int updateCurrentTreatments(@Param("current_treatments") String current_treatments,@Param("id") int id);
 	
 
 	@Modifying
 	@Transactional
-	@Query(value ="update medical_info set diabetes =:diabetes where id =:id", nativeQuery = true)
-	public int updateDiabetes(@Param("diabetes") String diabetes,@Param("id") int id);
+	@Query(value ="update medical_info set covid_status =:covid_status where id =:id", nativeQuery = true)
+	public int updateCovidStatus(@Param("covid_status") String covid_status,@Param("id") int id);
 	
 	@Transactional
 	@Modifying

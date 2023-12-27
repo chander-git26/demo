@@ -343,43 +343,50 @@ public class UpdateDetailsController {
 				map = mapper.readValue(json, Map.class);
 				int id = (int) map.get("id");
 				String past_surgeries = (String) map.get("past_surgeries");
+				 if(past_surgeries != null && id != 0 && !past_surgeries.isEmpty()) {
 				int updateDetails = userService.updatePastSurgeries(past_surgeries, id);
 				if(updateDetails != 0) {
 					return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
 				}
 				return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+				 }
 			} catch (Exception e) {
 				return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 			}
+			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
 		}	
 		
-		@PostMapping("/updateBloodPressure")
-		public ResponseObject updateBloodPressure(@RequestBody String json) {
+		@PostMapping("/updateCurrentTreatments")
+		public ResponseObject updateCurrentTreatments(@RequestBody String json) {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
 				Map<String, Object> map = null;
 				map = mapper.readValue(json, Map.class);
 				int id = (int) map.get("id");
-				String blood_pressure = (String) map.get("blood_pressure");
-				int updateDetails = userService.updateBloodPressure(blood_pressure, id);
+				String currentTreatments = (String) map.get("currentTreatments");
+				 if(currentTreatments != null && id != 0 && !currentTreatments.isEmpty()) {
+				int updateDetails = userService.updateCurrentTreatments(currentTreatments, id);
 				if(updateDetails != 0) {
-					return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("date cannot be sucessfull", "Failed", "400", 0, null);
+				 }
 			} catch (Exception e) {
 				return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 			}
+			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
 		}
 		
-		@PostMapping("/updateDiabetes")
-		public ResponseObject updateDiabetes(@RequestBody String json) {
+		
+		@PostMapping("/updateCovidStatus")
+		public ResponseObject updateCovidStatus(@RequestBody String json) {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
 				Map<String, Object> map = null;
 				map = mapper.readValue(json, Map.class);
 				int id = (int) map.get("id");
-				String diabetes = (String) map.get("diabetes");
-				int updateDetails = userService.updateDiabetes(diabetes, id);
+				String covidStatus = (String) map.get("covidStatus");
+				int updateDetails = userService.updateCovidStatus(covidStatus, id);
 				if(updateDetails != 0) {
 					return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
 				}
@@ -792,5 +799,6 @@ public class UpdateDetailsController {
 			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
 		 }
 
+		 
 		 
 }

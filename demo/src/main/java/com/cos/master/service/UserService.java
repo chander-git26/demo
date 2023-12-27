@@ -258,12 +258,12 @@ public class UserService {
 		return userRepo.updatePastSurgeries(past_surgeries,id);
 	}
 	
-	public int updateBloodPressure(String blood_pressure,int id) {
-		return userRepo.updateBloodPressure(blood_pressure,id);
+	public int updateCurrentTreatments(String current_treatments,int id) {
+		return userRepo.updateCurrentTreatments(current_treatments,id);
 	}
 
-	public int updateDiabetes(String diabetes,int id) {
-		return userRepo.updateDiabetes(diabetes,id);
+	public int updateCovidStatus(String covid_status,int id) {
+		return userRepo.updateCovidStatus(covid_status,id);
 	}
 	public int uploadProfile1(int userId,Blob profile) {
 		return userRepo.uploadProfile(userId, profile);
