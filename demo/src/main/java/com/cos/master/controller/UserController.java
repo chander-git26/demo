@@ -428,46 +428,46 @@ public ResponseObject createUserProfileFamilyInformation(@RequestParam String id
 //			userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(otherNomineeUploadMedicalHistory);
 			
 			
-			List<String> filenames = new ArrayList<>();
-			for (MultipartFile file : fatherUploadMedicalHistory) {
-				String filename = StringUtils.cleanPath(file.getOriginalFilename());
-				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-				filenames.add(filename);
-			}
-			for (int i = 0; i < filenames.size(); i++) {
-				userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
-
-			}
-			for (MultipartFile file : motherUploadMedicalHistory) {
-				String filename = StringUtils.cleanPath(file.getOriginalFilename());
-				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-				filenames.add(filename);
-			}
-			for (int i = 0; i < filenames.size(); i++) {
-				userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
-
-			}
-			for (MultipartFile file : spouseUploadMedicalHistory) {
-				String filename = StringUtils.cleanPath(file.getOriginalFilename());
-				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-				filenames.add(filename);
-			}
-			for (int i = 0; i < filenames.size(); i++) {
-				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
-			}
-
-			for (MultipartFile file : uploadOtherNomineeMedicalHistory) {
-				String filename = StringUtils.cleanPath(file.getOriginalFilename());
-				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
-				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-				filenames.add(filename);
-			}
-			for (int i = 0; i < filenames.size(); i++) {
-				userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(filenames.get(i));
-}
+//			List<String> filenames = new ArrayList<>();
+//			for (MultipartFile file : fatherUploadMedicalHistory) {
+//				String filename = StringUtils.cleanPath(file.getOriginalFilename());
+//				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+//				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//				filenames.add(filename);
+//			}
+//			for (int i = 0; i < filenames.size(); i++) {
+//				userProfileFamilyUpdate.setFatherUploadMedicalHistory(filenames.get(i));
+//
+//			}
+//			for (MultipartFile file : motherUploadMedicalHistory) {
+//				String filename = StringUtils.cleanPath(file.getOriginalFilename());
+//				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+//				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//				filenames.add(filename);
+//			}
+//			for (int i = 0; i < filenames.size(); i++) {
+//				userProfileFamilyUpdate.setMotherUploadMedicalHistory(filenames.get(i));
+//
+//			}
+//			for (MultipartFile file : spouseUploadMedicalHistory) {
+//				String filename = StringUtils.cleanPath(file.getOriginalFilename());
+//				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+//				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//				filenames.add(filename);
+//			}
+//			for (int i = 0; i < filenames.size(); i++) {
+//				userProfileFamilyUpdate.setSpouseUploadMedicalHistory(filenames.get(i));
+//			}
+//
+//			for (MultipartFile file : uploadOtherNomineeMedicalHistory) {
+//				String filename = StringUtils.cleanPath(file.getOriginalFilename());
+//				Path fileStorage = get(DIRECTORY, filename).toAbsolutePath().normalize();
+//				copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//				filenames.add(filename);
+//			}
+//			for (int i = 0; i < filenames.size(); i++) {
+//				userProfileFamilyUpdate.setOtherNomineeUploadMedicalHistory(filenames.get(i));
+//}
            FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
 			if (createUserProfileFamilyInformation.getId() != 0) {
 				return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,

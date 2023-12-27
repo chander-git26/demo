@@ -160,6 +160,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Modifying
 	@Transactional
+	@Query(value ="update family_info set father_upload_medical_history =:father_upload_medical_history where id =:id", nativeQuery = true)
+	public int updatefatherUploadMedicalHistory(@Param("father_upload_medical_history") byte father_upload_medical_history,@Param("id") int id);
+	@Modifying
+	@Transactional
 	@Query(value ="update family_info set mother_age =:mother_age where id =:id", nativeQuery = true)
 	public int updateMotherAge(@Param("mother_age") int mother_age,@Param("id") int id);
 	
@@ -175,8 +179,16 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	@Modifying
 	@Transactional
+	@Query(value ="update family_info set mother_upload_medical_history =:mother_upload_medical_history where id =:id", nativeQuery = true)
+	public int updatemotherUploadMedicalHistory(@Param("mother_upload_medical_history") byte mother_upload_medical_history,@Param("id") int id);
+	
+	
+	@Modifying
+	@Transactional
 	@Query(value ="update family_info set spouse_name =:spouse_name where id =:id", nativeQuery = true)
 	public int upadteSpouseName(@Param("spouse_name") String spouse_name,@Param("id") int id);
+	
+	
 	
 	@Modifying
 	@Transactional
@@ -188,6 +200,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Transactional
 	@Query(value ="update family_info set spouse_occupation =:spouse_occupation where id =:id", nativeQuery = true)
 	public int updateSpouseOccupation(@Param("spouse_occupation") String spouse_occupation,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set spouse_upload_medical_history =:spouse_upload_medical_history where id =:id", nativeQuery = true)
+	public int updatespouseUploadMedicalHistory(@Param("spouse_upload_medical_history") byte spouse_upload_medical_history,@Param("id") int id);
+	
 	
 //	@Modifying
 //	@Transactional
@@ -213,6 +231,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Transactional
 	@Query(value ="update family_info set other_nominee_occupation =:other_nominee_occupation where id =:id", nativeQuery = true)
 	public int updateOtherNomineeOccupation(@Param("other_nominee_occupation") String other_nominee_occupation,@Param("id") int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update family_info set other_nominee_upload_medical_history =:other_nominee_upload_medical_history where id =:id", nativeQuery = true)
+	public int updateotherNomineeUploadMedicalHistory(@Param("other_nominee_upload_medical_history") byte other_nominee_upload_medical_history,@Param("id") int id);
+	
 	
 	
 //	@Modifying
