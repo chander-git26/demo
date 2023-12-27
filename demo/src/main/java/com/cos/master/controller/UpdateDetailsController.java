@@ -620,4 +620,94 @@ public class UpdateDetailsController {
 				} 
 			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
 		 }
+		
+		 @PostMapping("/updateBusinessannualRevenue")
+			public ResponseObject updateBusinessannualRevenue(@RequestBody String json) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+			      Map<String, Object> map = null;
+					map = mapper.readValue(json, Map.class);
+			        int id = (int) map.get("id");
+			        Integer businessAnnualRevenue = (int) map.get("businessAnnualRevenue");
+			        if(businessAnnualRevenue.equals(null)  || id != 0 ) {
+			        int updateDetails = userService.updateBusinessannualRevenue(businessAnnualRevenue,id);
+					if(updateDetails != 0) {
+						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					}
+				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+			        }
+				} catch (Exception e) {
+					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+				} 
+			          
+				return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
+		 }
+		 
+		 @PostMapping("/updateGstNumber")
+			public ResponseObject updateGstNumber(@RequestBody String json) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+			      Map<String, Object> map = null;
+					map = mapper.readValue(json, Map.class);
+			        int id = (int) map.get("id");
+			        Integer gstNumber = (int) map.get("gstNumber");
+			        if(gstNumber.equals(null)  || id != 0 ) {
+			        int updateDetails = userService.updateGstNumber(gstNumber,id);
+					if(updateDetails != 0) {
+						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					}
+				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+			        }
+				} catch (Exception e) {
+					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+				} 
+			          
+				return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
+		 }
+		 
+		 @PostMapping("/updateBusinessType")
+			public ResponseObject updateBusinessType(@RequestBody String json) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+			
+				Map<String, Object> map = null;
+					map = mapper.readValue(json, Map.class);
+			       int id = (int) map.get("id");
+			        String businessType = (String) map.get("businessType");
+			        if(businessType != null && id != 0 && !businessType.isEmpty()) {
+			        int updateDetails = userService.updateBusinessType(businessType,id);
+					if(updateDetails != 0) {
+						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					}
+				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+			        }
+			}catch (Exception e) {
+					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+				}
+			return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
+
+		 }
+		 
+		 @PostMapping("/updateInvestAmount")
+			public ResponseObject updateInvestAmount(@RequestBody String json) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+			      Map<String, Object> map = null;
+					map = mapper.readValue(json, Map.class);
+			        int id = (int) map.get("id");
+			        Integer investAmount = (int) map.get("investAmount");
+			        if(investAmount.equals(null)  || id != 0 ) {
+			        int updateDetails = userService.updateInvestAmount(investAmount,id);
+					if(updateDetails != 0) {
+						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					}
+				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+			        }
+				} catch (Exception e) {
+					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+				} 
+			          
+				return appUtils.prepareResponse("Failed to update data", "failed", "500", 0, null);
+		 }
+		 
 }

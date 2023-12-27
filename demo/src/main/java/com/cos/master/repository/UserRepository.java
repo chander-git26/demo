@@ -272,5 +272,19 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Query(value ="update professional_info set annual_income =:annual_income where id =:id", nativeQuery = true)
     public int updateannualIncome(int annual_income, int id);
 	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set gst_number =:gst_number where id =:id", nativeQuery = true)
+    public int updateGstNumber(int gst_number, int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set invest_amount =:invest_amount where id =:id", nativeQuery = true)
+    public int updateInvestAmount(int invest_amount, int id);
+	
+	@Modifying
+	@Transactional
+	@Query(value ="update professional_info set business_type =:business_type where id =:id", nativeQuery = true)
+    public int updateBusinessType(String business_type, int id);
 }
 
