@@ -550,6 +550,176 @@ public class UserController {
 		}
 		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
+//  @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
+
+//public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
+	public ResponseObject createUserProfileFamilyInformation(@RequestParam String id, String fatherName,
+			Integer fatherAge, String fatherOccupation,
+			@RequestParam("fatherUploadMedicalHistory") List<MultipartFile> fatherUploadMedicalHistory,
+			String motherName, Integer motherAge, String motherOccupation,
+			@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
+			String spouseName, Integer spouseAge, String spouseOccupation,
+			@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
+			String otherNomineeName, Integer otherNomineeAge, String otherNomineeOccupation,
+			@RequestParam("uploadOtherNomineeMedicalHistory") List<MultipartFile> uploadOtherNomineeMedicalHistory) {
+		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
+		FamilyInformationEntity userss = null;
+		try {
+//		if (profileFamilyUpdate != null) {
+			if (id != null) {
+				userProfileFamilyUpdate.setId(Integer.parseInt(id));
+				userProfileFamilyUpdate.setFatherName(fatherName);
+//			userProfileFamilyUpdate.setFatherAge(Integer.parseInt(fatherAge));
+				userProfileFamilyUpdate.setFatherAge(fatherAge);
+				userProfileFamilyUpdate.setFatherOccupation(fatherOccupation);
+//			userProfileFamilyUpdate.setFatherUploadMedicalHistory(fatherUploadMedicalHistory)
+				userProfileFamilyUpdate.setMotherName(motherName);
+				userProfileFamilyUpdate.setMotherAge(motherAge);
+				userProfileFamilyUpdate.setMotherOccupation(motherOccupation);
+//			userProfileFamilyUpdate.setMotherUploadMedicalHistory(motherUploadMedicalHistory);
+				userProfileFamilyUpdate.setSpouseName(spouseName);
+				userProfileFamilyUpdate.setSpouseAge(spouseAge);
+				userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);
+//			userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);
+				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
+				userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
+				userProfileFamilyUpdate.setOtherNomineeOccupation(otherNomineeOccupation);
+//			userProfileFamilyUpdate.setuploadOtherNomineeMedicalHistory(uploadOtherNomineeMedicalHistory);
+
+				List<byte[]> byteArraysfatherUploadMedicalHistory = new ArrayList<>();
+				List<byte[]> byteArraysmotherUploadMedicalHistory = new ArrayList<>();
+				List<byte[]> byteArraysspouseUploadMedicalHistory = new ArrayList<>();
+				List<byte[]> byteArraysuploadOtherNomineeMedicalHistory = new ArrayList<>();
+
+				for (MultipartFile file : fatherUploadMedicalHistory) {
+					try {
+						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+
+						String filename = "sample_pdf.pdf";
+
+						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+
+						Files.write(fileStorage, bytes);
+
+						byteArraysfatherUploadMedicalHistory.add(bytes);
+
+						System.out.println("File saved successfully at: " + fileStorage.toString());
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+				// Usage of byte arrays
+				for (byte[] byteArray : byteArraysfatherUploadMedicalHistory) {
+					userProfileFamilyUpdate
+							.setFatherUploadMedicalHistory(byteArraysfatherUploadMedicalHistory.isEmpty() ? null
+									: byteArraysfatherUploadMedicalHistory.get(0));
+				}
+
+				// --------------------
+
+				for (MultipartFile file : motherUploadMedicalHistory) {
+					try {
+						byte[] bytes = file.getBytes();
+
+						String filename = "sample_pdf.pdf";
+
+						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+
+						Files.write(fileStorage, bytes);
+
+						byteArraysmotherUploadMedicalHistory.add(bytes);
+
+						System.out.println("File saved successfully at: " + fileStorage.toString());
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+				// Usage of byte arrays
+				for (byte[] byteArray : byteArraysmotherUploadMedicalHistory) {
+					userProfileFamilyUpdate
+							.setMotherUploadMedicalHistory(byteArraysmotherUploadMedicalHistory.isEmpty() ? null
+									: byteArraysmotherUploadMedicalHistory.get(0));
+				}
+
+				// ----------------------
+
+				for (MultipartFile file : spouseUploadMedicalHistory) {
+					try {
+						byte[] bytes = file.getBytes();
+
+						String filename = "sample_pdf.pdf";
+
+						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+
+						Files.write(fileStorage, bytes);
+
+						byteArraysspouseUploadMedicalHistory.add(bytes);
+
+						System.out.println("File saved successfully at: " + fileStorage.toString());
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+				for (byte[] byteArray : byteArraysspouseUploadMedicalHistory) {
+					userProfileFamilyUpdate
+							.setSpouseUploadMedicalHistory(byteArraysspouseUploadMedicalHistory.isEmpty() ? null
+									: byteArraysspouseUploadMedicalHistory.get(0));
+				}
+				for (MultipartFile file : uploadOtherNomineeMedicalHistory) {
+					try {
+						byte[] bytes = file.getBytes();
+
+						String filename = "sample_pdf.pdf";
+
+						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+
+						Files.write(fileStorage, bytes);
+
+						byteArraysuploadOtherNomineeMedicalHistory.add(bytes);
+
+						System.out.println("File saved successfully at: " + fileStorage.toString());
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				for (byte[] byteArray : byteArraysuploadOtherNomineeMedicalHistory) {
+					userProfileFamilyUpdate.setUploadOtherNomineeMedicalHistory(byteArraysuploadOtherNomineeMedicalHistory.isEmpty() ? null: byteArraysuploadOtherNomineeMedicalHistory.get(0));
+				}
+
+				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
+				if (createUserProfileFamilyInformation.getId() != 0) {
+					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
+							null);
+
+				} else {
+					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
+
+				}
+			}
+			// Usage of byte arrays
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("inside catch block" + e.getMessage());
+
+			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 	// -----------------------------------------
 	

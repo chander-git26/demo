@@ -61,7 +61,7 @@ public class UpdateDetailsController {
 			map = mapper.readValue(json, Map.class);
 			int id = (int) map.get("id");
 			int father_age = (int) map.get("father_age");
-			int updateDetails = userService.updateAge(father_age, id);
+			int updateDetails = userService.updateFatherAge(father_age, id);
 			if (updateDetails != 0) {
 				return appUtils.prepareResponse("Age updated sucessfully", "success", "200", 1, null);
 			}
@@ -97,8 +97,8 @@ public class UpdateDetailsController {
 			Map<String, Object> map = null;
 			map = mapper.readValue(json, Map.class);
 			int id = (int) map.get("id");
-			byte father_upload_medical_history = (byte) map.get("father_upload_medical_history");
-			int updateDetails = userService.updatefatherUploadMedicalHistory(father_upload_medical_history, id);
+			byte[] father_upload_medical_history = (byte[]) map.get("father_upload_medical_history");
+			int updateDetails = userService.updateFatherUploadMedicalHistory(father_upload_medical_history, id);
 			if (updateDetails != 0) {
 				return appUtils.prepareResponse("UploadMedicalHistory updated sucessfully", "success", "200", 1, null);
 			}
@@ -171,8 +171,8 @@ public class UpdateDetailsController {
 			Map<String, Object> map = null;
 			map = mapper.readValue(json, Map.class);
 			int id = (int) map.get("id");
-			byte mother_upload_medical_history = (byte) map.get("mother_upload_medical_history");
-			int updateDetails = userService.updatemotherUploadMedicalHistory(mother_upload_medical_history, id);
+			byte[] mother_upload_medical_history = (byte[]) map.get("mother_upload_medical_history");
+			int updateDetails = userService.updateMotherUploadMedicalHistory(mother_upload_medical_history, id);
 			if (updateDetails != 0) {
 				return appUtils.prepareResponse("motherUploadMedicalHistory updated sucessfully", "success", "200", 1, null);
 			}
@@ -247,7 +247,7 @@ public class UpdateDetailsController {
 			Map<String, Object> map = null;
 			map = mapper.readValue(json, Map.class);
 			int id = (int) map.get("id");
-			byte spouse_upload_medical_history = (byte) map.get("spouse_upload_medical_history");
+			byte[] spouse_upload_medical_history = (byte[]) map.get("spouse_upload_medical_history");
 			int updateDetails = userService.updateSpouseUploadMedicalHistory(spouse_upload_medical_history, id);
 			if (updateDetails != 0) {
 				return appUtils.prepareResponse("Spouse Medical History updated sucessfully", "success", "200", 1, null);
@@ -358,9 +358,8 @@ public class UpdateDetailsController {
 			Map<String, Object> map = null;
 			map = mapper.readValue(json, Map.class);
 			int id = (int) map.get("id");
-			byte other_nominee_upload_medical_history = (byte) map.get("other_nominee_upload_medical_history");
-			int updateDetails = userService.updateOtherNomineeUploadMedicalHistory(other_nominee_upload_medical_history,
-					id);
+			byte[] other_nominee_upload_medical_history = (byte[]) map.get("other_nominee_upload_medical_history");
+			int updateDetails = userService.updateOtherNomineeMedicalHistory(other_nominee_upload_medical_history,id);
 			if (updateDetails != 0) {
 				return appUtils.prepareResponse("otherNominee MedicalHistory updated sucessfully", "success", "200", 1, null);
 			}

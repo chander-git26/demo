@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-
 @Entity
 @Table(name = "family_info")
 public class FamilyInformationEntity implements Serializable {
@@ -33,11 +33,13 @@ public class FamilyInformationEntity implements Serializable {
 	private String fatherName;
 	@Column(name = "father_age")
 	private Integer fatherAge;
+
+	@Column(name = "father_occupation")
 	private String fatherOccupation;
-	
+
 	@Column(name = "father_upload_medical_history")
-	private String  fatherUploadMedicalHistory;
-	
+	private byte[] fatherUploadMedicalHistory;
+
 //	private MultipartFile  father_upload_medical_history;
 
 	@Column(name = "mother_name")
@@ -46,10 +48,10 @@ public class FamilyInformationEntity implements Serializable {
 	private Integer motherAge;
 	@Column(name = "mother_occupation")
 	private String motherOccupation;
-	
+
 	@Column(name = "mother_upload_medical_history")
-	private String  motherUploadMedicalHistory;
-//	private MultipartFile   mother_upload_medical_history;
+	private byte[] motherUploadMedicalHistory;
+	//private MultipartFile   mother_upload_medical_history;
 
 	@Column(name = "spouse_name")
 	private String spouseName;
@@ -57,9 +59,9 @@ public class FamilyInformationEntity implements Serializable {
 	private Integer spouseAge;
 	@Column(name = "spouse_occupation")
 	private String spouseOccupation;
-	
+
 	@Column(name = "spouse_upload_medical_history")
-	private String  spouseUploadMedicalHistory;
+	private byte[] spouseUploadMedicalHistory;
 //	private MultipartFile  spouse_upload_medical_history;
 
 //	@Column(name = "nominee1_name")
@@ -70,16 +72,16 @@ public class FamilyInformationEntity implements Serializable {
 
 	@Column(name = "other_nominee_name")
 	private String otherNomineeName;
-	
+
 	@Column(name = "other_nominee_age")
 	private Integer otherNomineeAge;
-	
+
 	@Column(name = "other_nominee_occupation")
 	private String otherNomineeOccupation;
-	
-	@Column(name = "other_nominee_upload_medical_history")
-	private String otherNomineeUploadMedicalHistory;
-	
+
+	@Column(name = "upload_other_nominee_medical_history")
+	private byte[] uploadOtherNomineeMedicalHistory;
+
 //
 //   @Column(name="upload_other_nominee_relation")
 //   private String uploadOtherNomineeRelation;

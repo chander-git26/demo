@@ -81,8 +81,8 @@ public class FamilyResponse implements Serializable {
 	@Column(name = "other_nominee_occupation")
 	private String otherNomineeOccupation;
 	
-	@Column(name = "other_nominee_upload_medical_history")
-	private String otherNomineeUploadMedicalHistory;
+	@Column(name = "upload_other_nominee_medical_history")
+	private String uploadOtherNomineeMedicalHistory;
 	
 //	@Column(name = "other_nominee_relation")
 //	private String otherNomineeRelation;
