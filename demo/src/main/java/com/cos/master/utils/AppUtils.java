@@ -27,7 +27,7 @@ public class AppUtils {
 	@Autowired
 	UserRepository userRepo;
 	
-	public String generateUserId(String firstName, String mobile) {
+	public String generateUniqueId(String firstName, String mobile) {
 		String userId = "";
 		try {
 			
@@ -44,6 +44,17 @@ public class AppUtils {
 			return userId;
 		}
 		
+	}
+	public long generateUserId() {
+		long userId = 1000;
+		String newUserId = userRepo.generateUserId();
+		if(newUserId.isEmpty() || newUserId.equals("null")) {
+			return userId;
+		}else {
+			long id = Long.parseLong(newUserId);
+			++id;
+			return id;
+		}
 	}
 	public String generateOtp() {
 		String generatedOtp = "";

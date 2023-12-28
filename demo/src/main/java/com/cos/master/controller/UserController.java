@@ -118,15 +118,15 @@ public class UserController {
 			if (userEntity != null) {
 				String firstName =userEntity.getFirstname();
 				String mobile =userEntity.getMobile();
-				
-				String createdUserId = appUtils.generateUserId(firstName,mobile);
-				String encryptedUserId = aes.encrypt(createdUserId);
+				String uniqueId = appUtils.generateUniqueId(firstName,mobile);
+				String encryptedUniqueId = aes.encrypt(uniqueId);
 //				String encryptedUserId = security.encryptString(createdUserId);
-				user.setUserId(encryptedUserId);
+				user.setUniqueId(encryptedUniqueId);
 				String encryptedPassword = aes.encrypt(userEntity.getPassword());
 				logger.info("Middle of create user method ");
+				String userId = String.valueOf(appUtils.generateUserId());
+				user.setUserId(userId);
 				user.setPassword(encryptedPassword);
-				
 				user.setFirstname(firstName);
 				user.setLastname(userEntity.getLastname());
 				user.setMobile(mobile);
