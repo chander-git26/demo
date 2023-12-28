@@ -44,9 +44,9 @@ public class UpdateDetailsController {
 			String father_name = (String) map.get("father_name");
 			int updateDetails = userService.updateFatherName(father_name, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("FatherName updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("FatherName cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -63,9 +63,9 @@ public class UpdateDetailsController {
 			int father_age = (int) map.get("father_age");
 			int updateDetails = userService.updateAge(father_age, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("Age updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("Age cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -81,9 +81,9 @@ public class UpdateDetailsController {
 			String father_occupation = (String) map.get("father_occupation");
 			int updateDetails = userService.upadteFatherOccupation(father_occupation, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("FatherOccupation updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("FatherOccupation cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -100,9 +100,9 @@ public class UpdateDetailsController {
 			byte father_upload_medical_history = (byte) map.get("father_upload_medical_history");
 			int updateDetails = userService.updatefatherUploadMedicalHistory(father_upload_medical_history, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("UploadMedicalHistory updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("UploadMedicalHistory cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -118,9 +118,9 @@ public class UpdateDetailsController {
 			String mother_Name = (String) map.get("mother_Name");
 			int updateDetails = userService.upadteMotherName(mother_Name, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("MotherName updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("MotherName cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -137,9 +137,9 @@ public class UpdateDetailsController {
 			int mother_Name = (int) map.get("mother_Name");
 			int updateDetails = userService.updateMotherAge(mother_Name, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("MotherAge updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("MotherAge cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -155,9 +155,9 @@ public class UpdateDetailsController {
 			String mother_occupation = (String) map.get("mother_occupation");
 			int updateDetails = userService.upadteMotherOccupation(mother_occupation, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("MotherOccupation updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("MotherOccupation cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -174,9 +174,9 @@ public class UpdateDetailsController {
 			byte mother_upload_medical_history = (byte) map.get("mother_upload_medical_history");
 			int updateDetails = userService.updatemotherUploadMedicalHistory(mother_upload_medical_history, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("motherUploadMedicalHistory updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("motherUploadMedicalHistory cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -192,9 +192,9 @@ public class UpdateDetailsController {
 			String spouse_name = (String) map.get("spouse_name");
 			int updateDetails = userService.upadteSpouseName(spouse_name, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("SpouseName updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("SpouseName cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -211,9 +211,9 @@ public class UpdateDetailsController {
 			int spouse_age = (int) map.get("spouse_age");
 			int updateDetails = userService.updateSpouseAge(spouse_age, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("SpouseAge updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("SpouseAge cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -231,9 +231,9 @@ public class UpdateDetailsController {
 			int updateDetails = userService.updateSpouseOccupation(spouse_occupation, id);
 			if (updateDetails != 0) {
 
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("SpouseOccupation updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("SpouseOccupation cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -306,9 +306,9 @@ public class UpdateDetailsController {
 			String other_nominee_name = (String) map.get("other_nominee_name");
 			int updateDetails = userService.updateOtherNomineeName(other_nominee_name, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("OtherNomineeName updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("OtherNomineeName cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -325,9 +325,9 @@ public class UpdateDetailsController {
 			int other_nominee_age = (int) map.get("other_nominee_age");
 			int updateDetails = userService.updateOtherNomineeAge(other_nominee_age, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("OtherNomineeAge updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("OtherNomineeAge cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -343,9 +343,9 @@ public class UpdateDetailsController {
 			String other_nominee_occupation = (String) map.get("other_nominee_occupation");
 			int updateDetails = userService.updateOtherNomineeOccupation(other_nominee_occupation, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("otherNominee Occupation updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("otherNominee Occupation cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -362,9 +362,9 @@ public class UpdateDetailsController {
 			int updateDetails = userService.updateOtherNomineeUploadMedicalHistory(other_nominee_upload_medical_history,
 					id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("otherNominee MedicalHistory updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("otherNominee MedicalHistory cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -440,9 +440,9 @@ public class UpdateDetailsController {
 			String diabetes = (String) map.get("diabetes");
 			int updateDetails = userService.updateDiabetes(diabetes, id);
 			if (updateDetails != 0) {
-				return appUtils.prepareResponse("address updated sucessfully", "success", "200", 1, null);
+				return appUtils.prepareResponse("Diabetes updated sucessfully", "success", "200", 1, null);
 			}
-			return appUtils.prepareResponse("address cannot be sucessfull", "Failed", "400", 0, null);
+			return appUtils.prepareResponse("Diabetes cannot be sucessfull", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
@@ -459,9 +459,9 @@ public class UpdateDetailsController {
 			if (address != null && id != 0 && !address.isEmpty()) {
 				int updateDetails = userService.updateAddress(address, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("Address updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("Address not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -480,10 +480,10 @@ public class UpdateDetailsController {
 			if (gender != null && id != 0 && !gender.isEmpty()) {
 				int updateDetails = userService.updateGender(gender, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("Gender updated sucessfully", "success", "200", 1, null);
 				}
 
-				return appUtils.prepareResponse(" Data not Updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse(" Gender not Updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 
@@ -508,9 +508,9 @@ public class UpdateDetailsController {
 			if (newDate.equals(null) || id != 0 || !newDate.isEmpty()) {
 				int updateDetails = userService.updateDateOfBirth(newDate, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("DateOfBirth updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("DateOfBirth not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -531,9 +531,9 @@ public class UpdateDetailsController {
 			if (state != null && id != 0 && !state.isEmpty()) {
 				int updateDetails = userService.updateState(state, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("State updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("State not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -543,7 +543,7 @@ public class UpdateDetailsController {
 	}
 
 	@PostMapping("/updatePincode")
-	public ResponseObject updatecountry(@RequestBody String json) {
+	public ResponseObject updatePincode(@RequestBody String json) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 
@@ -554,9 +554,9 @@ public class UpdateDetailsController {
 			if (pincode.equals(null) || id != 0) {
 				int updateDetails = userService.updatePincode(pincode, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("pincode updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("pincode not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -576,9 +576,9 @@ public class UpdateDetailsController {
 			if (maritalStatus != null && id != 0 && !maritalStatus.isEmpty()) {
 				int updateDetails = userService.updateMaritalStatus(maritalStatus, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("maritalStatus updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("maritalStatus not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -599,9 +599,9 @@ public class UpdateDetailsController {
 			if (height.equals(null) || id != 0) {
 				int updateDetails = userService.updateHeight(height, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("height updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("height not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -621,9 +621,9 @@ public class UpdateDetailsController {
 			if (weight.equals(null) || id != 0) {
 				int updateDetails = userService.updateWeight(weight, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("weight updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("weight not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -644,9 +644,9 @@ public class UpdateDetailsController {
 			if (smoking != null && id != 0 && !smoking.isEmpty()) {
 				int updateDetails = userService.updateSmokingStatus(smoking, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("smoking updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("smoking not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -666,9 +666,9 @@ public class UpdateDetailsController {
 			if (alochol != null && id != 0 && !alochol.isEmpty()) {
 				int updateDetails = userService.updateAlocholStatus(alochol, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("alochol updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("alochol not updated sucessfull", "Failed", "400", 0, null);
 			}
 
 		} catch (Exception e) {
@@ -688,9 +688,9 @@ public class UpdateDetailsController {
 			if (sourceOfIncome != null && id != 0 && !sourceOfIncome.isEmpty()) {
 				int updateDetails = userService.updateSourceofIncome(sourceOfIncome, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("sourceOfIncome updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("sourceOfIncome not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -709,9 +709,9 @@ public class UpdateDetailsController {
 			if (companyName != null && id != 0 && !companyName.isEmpty()) {
 				int updateDetails = userService.updateCompanyName(companyName, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("companyName updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("companyName not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -724,15 +724,21 @@ public class UpdateDetailsController {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Map<String, Object> map = null;
-			map = mapper.readValue(json, Map.class);
+			map = mapper.readValue(json, Map.class);  
+			
+			
+			
+			
+			
+			 
 			int id = (int) map.get("id");
 			String businessName = (String) map.get("businessName");
 			if (businessName != null && id != 0 && !businessName.isEmpty()) {
 				int updateDetails = userService.updateBusinessName(businessName, id);
 				if (updateDetails != 0) {
-					return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+					return appUtils.prepareResponse("businessName updated sucessfully", "success", "200", 1, null);
 				}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+				return appUtils.prepareResponse("businessName not updated sucessfull", "Failed", "400", 0, null);
 			}
 		} catch (Exception e) {
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
@@ -751,9 +757,11 @@ public class UpdateDetailsController {
 			        if(annualIncome != 0 && id !=0) {
 					int updateDetails = userService.updateAnnualIncome(annualIncome,id);
 					if(updateDetails != 0) {
-						return appUtils.prepareResponse("Data updated sucessfully", "success", "200", 1, null);
+						return appUtils.prepareResponse("annualIncome updated sucessfully", "success", "200", 1, null);
 					}
-				return appUtils.prepareResponse("Data not updated sucessfull", "Failed", "400", 0, null);
+					
+					
+				return appUtils.prepareResponse("annualIncome not updated sucessfull", "Failed", "400", 0, null);
 			        }
 				} catch (Exception e) {
 					return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
