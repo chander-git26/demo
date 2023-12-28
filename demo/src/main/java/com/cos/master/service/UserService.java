@@ -1,6 +1,7 @@
 package com.cos.master.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,6 @@ public class UserService {
 	AES aes;
 
 	public UserEntity getUserInfo(String userId) {
-
 		return userRepo.fetchByUserId(userId);
 	}
 
@@ -115,31 +115,88 @@ public class UserService {
 	}
 
 	public MedicalInfoResponse getMedicalInfo(String userId) {
-			MedicalInfoResponse medicalInfo = new MedicalInfoResponse();
-			List<Object[]> professionalInfoList = userRepo.getMedicallInfo(userId);
-			for (int i = 0; i < professionalInfoList.size(); i++) {
-				Object[] data = professionalInfoList.get(i);
+		MedicalInfoResponse medicalInfo = new MedicalInfoResponse();
+		List<Object[]> professionalInfoList = userRepo.getMedicallInfo(userId);
+		for (int i = 0; i < professionalInfoList.size(); i++) {
+			Object[] data = professionalInfoList.get(i);
 
-				medicalInfo.setId(Integer.parseInt(setData(data, 0)));
-				medicalInfo.setPastSurgeries(setData(data, 1));
-		        medicalInfo.setUploadBpReport(convertStringToByteArray(setData(data, 2)));
-		        medicalInfo.setUploadDiabetesReport(convertStringToByteArray(setData(data, 3)));
-		        medicalInfo.setUploadHeartStrokeReport(convertStringToByteArray(setData(data, 4)));
-		        medicalInfo.setUploadOtherReport(convertStringToByteArray(setData(data, 5)));
-		        medicalInfo.setCurrentTreatments(setData(data, 6));
-		        medicalInfo.setCovidStatus(setData(data, 7));
-				
-			}
-			return medicalInfo;
+			medicalInfo.setId(Integer.parseInt(setData(data, 0)));
+			medicalInfo.setPastSurgeries(setData(data, 1));
+			medicalInfo.setUploadBpReport(convertStringToByteArray(setData(data, 2)));
+			medicalInfo.setUploadDiabetesReport(convertStringToByteArray(setData(data, 3)));
+			medicalInfo.setUploadHeartStrokeReport(convertStringToByteArray(setData(data, 4)));
+			medicalInfo.setUploadOtherReport(convertStringToByteArray(setData(data, 5)));
+			medicalInfo.setCurrentTreatments(setData(data, 6));
+			medicalInfo.setCovidStatus(setData(data, 7));
 
 		}
-	
-	
-	private byte[] convertStringToByteArray(String data) {
-	    // Example conversion using UTF-8 encoding
-	    return data.getBytes(StandardCharsets.UTF_8);
+		return medicalInfo;
+
 	}
-		
+
+//	public byte[] getMedicalBpInfo(String userId) {
+//		MedicalInfoResponse medicalInfo = new MedicalInfoResponse();
+//		List<Object[]> professionalInfoList = userRepo.getMedicalBpInfo(userId);
+//		for (int i = 0; i < professionalInfoList.size(); i++) {
+//			Object[] data = professionalInfoList.get(i);
+//			
+//			medicalInfo.setUploadBpReport(convertStringToByteArray(setData(data, 1)));
+//			medicalInfo.setUploadDiabetesReport(convertStringToByteArray(setData(data, 2)));
+//			medicalInfo.setUploadHeartStrokeReport(convertStringToByteArray(setData(data, 3)));
+//			medicalInfo.setUploadOtherReport(convertStringToByteArray(setData(data, 4)));
+//
+//		}
+//		return medicalInfo.getUploadBpReport();
+////		return medicalInfo.getUploadDiabetesReport();
+////		return medicalInfo.getUploadHeartStrokeReport();
+////		return medicalInfo.getUploadOtherReport();
+//
+//	}
+//
+//	public byte[] getMedicalDiabetesInfo(String userId) {
+//		MedicalInfoResponse medicalInfo = new MedicalInfoResponse();
+//		List<Object[]> professionalInfoList = userRepo.getMedicallInfo(userId);
+//		for (int i = 0; i < professionalInfoList.size(); i++) {
+//			Object[] data = professionalInfoList.get(i);
+//	        
+//	        medicalInfo.setUploadBpReport(convertStringToByteArray(setData(data, 1)));
+//	        medicalInfo.setUploadDiabetesReport(convertStringToByteArray(setData(data, 2)));
+//	        medicalInfo.setUploadHeartStrokeReport(convertStringToByteArray(setData(data, 3)));
+//	        medicalInfo.setUploadOtherReport(convertStringToByteArray(setData(data, 4)));
+//
+//		}
+//		return medicalInfo.getUploadDiabetesReport();
+//
+//	}
+
+	public byte[] getMedicalBpInfo(String userId) {
+
+		return userRepo.getMedicalInfo(userId);
+	}
+	
+	public byte[] getMedicalDiabetesInfo(String userId) {
+
+		return userRepo.getMedicalInfo(userId);
+	}
+	
+	public byte[] getMedicalHeartStrokeInfo(String userId) {
+
+		return userRepo.getMedicalInfo(userId);
+	}
+	
+	public byte[] getMedicalOtherInfo(String userId) {
+
+		return userRepo.getMedicalInfo(userId);
+	}
+
+//	public byte[] getMedicallInfo(String userId) {
+//		return userRepo.getMedicalInfo(userId);
+//	}
+
+	private byte[] convertStringToByteArray(String data) {
+		// Example conversion using UTF-8 encoding
+		return data.getBytes(StandardCharsets.UTF_8);
+	}
 
 	public byte[] getMedicallInfo(String userId) {
 		return userRepo.getMedicalInfo(userId);
@@ -340,16 +397,20 @@ public class UserService {
 	public int updateCovidStatus(String covid_status, int id) {
 		return userRepo.updateCovidStatus(covid_status, id);
 	}
-	public int updateOtherNomineeUploadMedicalHistory(byte other_nominee_upload_medical_history,int id) {
-		return userRepo.updateOtherNomineeUploadMedicalHistory(other_nominee_upload_medical_history,id);
+
+	public int updateOtherNomineeUploadMedicalHistory(byte other_nominee_upload_medical_history, int id) {
+		return userRepo.updateOtherNomineeUploadMedicalHistory(other_nominee_upload_medical_history, id);
 	}
-	public int updateSpouseUploadMedicalHistory(byte spouse_upload_medical_history,int id) {
-		return userRepo.updateSpouseUploadMedicalHistory(spouse_upload_medical_history,id);
+
+	public int updateSpouseUploadMedicalHistory(byte spouse_upload_medical_history, int id) {
+		return userRepo.updateSpouseUploadMedicalHistory(spouse_upload_medical_history, id);
 	}
-	public int updatemotherUploadMedicalHistory(byte mother_upload_medical_history,int id) {
-		return userRepo.updateMotherUploadMedicalHistory(mother_upload_medical_history,id);
+
+	public int updatemotherUploadMedicalHistory(byte mother_upload_medical_history, int id) {
+		return userRepo.updateMotherUploadMedicalHistory(mother_upload_medical_history, id);
 	}
-	public int updatefatherUploadMedicalHistory(byte father_upload_medical_history,int id) {
-		return userRepo.updateFatherUploadMedicalHistory(father_upload_medical_history,id);
+
+	public int updatefatherUploadMedicalHistory(byte father_upload_medical_history, int id) {
+		return userRepo.updateFatherUploadMedicalHistory(father_upload_medical_history, id);
 	}
 }

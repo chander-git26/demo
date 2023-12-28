@@ -552,9 +552,50 @@ public class UserController {
 	}
 
 	// -----------------------------------------
+	
+//	@GetMapping("downloadDiabetesReport/{userId}")
+//	public ResponseEntity<?> getmedicalInfo(@PathVariable("userId") String userId) throws IOException {
+//
+//		logger.info("pdf download method" + userId);
+//
+//		try {
+//			if (!userId.equals("0")) {
+//				UserEntity userEntity = new UserEntity();
+//				String user_id = String.valueOf(userId);
+//				
+//	
+//				byte[] medicalInfo = userService.getMedicallInfo(user_id);
+//
+//
+//				if (medicalInfo != null) {
+//
+//					HttpHeaders headers = new HttpHeaders();
+//					headers.setContentDispositionFormData("attachment", "sample_pdf.pdf");
+//
+//					headers.setContentType(MediaType.APPLICATION_PDF);
+//
+//					ResponseEntity<Resource> responseEntity = null;
+////					return new ResponseEntity<>(medicalInfo, headers, HttpStatus.OK);
+//					return new ResponseEntity<>(medicalInfo, headers, HttpStatus.OK);
+//
+//				}
+////				}
+//			} else {
+//				return new ResponseEntity<>(HttpStatus.OK);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			logger.info("inside catch block" + e.getMessage());
+//
+//			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//		return new ResponseEntity<>(HttpStatus.OK);
+//	}
 
-	@GetMapping("download/{userId}")
-	public ResponseEntity<?> getmedicalInfo(@PathVariable("userId") String userId) throws IOException {
+	//------------
+	
+	@GetMapping("downloadBpReport/{userId}")
+	public ResponseEntity<?> downloadBpReport(@PathVariable("userId") String userId) throws IOException {
 		logger.info("download method"+userId);
 
 
@@ -562,28 +603,173 @@ public class UserController {
 			if (!userId.equals("0")) {
 				UserEntity userEntity = new UserEntity();
 				String user_id = String.valueOf(userId);
-				byte[] medicalInfo = userService.getMedicallInfo(user_id);
+				
+				byte[] medicalInfo = userService.getMedicalBpInfo(userId);
+				if (medicalInfo != null) {
 //				if (medicalInfo.isPresent()) {
 //					MedicalInfoResponse response = medicalInfo.get();
-//					byte[] data = response.getUploadMedicalHistory();
+//					byte[] data = response.getUploadDiabetesReport();
+ 
+					HttpHeaders headers = new HttpHeaders();
+					
+					headers.setContentDispositionFormData("attachment", "sample_pdf.pdf");
 
-				HttpHeaders headers = new HttpHeaders();
-				headers.setContentType(MediaType.APPLICATION_PDF);
-
-				ResponseEntity<Resource> responseEntity = null;
-				return new ResponseEntity<>(medicalInfo, headers, HttpStatus.OK);
-//				}
-			} else {
+					
+					headers.setContentType(MediaType.APPLICATION_PDF);
+ 
+					ResponseEntity<Resource> responseEntity = null;
+					return new ResponseEntity<>(medicalInfo, headers, HttpStatus.OK);
+					
+				}
+				} else {
 				return new ResponseEntity<>(HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("inside catch block"+e.getMessage());
+			logger.info("inside catch block" + e.getMessage());
 
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+
+	}
+	
+	//----------------------------------------------
+	
+	@GetMapping("downloadDiabetesReport/{userId}")
+	public ResponseEntity<?> downloadDiabetesReport(@PathVariable("userId") String userId) throws IOException {
+		logger.info("pdf download method"+userId);
+
+
+		try {
+			if (!userId.equals("0")) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+				byte[] medicalInfo = userService.getMedicalDiabetesInfo(user_id);
+
+				if (medicalInfo != null) {
+ 
+					HttpHeaders headers = new HttpHeaders();
+					headers.setContentDispositionFormData("attachment", "sample_pdf.pdf");
+
+					headers.setContentType(MediaType.APPLICATION_PDF);
+ 
+					ResponseEntity<Resource> responseEntity = null;
+					return new ResponseEntity<>(medicalInfo, headers, HttpStatus.OK);
+				}
+				} else {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+
+	}
+	
+	
+	//------
+	
+	@GetMapping("downloadHeartStrokeReport/{userId}")
+	public ResponseEntity<?> downloadHeartStrokeReport(@PathVariable("userId") String userId) throws IOException {
+		logger.info("download method"+userId);
+
+
+		try {
+			if (!userId.equals("0")) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+				
+				byte[] medicalInfo = userService.getMedicallInfo(user_id);
+ 
+				
+				
+					HttpHeaders headers = new HttpHeaders();
+					
+					headers.setContentDispositionFormData("attachment", "sample_pdf.pdf");
+
+					
+					headers.setContentType(MediaType.APPLICATION_PDF);
+ 
+					ResponseEntity<Resource> responseEntity = null;
+					return new ResponseEntity<>(medicalInfo, headers, HttpStatus.OK);
+				} else {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
+	
+	
+	@GetMapping("downloadOtherReport/{userId}")
+	public ResponseEntity<?> downloadOtherReport(@PathVariable("userId") String userId) throws IOException {
+		logger.info("download method"+userId);
+
+
+		try {
+			if (!userId.equals("0")) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+				
+				byte[] medicalInfo = userService.getMedicallInfo(userId);
+//				if (medicalInfo.isPresent()) {
+//					MedicalInfoResponse response = medicalInfo.get();
+//					byte[] data = response.getUploadDiabetesReport();
+ 
+					HttpHeaders headers = new HttpHeaders();
+					headers.setContentType(MediaType.APPLICATION_PDF);
+ 
+					ResponseEntity<Resource> responseEntity = null;
+					return new ResponseEntity<>(medicalInfo, headers, HttpStatus.OK);
+				} else {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+
+
+	
+	//--------------------------------------------------
+
+//	@GetMapping("downloadDiabetesReport/{userId}")
+//	public ResponseEntity<?> getmedicalInfo(@PathVariable("userId") String userId) throws IOException {
+//		logger.info("download method"+userId);
+//
+//
+//		try {
+//			if (!userId.equals("0")) {
+//				UserEntity userEntity = new UserEntity();
+//				String user_id = String.valueOf(userId);
+//				
+//				//Optional<MedicalInfoResponse> medicalInfo = userService.getMedicalInfo(user_id);
+//				byte[] medicalInfo = userService.getMedicallInfo(user_id);
+////				if (medicalInfo.isPresent()) {
+////					MedicalInfoResponse response = medicalInfo.get();
+////					byte[] data = response.getUploadMedicalHistory();
+//
+//				HttpHeaders headers = new HttpHeaders();
+//				headers.setContentType(MediaType.APPLICATION_PDF);
+//
+//				ResponseEntity<Resource> responseEntity = null;
+//				return new ResponseEntity<>(medicalInfo, headers, HttpStatus.OK);
+////				}
+//			} else {
+//				return new ResponseEntity<>(HttpStatus.OK);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			logger.info("inside catch block"+e.getMessage());
+//
+//			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//
+//	}
 
 	// ---------------------------------------------------------
 
