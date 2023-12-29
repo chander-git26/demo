@@ -254,7 +254,7 @@ public class UserService {
 		return userRepo.getMobileNumber(mobileNumber);
 	}
 
-	public String getusername(String email) {
+	public UserEntity getuserInfo(String email) {
 		return userRepo.fetchByUserInfo(email);
 	}
 

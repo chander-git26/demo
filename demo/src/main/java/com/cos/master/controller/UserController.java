@@ -163,22 +163,20 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/signin")
-	public ResponseEntity<String> signin(@RequestBody UserEntity userInf) throws Exception {
+	@PostMapping("/signIn")
+	public ResponseObject signin(@RequestBody UserEntity userInf) throws Exception {
 		logger.info("signin  method"+userInf);
-
 		UserEntity user = new UserEntity();
-
 		String email = userInf.getEmail();
 		String password = userInf.getPassword();
 //	    String encryptPassword = aes.encrypt(password);
-		String userpassword = userService.getusername(email);
-		String decryptPassword = aes.decrypt(userpassword);
+		UserEntity userEntity = userService.getuserInfo(email);
+		String decryptPassword = aes.decrypt(userEntity.getPassword());
 //      	users = userRepo.save(user);
 		if (password.equals(decryptPassword)) {
-			return new ResponseEntity<>("Successfully signed in", HttpStatus.OK);
+			return appUtils.prepareResponse("User successfully logged in", "Success", "200", 1, userEntity);
 		} else {
-			return new ResponseEntity<>("Authentication failed", HttpStatus.BAD_REQUEST);
+			return appUtils.prepareResponse("Invalid login", "failed", "400", 1, null);
 		}
 	}
 
