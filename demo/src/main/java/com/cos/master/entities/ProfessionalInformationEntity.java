@@ -20,7 +20,7 @@ public class ProfessionalInformationEntity implements Serializable {
 	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	private Integer id;
+	private String id;
 	
 	@Column(name = "source_of_income")
 	private String sourceOfIncome;

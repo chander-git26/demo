@@ -25,9 +25,9 @@ import lombok.Setter;
 public class ProfileProfessionalInformationEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	private Integer id;
+	private String id;
 	
 	@Column(name = "source_of_income")
 	private String sourceOfIncome;

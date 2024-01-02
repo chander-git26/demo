@@ -26,8 +26,8 @@ import lombok.Setter;
 public class FamilyInformationEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String id;
 
 	@Column(name = "father_name")
 	private String fatherName;

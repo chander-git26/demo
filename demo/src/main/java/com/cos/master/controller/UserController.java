@@ -310,7 +310,7 @@ public class UserController {
 				userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
 				PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo
 						.save(userprofilepersonalUpdate);
-				if (createUserProfilePersonalInformation.getId() != 0) {
+				if (createUserProfilePersonalInformation.getId() != null) {
 					return new ResponseEntity<>("200", HttpStatus.CREATED);
 				} else {
 					return new ResponseEntity<>("400", HttpStatus.OK);
@@ -336,7 +336,7 @@ public class UserController {
 
 		try {
 			if (profileProfessionalInformationEntity.getSourceOfIncome().equals("business")) {
-				if (profileProfessionalInformationEntity.getId() != 0
+				if (profileProfessionalInformationEntity.getId() != null
 						&& profileProfessionalInformationEntity.getBusinessName() != null
 						&& profileProfessionalInformationEntity.getBusinessAnnualRevenue() != 0
 						&& profileProfessionalInformationEntity.getGstNumber() != null
@@ -355,7 +355,7 @@ public class UserController {
 					userprofileprofessionalUpdate
 							.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
 					ProfessionalInformationEntity userEntity = professionalInfoRepo.save(userprofileprofessionalUpdate);
-					if (userEntity.getId() != 0) {
+					if (userEntity.getId() != null) {
 						return appUtils.prepareResponse("Data Saved Successfully", "Success", "200", 1, null);
 					} else {
 						return appUtils.prepareResponse("Unable to save data", "Failed", "400", 0, null);
@@ -364,7 +364,7 @@ public class UserController {
 					return appUtils.prepareResponse("Mandatory fileds are missing", "failed", "500", 0, null);
 				}
 			} else if (profileProfessionalInformationEntity.getSourceOfIncome().equals("salaried")) {
-				if (profileProfessionalInformationEntity.getId() != 0
+				if (profileProfessionalInformationEntity.getId() != null
 						&& profileProfessionalInformationEntity.getCompanyName() != null
 						&& profileProfessionalInformationEntity.getAnnualIncome() != null) {
 					userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
@@ -376,7 +376,7 @@ public class UserController {
 					userprofileprofessionalUpdate
 							.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
 					ProfessionalInformationEntity userEntity = professionalInfoRepo.save(userprofileprofessionalUpdate);
-					if (userEntity.getId() != 0) {
+					if (userEntity.getId() != null) {
 						return appUtils.prepareResponse("Data Saved Successfully", "Success", "200", 1, null);
 					} else {
 						return appUtils.prepareResponse("Unable to save data", "Failed", "400", 0, null);
@@ -413,7 +413,7 @@ public class UserController {
 		logger.info("saveMedicalInformation  method" + userprofilemedicalUpdate);
 		try {
 			if (id != null) {
-				userprofilemedicalUpdate.setId(Integer.parseInt(id));
+				userprofilemedicalUpdate.setId(id);
 				userprofilemedicalUpdate.setPastSurgeries(pastSurgeries);
 
 				userprofilemedicalUpdate.setCurrentTreatments(currentTreatments);
@@ -533,7 +533,7 @@ public class UserController {
 				}
 
 				MedicalInformationEntity saveMedicalInformation = medicalInfoRepo.save(userprofilemedicalUpdate);
-				if (saveMedicalInformation.getId() != 0) {
+				if (saveMedicalInformation.getId() != null) {
 					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,null);
 				} else {
 					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
@@ -567,7 +567,7 @@ public class UserController {
 		try {
 //		if (profileFamilyUpdate != null) {
 			if (id != null) {
-				userProfileFamilyUpdate.setId(Integer.parseInt(id));
+				userProfileFamilyUpdate.setId(id);
 				userProfileFamilyUpdate.setFatherName(fatherName);
 //			userProfileFamilyUpdate.setFatherAge(Integer.parseInt(fatherAge));
 				userProfileFamilyUpdate.setFatherAge(fatherAge);
@@ -698,7 +698,7 @@ public class UserController {
 				}
 
 				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
-				if (createUserProfileFamilyInformation.getId() != 0) {
+				if (createUserProfileFamilyInformation.getId() != null) {
 					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
 							null);
 
@@ -1007,63 +1007,45 @@ public class UserController {
 	
 
 
-//	@PostMapping("/uploadImage")
-//	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
-//		logger.info("upload image method"+file);
-//
-//		try {
-//			byte[] bytes = file.getBytes();
-//			Blob blob = new SerialBlob(bytes);
-//
-//			UserEntity userEntity = new UserEntity();
-//			userEntity.setProfile(blob);
-//			int rows = userService.uploadProfile(UserId, userEntity.getProfile());
-//			if (rows != 0) {
-//				return appUtils.prepareResponse("profile updated successfully", "success", "200", 1, null);
-//			} else {
-//				return appUtils.prepareResponse("failed to update profile", "failed", "400", 0, null);
-//			}
-//		} catch (Exception e) {
-//			logger.info("inside catch block"+e.getMessage());
-//
-//			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
-//		}
-//	}
+	@PostMapping("/uploadImage")
+	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
+		logger.info("upload image method"+file);
+
+		try {
+			byte[] bytes = file.getBytes();
+		Blob blob = new SerialBlob(bytes);
+
+			UserEntity userEntity = new UserEntity();
+			userEntity.setProfile(blob);
+			int rows = userService.uploadProfile(UserId, userEntity.getProfile());
+			if (rows != 0) {
+				return appUtils.prepareResponse("profile updated successfully", "success", "200", 1, null);
+			} else {
+				return appUtils.prepareResponse("failed to update profile", "failed", "400", 0, null);
+			}
+		} catch (Exception e) {
+		logger.info("inside catch block"+e.getMessage());
+
+			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
+		}
+	}
 	
 	
 	
-//	@GetMapping("/display")
-//	public ResponseEntity<byte[]> display(@RequestParam("id") int id)  {
-//		logger.info("image display method"+id);
-//		try {
-////    	UserService userService = null;
-//		UserEntity profile = userService.viewById(id);
-//		byte[] imageBytes = null;
-//		imageBytes = profile.getProfile().getBytes(1, (int) profile.getProfile().length());
-//		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//			e.getMessage();
-//		}
-//		return null;
-//		}
 	
-	
-	
-//	@GetMapping("display/{id}")
-//    public ResponseEntity<byte[]> fromDatabaseAsResEntity(@PathVariable("id") Integer id) throws SQLException {
-//
-//        Optional<UserEntity> userImage = userRepo.findById(id);
-//        byte[] imageBytes = null;
-//        if (userImage.isPresent()) {
-//
-//            imageBytes = userImage.get().getProfile().getBytes(1,
-//                    (int) userImage.get().getProfile().length());
-//        }
-//
-//        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-//    }
+	@GetMapping("display/{id}")
+    public ResponseEntity<byte[]> fromDatabaseAsResEntity(@PathVariable("id") Integer id) throws SQLException {
+
+       Optional<UserEntity> userImage = userRepo.findById(id);
+      byte[] imageBytes = null;
+        if (userImage.isPresent()) {
+
+            imageBytes = userImage.get().getProfile().getBytes(1,
+                    (int) userImage.get().getProfile().length());
+       }
+
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
+   }
 	
 	}
 
