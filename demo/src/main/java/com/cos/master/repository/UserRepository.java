@@ -128,7 +128,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	@Modifying
 	@Transactional
 	@Query(value ="update personal_info set height =:height where id =:userId", nativeQuery = true)
-	public int updateHeight(@Param("height") int height,@Param("userId") int userId);
+	public int updateHeight(@Param("height") String height,@Param("userId") int userId);
 	
 	@Modifying
 	@Transactional

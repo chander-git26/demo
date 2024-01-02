@@ -230,7 +230,7 @@ public class UserService {
 //		return userRepo.updateBloodGroup(bloodGroup,id);
 //	}
 
-	public int updateHeight(int height, int id) {
+	public int updateHeight(String height, int id) {
 		return userRepo.updateHeight(height, id);
 	}
 

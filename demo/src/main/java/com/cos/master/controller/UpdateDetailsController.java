@@ -594,7 +594,7 @@ public class UpdateDetailsController {
 			Map<String, Object> map = null;
 			map = mapper.readValue(json, Map.class);
 			int id = (int) map.get("id");
-			Integer height = (int) map.get("height");
+			String height = (String) map.get("height");
 			if (height.equals(null) || id != 0) {
 				int updateDetails = userService.updateHeight(height, id);
 				if (updateDetails != 0) {
