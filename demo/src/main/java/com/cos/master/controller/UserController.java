@@ -307,7 +307,7 @@ public class UserController {
 				userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
 				userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
 				userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
-				userprofilepersonalUpdate.setAlochol(profilePersonalInformationEntity.getAlochol());
+				userprofilepersonalUpdate.setAlcohol(profilePersonalInformationEntity.getAlcohol());
 				PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo
 						.save(userprofilepersonalUpdate);
 				if (createUserProfilePersonalInformation.getId() != null) {
@@ -581,9 +581,9 @@ public class UserController {
 				userProfileFamilyUpdate.setSpouseAge(spouseAge);
 				userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);
 //			userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);
-				userProfileFamilyUpdate.setOtherNomineeName(otherNomineeName);
-				userProfileFamilyUpdate.setOtherNomineeAge(otherNomineeAge);
-				userProfileFamilyUpdate.setOtherNomineeOccupation(otherNomineeOccupation);
+				userProfileFamilyUpdate.setOtherName(otherNomineeName);
+				userProfileFamilyUpdate.setOtherAge(otherNomineeAge);
+				userProfileFamilyUpdate.setOtherOccupation(otherNomineeOccupation);
 //			userProfileFamilyUpdate.setuploadOtherNomineeMedicalHistory(uploadOtherNomineeMedicalHistory);
 
 				List<byte[]> byteArraysfatherUploadMedicalHistory = new ArrayList<>();
@@ -694,7 +694,7 @@ public class UserController {
 					}
 				}
 				for (byte[] byteArray : byteArraysuploadOtherNomineeMedicalHistory) {
-					userProfileFamilyUpdate.setUploadOtherNomineeMedicalHistory(byteArraysuploadOtherNomineeMedicalHistory.isEmpty() ? null: byteArraysuploadOtherNomineeMedicalHistory.get(0));
+					userProfileFamilyUpdate.setOtherMedicalHistory(byteArraysuploadOtherNomineeMedicalHistory.isEmpty() ? null: byteArraysuploadOtherNomineeMedicalHistory.get(0));
 				}
 
 				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);

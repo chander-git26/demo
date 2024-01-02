@@ -37,9 +37,9 @@ public class PersonalInformationEntity implements Serializable {
 	private Integer pincode;
 	@Column(name = "marital_status")
 	private String maritalStatus;
-	private Integer height;
+	private String height;
 	private Integer weight;
 	private String smoking;
-	private String alochol;
+	private String alcohol;
 
 }
