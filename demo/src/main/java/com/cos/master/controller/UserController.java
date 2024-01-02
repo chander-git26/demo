@@ -403,12 +403,12 @@ public class UserController {
 
 
 	@PostMapping(value = "/saveMedicalInformation", consumes = "multipart/form-data")
-	public ResponseObject saveMedicalInformation(@RequestParam String id, @RequestParam String pastSurgeries,
+	public ResponseObject saveMedicalInformation(@RequestParam String id, @RequestParam(value = "pastSurgeries",required =  false) String pastSurgeries,
 			@RequestParam("uploadBpReport") List<MultipartFile> uploadBpReport,
 			@RequestParam("uploadDiabetesReport") List<MultipartFile> uploadDiabetesReport,
 			@RequestParam("uploadHeartStrokeReport") List<MultipartFile> uploadHeartStrokeReport,
 			@RequestParam("uploadOtherReport") List<MultipartFile> uploadOtherReport, @RequestParam("uploadAsthmaReport") List<MultipartFile> uploadAsthmaReport,
-			@RequestParam String currentTreatments, @RequestParam String covidStatus, @RequestParam String bloodGroup) throws IOException {
+			@RequestParam(value = "currentTreatments",required = false) String currentTreatments, @RequestParam(value = "covidStatus", required = false) String covidStatus, @RequestParam String bloodGroup) throws IOException {
 
 		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
 		logger.info("saveMedicalInformation  method" + userprofilemedicalUpdate);
@@ -585,7 +585,7 @@ public class UserController {
 			@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
 			String spouseName, Integer spouseAge, String spouseOccupation,
 			@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
-			String otherNomineeName, Integer otherNomineeAge, String otherNomineeOccupation,
+			String otherName, Integer otherAge, String otherOccupation,
 			@RequestParam("uploadOtherNomineeMedicalHistory") List<MultipartFile> uploadOtherNomineeMedicalHistory) {
 		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
 		FamilyInformationEntity userss = null;
@@ -606,10 +606,10 @@ public class UserController {
 				userProfileFamilyUpdate.setSpouseAge(spouseAge);
 				userProfileFamilyUpdate.setSpouseOccupation(spouseOccupation);
 //			userProfileFamilyUpdate.setSpouseUploadMedicalHistory(spouseUploadMedicalHistory);
-				userProfileFamilyUpdate.setOtherName(otherNomineeName);
-				userProfileFamilyUpdate.setOtherAge(otherNomineeAge);
-				userProfileFamilyUpdate.setOtherOccupation(otherNomineeOccupation);
-//			userProfileFamilyUpdate.setuploadOtherNomineeMedicalHistory(uploadOtherNomineeMedicalHistory);
+				userProfileFamilyUpdate.setOtherName(otherName);
+				userProfileFamilyUpdate.setOtherAge(otherAge);
+				userProfileFamilyUpdate.setOtherOccupation(otherOccupation);
+//			userProfileFamilyUpdate.setuploadOtherNomineeMedicalHistory(uploadotherMedicalHistory);
 
 				List<byte[]> byteArraysfatherUploadMedicalHistory = new ArrayList<>();
 				List<byte[]> byteArraysmotherUploadMedicalHistory = new ArrayList<>();
