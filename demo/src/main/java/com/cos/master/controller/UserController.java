@@ -406,7 +406,7 @@ public class UserController {
 			@RequestParam("uploadBpReport") List<MultipartFile> uploadBpReport,
 			@RequestParam("uploadDiabetesReport") List<MultipartFile> uploadDiabetesReport,
 			@RequestParam("uploadHeartStrokeReport") List<MultipartFile> uploadHeartStrokeReport,
-			@RequestParam("uploadOtherReport") List<MultipartFile> uploadOtherReport, @RequestParam("") List<MultipartFile> uploadAsthmaReport,
+			@RequestParam("uploadOtherReport") List<MultipartFile> uploadOtherReport, @RequestParam("uploadAsthmaReport") List<MultipartFile> uploadAsthmaReport,
 			@RequestParam String currentTreatments, @RequestParam String covidStatus, @RequestParam String bloodGroup) throws IOException {
 
 		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
