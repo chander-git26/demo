@@ -406,8 +406,8 @@ public class UserController {
 			@RequestParam("uploadBpReport") List<MultipartFile> uploadBpReport,
 			@RequestParam("uploadDiabetesReport") List<MultipartFile> uploadDiabetesReport,
 			@RequestParam("uploadHeartStrokeReport") List<MultipartFile> uploadHeartStrokeReport,
-			@RequestParam("uploadOtherReport") List<MultipartFile> uploadOtherReport,
-			@RequestParam String currentTreatments, @RequestParam String covidStatus) throws IOException {
+			@RequestParam("uploadOtherReport") List<MultipartFile> uploadOtherReport, @RequestParam("") List<MultipartFile> uploadAsthmaReport,
+			@RequestParam String currentTreatments, @RequestParam String covidStatus, @RequestParam String bloodGroup) throws IOException {
 
 		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
 		logger.info("saveMedicalInformation  method" + userprofilemedicalUpdate);
@@ -418,10 +418,12 @@ public class UserController {
 
 				userprofilemedicalUpdate.setCurrentTreatments(currentTreatments);
 				userprofilemedicalUpdate.setCovidStatus(covidStatus);
+				userprofilemedicalUpdate.setBloodGroup(bloodGroup);
 
 				List<byte[]> byteArraysBp = new ArrayList<>();
 				List<byte[]> byteArraysDiabetes = new ArrayList<>();
 				List<byte[]> byteArraysHeartStroke = new ArrayList<>();
+				List<byte[]> byteArrayAsthmaReport = new ArrayList<>();
 				List<byte[]> byteArraysOther = new ArrayList<>();
 
 
@@ -450,7 +452,29 @@ public class UserController {
 		            userprofilemedicalUpdate.setUploadBpReport(byteArraysBp.isEmpty() ? null : byteArraysBp.get(0));
 
 				}
+				for (MultipartFile file : uploadAsthmaReport) {
+					try {
+						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
 
+						String filename = "sample_pdf.pdf";
+
+						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+
+						Files.write(fileStorage, bytes);
+
+						byteArrayAsthmaReport.add(bytes);
+						
+				        System.out.println("File saved successfully at: " + fileStorage.toString());
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+				for (byte[] byteArray1 : byteArrayAsthmaReport) {
+		            userprofilemedicalUpdate.setUploadAsthmaReport(byteArraysDiabetes.isEmpty() ? null : byteArraysDiabetes.get(0));
+				}
 
 				for (MultipartFile file : uploadDiabetesReport) {
 					try {
