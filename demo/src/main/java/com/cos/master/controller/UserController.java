@@ -429,16 +429,16 @@ public class UserController {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
 
-						String filename = "sample_pdf.pdf";
+//						String filename = "sample_pdf.pdf";
 
-						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
 
-						Files.write(fileStorage, bytes);
+//						Files.write(fileStorage, bytes);
 
 						byteArraysBp.add(bytes);
 
-						System.out.println("File saved successfully at: " + fileStorage.toString());
+//						System.out.println("File saved successfully at: " + fileStorage.toString());
 
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -456,16 +456,16 @@ public class UserController {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
 
-						String filename = "sample_pdf.pdf";
-
-						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
-						Files.write(fileStorage, bytes);
+//						String filename = "sample_pdf.pdf";
+//
+//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//
+//						Files.write(fileStorage, bytes);
 
 						byteArraysDiabetes.add(bytes);
 						
-				        System.out.println("File saved successfully at: " + fileStorage.toString());
+//				        System.out.println("File saved successfully at: " + fileStorage.toString());
 						
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -480,16 +480,16 @@ public class UserController {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
 						
-						   String filename = "sample_pdf.pdf";
+//						   String filename = "sample_pdf.pdf";
 			                
-			                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//			                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
 
-					        Files.write(fileStorage, bytes);
+//					        Files.write(fileStorage, bytes);
 						
 					        byteArraysHeartStroke.add(bytes);
 						
-				        System.out.println("File saved successfully at: " + fileStorage.toString());
+//				        System.out.println("File saved successfully at: " + fileStorage.toString());
 
 						
 					} catch (IOException e) {
@@ -509,16 +509,16 @@ public class UserController {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
 						
-						String filename = "sample_pdf.pdf";
-		                
-		                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
-				        Files.write(fileStorage, bytes);
+//						String filename = "sample_pdf.pdf";
+//		                
+//		                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//
+//				        Files.write(fileStorage, bytes);
 						
 				        byteArraysOther.add(bytes);
 						
-				        System.out.println("File saved successfully at: " + fileStorage.toString());
+//				        System.out.println("File saved successfully at: " + fileStorage.toString());
 
 						
 					} catch (IOException e) {
@@ -595,16 +595,16 @@ public class UserController {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
 
-						String filename = "sample_pdf.pdf";
+//						String filename = "sample_pdf.pdf";
 
-						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
 
-						Files.write(fileStorage, bytes);
+//						Files.write(fileStorage, bytes);
 
 						byteArraysfatherUploadMedicalHistory.add(bytes);
 
-						System.out.println("File saved successfully at: " + fileStorage.toString());
+//						System.out.println("File saved successfully at: " + fileStorage.toString());
 
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -624,16 +624,16 @@ public class UserController {
 					try {
 						byte[] bytes = file.getBytes();
 
-						String filename = "sample_pdf.pdf";
-
-						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
-						Files.write(fileStorage, bytes);
+//						String filename = "sample_pdf.pdf";
+//
+//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//
+//						Files.write(fileStorage, bytes);
 
 						byteArraysmotherUploadMedicalHistory.add(bytes);
 
-						System.out.println("File saved successfully at: " + fileStorage.toString());
+//						System.out.println("File saved successfully at: " + fileStorage.toString());
 
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -653,16 +653,16 @@ public class UserController {
 					try {
 						byte[] bytes = file.getBytes();
 
-						String filename = "sample_pdf.pdf";
-
-						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
-						Files.write(fileStorage, bytes);
+//						String filename = "sample_pdf.pdf";
+//
+//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//
+//						Files.write(fileStorage, bytes);
 
 						byteArraysspouseUploadMedicalHistory.add(bytes);
 
-						System.out.println("File saved successfully at: " + fileStorage.toString());
+//						System.out.println("File saved successfully at: " + fileStorage.toString());
 
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -678,16 +678,16 @@ public class UserController {
 					try {
 						byte[] bytes = file.getBytes();
 
-						String filename = "sample_pdf.pdf";
-
-						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
-						Files.write(fileStorage, bytes);
+//						String filename = "sample_pdf.pdf";
+//
+//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//
+//						Files.write(fileStorage, bytes);
 
 						byteArraysuploadOtherNomineeMedicalHistory.add(bytes);
 
-						System.out.println("File saved successfully at: " + fileStorage.toString());
+//						System.out.println("File saved successfully at: " + fileStorage.toString());
 
 					} catch (IOException e) {
 						e.printStackTrace();
