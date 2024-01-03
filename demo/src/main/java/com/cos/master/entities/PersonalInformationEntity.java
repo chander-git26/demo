@@ -41,5 +41,6 @@ public class PersonalInformationEntity implements Serializable {
 	private Integer weight;
 	private String smoking;
 	private String alcohol;
+    private String city;
 
 }

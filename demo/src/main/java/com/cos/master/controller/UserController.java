@@ -308,6 +308,7 @@ public class UserController {
 				userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
 				userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
 				userprofilepersonalUpdate.setAlcohol(profilePersonalInformationEntity.getAlcohol());
+				userprofilepersonalUpdate.setCity(profilePersonalInformationEntity.getCity());
 				PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo
 						.save(userprofilepersonalUpdate);
 				if (createUserProfilePersonalInformation.getId() != null) {
@@ -363,7 +364,7 @@ public class UserController {
 				} else {
 					return appUtils.prepareResponse("Mandatory fileds are missing", "failed", "500", 0, null);
 				}
-			} else if (profileProfessionalInformationEntity.getSourceOfIncome().equals("salaried")) {
+			} else if (profileProfessionalInformationEntity.getSourceOfIncome().equals("employment")) {
 				if (profileProfessionalInformationEntity.getId() != null
 						&& profileProfessionalInformationEntity.getCompanyName() != null
 						&& profileProfessionalInformationEntity.getAnnualIncome() != null) {
