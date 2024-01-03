@@ -33,7 +33,7 @@ public class PersonalInfoResponse implements Serializable{
 	@Column(name = "marital_status")
 	private String maritalStatus;
 	
-    private Integer height;
+    private String height;
 	private Integer weight;
 	private String smoking;
 	private String alcohol;
