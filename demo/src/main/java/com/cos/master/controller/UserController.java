@@ -416,97 +416,103 @@ public class UserController {
 				List<byte[]> byteArraysHeartStroke = new ArrayList<>();
 				List<byte[]> byteArrayAsthmaReport = new ArrayList<>();
 				List<byte[]> byteArraysOther = new ArrayList<>();
+				if (uploadBpReport != null) {
+					for (MultipartFile file : uploadBpReport) {
+						try {
+							byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+//							String filename = "sample_pdf.pdf";
+//							Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//							Files.write(fileStorage, bytes);
+							byteArraysBp.add(bytes);
+//							System.out.println("File saved successfully at: " + fileStorage.toString());
 
-				for (MultipartFile file : uploadBpReport) {
-					try {
-						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-//						String filename = "sample_pdf.pdf";
-//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//						Files.write(fileStorage, bytes);
-						byteArraysBp.add(bytes);
-//						System.out.println("File saved successfully at: " + fileStorage.toString());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					// Usage of byte arrays
+					for (byte[] byteArray : byteArraysBp) {
+			            userprofilemedicalUpdate.setUploadBpReport(byteArraysBp.isEmpty() ? null : byteArraysBp.get(0));
 
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 				}
-				// Usage of byte arrays
-				for (byte[] byteArray : byteArraysBp) {
-		            userprofilemedicalUpdate.setUploadBpReport(byteArraysBp.isEmpty() ? null : byteArraysBp.get(0));
-
-				}
-				for (MultipartFile file : uploadAsthmaReport) {
-					try {
-						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-//						String filename = "sample_pdf.pdf";
-//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//						Files.write(fileStorage, bytes);
-						byteArrayAsthmaReport.add(bytes);	
-//				        System.out.println("File saved successfully at: " + fileStorage.toString());				
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (uploadAsthmaReport != null) {
+					for (MultipartFile file : uploadAsthmaReport) {
+						try {
+							byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+//							String filename = "sample_pdf.pdf";
+//							Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//							Files.write(fileStorage, bytes);
+							byteArrayAsthmaReport.add(bytes);	
+//					        System.out.println("File saved successfully at: " + fileStorage.toString());				
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					for (byte[] byteArray1 : byteArrayAsthmaReport) {
+			            userprofilemedicalUpdate.setUploadAsthmaReport(byteArrayAsthmaReport.isEmpty() ? null : byteArrayAsthmaReport.get(0));
 					}
 				}
-				for (byte[] byteArray1 : byteArrayAsthmaReport) {
-		            userprofilemedicalUpdate.setUploadAsthmaReport(byteArrayAsthmaReport.isEmpty() ? null : byteArrayAsthmaReport.get(0));
-				}
-				for (MultipartFile file : uploadDiabetesReport) {
-					try {
-						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-//						String filename = "sample_pdf.pdf";
-//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//						Files.write(fileStorage, bytes);
-						byteArraysDiabetes.add(bytes);						
-//				        System.out.println("File saved successfully at: " + fileStorage.toString());						
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (uploadDiabetesReport != null) {
+					for (MultipartFile file : uploadDiabetesReport) {
+						try {
+							byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+//							String filename = "sample_pdf.pdf";
+//							Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//							Files.write(fileStorage, bytes);
+							byteArraysDiabetes.add(bytes);						
+//					        System.out.println("File saved successfully at: " + fileStorage.toString());						
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					for (byte[] byteArray1 : byteArraysDiabetes) {
+			            userprofilemedicalUpdate.setUploadDiabetesReport(byteArraysDiabetes.isEmpty() ? null : byteArraysDiabetes.get(0));
 					}
 				}
-				for (byte[] byteArray1 : byteArraysDiabetes) {
-		            userprofilemedicalUpdate.setUploadDiabetesReport(byteArraysDiabetes.isEmpty() ? null : byteArraysDiabetes.get(0));
+				if (uploadHeartStrokeReport != null) {
+					for (MultipartFile file : uploadHeartStrokeReport) {
+						try {
+							byte[] bytes = file.getBytes(); // Get bytes from MultipartFile					
+//							   String filename = "sample_pdf.pdf";			                
+//				                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//								copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//						        Files.write(fileStorage, bytes);		
+						        byteArraysHeartStroke.add(bytes);	
+//					        System.out.println("File saved successfully at: " + fileStorage.toString());
+							
+						} catch (IOException e) {
+							// Handle exception (e.g., log or throw)
+							e.printStackTrace();
+						}
+					}
+					for (byte[] byteArray2 : byteArraysHeartStroke) {
+			            userprofilemedicalUpdate.setUploadHeartStrokeReport(byteArraysHeartStroke.isEmpty() ? null : byteArraysHeartStroke.get(0));
+					}
 				}
-				for (MultipartFile file : uploadHeartStrokeReport) {
-					try {
-						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile					
-//						   String filename = "sample_pdf.pdf";			                
+				if (uploadOtherReport != null) {
+					for (MultipartFile file : uploadOtherReport) {
+						try {
+							byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+//							String filename = "sample_pdf.pdf";	
 //			                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//					        Files.write(fileStorage, bytes);		
-					        byteArraysHeartStroke.add(bytes);	
-//				        System.out.println("File saved successfully at: " + fileStorage.toString());
-						
-					} catch (IOException e) {
-						// Handle exception (e.g., log or throw)
-						e.printStackTrace();
+//					        Files.write(fileStorage, bytes);
+					        byteArraysOther.add(bytes);
+//					        System.out.println("File saved successfully at: " + fileStorage.toString());
+						} catch (IOException e) {
+							// Handle exception (e.g., log or throw)
+							e.printStackTrace();
+						}
+					}
+					// Usage of byte arrays
+					for (byte[] byteArray3 : byteArraysOther) {
+			            userprofilemedicalUpdate.setUploadOtherReport(byteArraysOther.isEmpty() ? null : byteArraysOther.get(0));
 					}
 				}
-				for (byte[] byteArray2 : byteArraysHeartStroke) {
-		            userprofilemedicalUpdate.setUploadHeartStrokeReport(byteArraysHeartStroke.isEmpty() ? null : byteArraysHeartStroke.get(0));
-				}
-				for (MultipartFile file : uploadOtherReport) {
-					try {
-						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-						
-//						String filename = "sample_pdf.pdf";
-//		                
-//		                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//				        Files.write(fileStorage, bytes);
-				        byteArraysOther.add(bytes);
-//				        System.out.println("File saved successfully at: " + fileStorage.toString());
-					} catch (IOException e) {
-						// Handle exception (e.g., log or throw)
-						e.printStackTrace();
-					}
-				}
-				// Usage of byte arrays
-				for (byte[] byteArray3 : byteArraysOther) {
-		            userprofilemedicalUpdate.setUploadOtherReport(byteArraysOther.isEmpty() ? null : byteArraysOther.get(0));
-				}
-
 				MedicalInformationEntity saveMedicalInformation = medicalInfoRepo.save(userprofilemedicalUpdate);
 				if (saveMedicalInformation.getId() != null) {
 					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,null);
@@ -525,8 +531,10 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
+//  @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
+
 //public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
-	public ResponseObject saveFamilyInformation(@RequestParam String id,@RequestParam(value = "fatherName", required = false) String fatherName, @RequestParam(value = "fatherAge", required = false) Integer fatherAge, @RequestParam(value = "fatherOccupation", required = false) String fatherOccupation,
+	public ResponseObject createUserProfileFamilyInformation(@RequestParam String id,@RequestParam(value = "fatherName", required = false) String fatherName, @RequestParam(value = "fatherAge", required = false) Integer fatherAge, @RequestParam(value = "fatherOccupation", required = false) String fatherOccupation,
 			@RequestParam(value = "fatherUploadMedicalHistory", required = false) List<MultipartFile> fatherUploadMedicalHistory,
 			@RequestParam(value = "motherName", required = false) String motherName, @RequestParam(value = "motherAge", required = false) Integer motherAge, @RequestParam(value = "motherOccupation", required = false) String motherOccupation,
 			@RequestParam(value = "motherUploadMedicalHistory", required = false) List<MultipartFile> motherUploadMedicalHistory,
@@ -561,82 +569,86 @@ public class UserController {
 				List<byte[]> byteArraysmotherUploadMedicalHistory = new ArrayList<>();
 				List<byte[]> byteArraysspouseUploadMedicalHistory = new ArrayList<>();
 				List<byte[]> byteArraysuploadOtherNomineeMedicalHistory = new ArrayList<>();
-
-				for (MultipartFile file : fatherUploadMedicalHistory) {
-					try {
-						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-//						String filename = "sample_pdf.pdf";
-//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//						Files.write(fileStorage, bytes);
-						byteArraysfatherUploadMedicalHistory.add(bytes);
-//						System.out.println("File saved successfully at: " + fileStorage.toString());
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (fatherUploadMedicalHistory != null) {
+					for (MultipartFile file : fatherUploadMedicalHistory) {
+						try {
+							byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
+//							String filename = "sample_pdf.pdf";
+//							Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//							Files.write(fileStorage, bytes);
+							byteArraysfatherUploadMedicalHistory.add(bytes);
+//							System.out.println("File saved successfully at: " + fileStorage.toString());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					// Usage of byte arrays
+					for (byte[] byteArray : byteArraysfatherUploadMedicalHistory) {
+						userProfileFamilyUpdate
+								.setFatherUploadMedicalHistory(byteArraysfatherUploadMedicalHistory.isEmpty() ? null
+										: byteArraysfatherUploadMedicalHistory.get(0));
 					}
 				}
-				// Usage of byte arrays
-				for (byte[] byteArray : byteArraysfatherUploadMedicalHistory) {
-					userProfileFamilyUpdate
-							.setFatherUploadMedicalHistory(byteArraysfatherUploadMedicalHistory.isEmpty() ? null
-									: byteArraysfatherUploadMedicalHistory.get(0));
-				}
-				// --------------------
-				for (MultipartFile file : motherUploadMedicalHistory) {
-					try {
-						byte[] bytes = file.getBytes();
-//						String filename = "sample_pdf.pdf";
-//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//						Files.write(fileStorage, bytes);
-						byteArraysmotherUploadMedicalHistory.add(bytes);
-//						System.out.println("File saved successfully at: " + fileStorage.toString());
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (motherUploadMedicalHistory != null) {
+					for (MultipartFile file : motherUploadMedicalHistory) {
+						try {
+							byte[] bytes = file.getBytes();
+//							String filename = "sample_pdf.pdf";
+//							Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//							Files.write(fileStorage, bytes);
+							byteArraysmotherUploadMedicalHistory.add(bytes);
+//							System.out.println("File saved successfully at: " + fileStorage.toString());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					// Usage of byte arrays
+					for (byte[] byteArray : byteArraysmotherUploadMedicalHistory) {
+						userProfileFamilyUpdate
+								.setMotherUploadMedicalHistory(byteArraysmotherUploadMedicalHistory.isEmpty() ? null
+										: byteArraysmotherUploadMedicalHistory.get(0));
 					}
 				}
-				// Usage of byte arrays
-				for (byte[] byteArray : byteArraysmotherUploadMedicalHistory) {
-					userProfileFamilyUpdate
-							.setMotherUploadMedicalHistory(byteArraysmotherUploadMedicalHistory.isEmpty() ? null
-									: byteArraysmotherUploadMedicalHistory.get(0));
-				}
-				// ----------------------
-				for (MultipartFile file : spouseUploadMedicalHistory) {
-					try {
-						byte[] bytes = file.getBytes();
-//						String filename = "sample_pdf.pdf";
-//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//						Files.write(fileStorage, bytes);
-						byteArraysspouseUploadMedicalHistory.add(bytes);
-//						System.out.println("File saved successfully at: " + fileStorage.toString());
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (spouseUploadMedicalHistory != null) {
+					for (MultipartFile file : spouseUploadMedicalHistory) {
+						try {
+							byte[] bytes = file.getBytes();
+//							String filename = "sample_pdf.pdf";
+//							Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//							Files.write(fileStorage, bytes);
+							byteArraysspouseUploadMedicalHistory.add(bytes);
+//							System.out.println("File saved successfully at: " + fileStorage.toString());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					for (byte[] byteArray : byteArraysspouseUploadMedicalHistory) {
+						userProfileFamilyUpdate
+								.setSpouseUploadMedicalHistory(byteArraysspouseUploadMedicalHistory.isEmpty() ? null
+										: byteArraysspouseUploadMedicalHistory.get(0));
 					}
 				}
-				for (byte[] byteArray : byteArraysspouseUploadMedicalHistory) {
-					userProfileFamilyUpdate
-							.setSpouseUploadMedicalHistory(byteArraysspouseUploadMedicalHistory.isEmpty() ? null
-									: byteArraysspouseUploadMedicalHistory.get(0));
-				}
-				for (MultipartFile file : uploadOtherMedicalHistory) {
-					try {
-						byte[] bytes = file.getBytes();
-//						String filename = "sample_pdf.pdf";
-//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//						Files.write(fileStorage, bytes);
-						byteArraysuploadOtherNomineeMedicalHistory.add(bytes);
-//						System.out.println("File saved successfully at: " + fileStorage.toString());
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (uploadOtherMedicalHistory != null) {
+					for (MultipartFile file : uploadOtherMedicalHistory) {
+						try {
+							byte[] bytes = file.getBytes();
+//							String filename = "sample_pdf.pdf";
+//							Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//							Files.write(fileStorage, bytes);
+							byteArraysuploadOtherNomineeMedicalHistory.add(bytes);
+//							System.out.println("File saved successfully at: " + fileStorage.toString());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					for (byte[] byteArray : byteArraysuploadOtherNomineeMedicalHistory) {
+						userProfileFamilyUpdate.setOtherMedicalHistory(byteArraysuploadOtherNomineeMedicalHistory.isEmpty() ? null: byteArraysuploadOtherNomineeMedicalHistory.get(0));
 					}
 				}
-//				for (byte[] byteArray : byteArraysuploadOtherNomineeMedicalHistory) {
-//					userProfileFamilyUpdate.setuploadOtherNomineeMedicalHistory(byteArraysuploadOtherNomineeMedicalHistory.isEmpty() ? null: byteArraysuploadOtherNomineeMedicalHistory.get(0));
-//				}
-
 				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
 				if (createUserProfileFamilyInformation.getId() != null) {
 					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,null);
@@ -834,10 +846,6 @@ public class UserController {
 		}
 
 	}
-	
-
-
-	
 	//--------------------------------------------------
 
 //	@GetMapping("downloadDiabetesReport/{userId}")
@@ -940,8 +948,6 @@ public class UserController {
 		}
 	}
 	
-
-
 	@PostMapping("/uploadImage")
 	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
 		logger.info("upload image method"+file);
@@ -965,9 +971,6 @@ public class UserController {
 		}
 	}
 	
-	
-	
-	
 	@GetMapping("display/{id}")
     public ResponseEntity<byte[]> fromDatabaseAsResEntity(@PathVariable("id") Integer id) throws SQLException {
 
@@ -982,8 +985,6 @@ public class UserController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
    }
 	
-
-
  //----------------------------
 //-------------------
 	@GetMapping("downloadFatherMedicalHistory/{userId}")

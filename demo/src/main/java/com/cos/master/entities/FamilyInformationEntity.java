@@ -80,7 +80,7 @@ public class FamilyInformationEntity implements Serializable {
 	private String otherOccupation;
 
 	@Column(name = "upload_other_nominee_medical_history")
-	private byte[] uploadOtherNomineeMedicalHistory;
+	private byte[] otherMedicalHistory;
 
 //
 //   @Column(name="upload_other_nominee_relation")
