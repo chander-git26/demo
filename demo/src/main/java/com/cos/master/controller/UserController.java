@@ -282,33 +282,34 @@ public class UserController {
 
 	@PostMapping("/savePersonalInformation")
 	public ResponseEntity<?> createUserProfilePersonalInformation(
-			@RequestBody PersonalInformationEntity profilePersonalInformationEntity) {
-		logger.info("savePersonalInformation method"+profilePersonalInformationEntity);
+			@RequestBody PersonalInformationEntity personalInformationEntity) {
+		logger.info("savePersonalInformation method"+personalInformationEntity);
 
 		PersonalInformationEntity userprofilepersonalUpdate = new PersonalInformationEntity();
 		PersonalInformationEntity userss = null;
 		try {
-			if (profilePersonalInformationEntity != null) {
+			if (personalInformationEntity.getGender() != null && personalInformationEntity.getMaritalStatus() != null && personalInformationEntity.getDateOfBirth() != null && personalInformationEntity.getState() != null & personalInformationEntity.getPincode() != null && personalInformationEntity.getSmoking() != null && personalInformationEntity.getAlcohol() != null )
+			{
 			
-				userprofilepersonalUpdate.setId(profilePersonalInformationEntity.getId());
-				userprofilepersonalUpdate.setAddress(profilePersonalInformationEntity.getAddress());
-				userprofilepersonalUpdate.setGender(profilePersonalInformationEntity.getGender());
+				userprofilepersonalUpdate.setId(personalInformationEntity.getId());
+				userprofilepersonalUpdate.setAddress(personalInformationEntity.getAddress());
+				userprofilepersonalUpdate.setGender(personalInformationEntity.getGender());
 				
-				Date startDateString = profilePersonalInformationEntity.getDateOfBirth();
+				Date startDateString = personalInformationEntity.getDateOfBirth();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 				DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				//String newDate = LocalDate.parse(startDateString, formatter2).format(formatter2);
 				userprofilepersonalUpdate.setDateOfBirth(startDateString);
 				
-				userprofilepersonalUpdate.setState(profilePersonalInformationEntity.getState());
-				userprofilepersonalUpdate.setPincode(profilePersonalInformationEntity.getPincode());
+				userprofilepersonalUpdate.setState(personalInformationEntity.getState());
+				userprofilepersonalUpdate.setPincode(personalInformationEntity.getPincode());
 				//userprofilepersonalUpdate.setCountry(profilePersonalInformationEntity.getCountry());
-				userprofilepersonalUpdate.setMaritalStatus(profilePersonalInformationEntity.getMaritalStatus());
-				userprofilepersonalUpdate.setHeight(profilePersonalInformationEntity.getHeight());
-				userprofilepersonalUpdate.setWeight(profilePersonalInformationEntity.getWeight());
-				userprofilepersonalUpdate.setSmoking(profilePersonalInformationEntity.getSmoking());
-				userprofilepersonalUpdate.setAlcohol(profilePersonalInformationEntity.getAlcohol());
-				userprofilepersonalUpdate.setCity(profilePersonalInformationEntity.getCity());
+				userprofilepersonalUpdate.setMaritalStatus(personalInformationEntity.getMaritalStatus());
+				userprofilepersonalUpdate.setHeight(personalInformationEntity.getHeight());
+				userprofilepersonalUpdate.setWeight(personalInformationEntity.getWeight());
+				userprofilepersonalUpdate.setSmoking(personalInformationEntity.getSmoking());
+				userprofilepersonalUpdate.setAlcohol(personalInformationEntity.getAlcohol());
+				userprofilepersonalUpdate.setCity(personalInformationEntity.getCity());
 				PersonalInformationEntity createUserProfilePersonalInformation = personalInfoRepo
 						.save(userprofilepersonalUpdate);
 				if (createUserProfilePersonalInformation.getId() != null) {
@@ -344,17 +345,12 @@ public class UserController {
 						&& profileProfessionalInformationEntity.getBusinessType() != null
 						&& profileProfessionalInformationEntity.getInvestAmount() != 0) {
 					userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
-					userprofileprofessionalUpdate
-							.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
-					userprofileprofessionalUpdate
-							.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
-					userprofileprofessionalUpdate
-							.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
+					userprofileprofessionalUpdate.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
+					userprofileprofessionalUpdate.setBusinessName(profileProfessionalInformationEntity.getBusinessName());
+					userprofileprofessionalUpdate.setBusinessAnnualRevenue(profileProfessionalInformationEntity.getBusinessAnnualRevenue());
 					userprofileprofessionalUpdate.setGstNumber(profileProfessionalInformationEntity.getGstNumber());
-					userprofileprofessionalUpdate
-							.setBusinessType(profileProfessionalInformationEntity.getBusinessType());
-					userprofileprofessionalUpdate
-							.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
+					userprofileprofessionalUpdate.setBusinessType(profileProfessionalInformationEntity.getBusinessType());
+					userprofileprofessionalUpdate.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
 					ProfessionalInformationEntity userEntity = professionalInfoRepo.save(userprofileprofessionalUpdate);
 					if (userEntity.getId() != null) {
 						return appUtils.prepareResponse("Data Saved Successfully", "Success", "200", 1, null);
@@ -369,13 +365,10 @@ public class UserController {
 						&& profileProfessionalInformationEntity.getCompanyName() != null
 						&& profileProfessionalInformationEntity.getAnnualIncome() != null) {
 					userprofileprofessionalUpdate.setId(profileProfessionalInformationEntity.getId());
-					userprofileprofessionalUpdate
-							.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
+					userprofileprofessionalUpdate.setSourceOfIncome(profileProfessionalInformationEntity.getSourceOfIncome());
 					userprofileprofessionalUpdate.setCompanyName(profileProfessionalInformationEntity.getCompanyName());
-					userprofileprofessionalUpdate
-							.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
-					userprofileprofessionalUpdate
-							.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
+					userprofileprofessionalUpdate.setAnnualIncome(profileProfessionalInformationEntity.getAnnualIncome());
+					userprofileprofessionalUpdate.setInvestAmount(profileProfessionalInformationEntity.getInvestAmount());
 					ProfessionalInformationEntity userEntity = professionalInfoRepo.save(userprofileprofessionalUpdate);
 					if (userEntity.getId() != null) {
 						return appUtils.prepareResponse("Data Saved Successfully", "Success", "200", 1, null);
@@ -404,50 +397,40 @@ public class UserController {
 
 	@PostMapping(value = "/saveMedicalInformation", consumes = "multipart/form-data")
 	public ResponseObject saveMedicalInformation(@RequestParam String id, @RequestParam(value = "pastSurgeries",required =  false) String pastSurgeries,
-			@RequestParam("uploadBpReport") List<MultipartFile> uploadBpReport,
-			@RequestParam("uploadDiabetesReport") List<MultipartFile> uploadDiabetesReport,
-			@RequestParam("uploadHeartStrokeReport") List<MultipartFile> uploadHeartStrokeReport,
-			@RequestParam("uploadOtherReport") List<MultipartFile> uploadOtherReport, @RequestParam("uploadAsthmaReport") List<MultipartFile> uploadAsthmaReport,
+			@RequestParam(value = "uploadBpReport", required =  false ) List<MultipartFile> uploadBpReport,
+			@RequestParam(value = "uploadDiabetesReport", required = false) List<MultipartFile> uploadDiabetesReport,
+			@RequestParam(value = "uploadHeartStrokeReport", required = false) List<MultipartFile> uploadHeartStrokeReport,
+			@RequestParam(value = "uploadOtherReport", required = false) List<MultipartFile> uploadOtherReport, @RequestParam(value = "uploadAsthmaReport", required = false) List<MultipartFile> uploadAsthmaReport,
 			@RequestParam(value = "currentTreatments",required = false) String currentTreatments, @RequestParam(value = "covidStatus", required = false) String covidStatus, @RequestParam String bloodGroup) throws IOException {
-
 		MedicalInformationEntity userprofilemedicalUpdate = new MedicalInformationEntity();
 		logger.info("saveMedicalInformation  method" + userprofilemedicalUpdate);
 		try {
 			if (id != null) {
 				userprofilemedicalUpdate.setId(id);
 				userprofilemedicalUpdate.setPastSurgeries(pastSurgeries);
-
 				userprofilemedicalUpdate.setCurrentTreatments(currentTreatments);
 				userprofilemedicalUpdate.setCovidStatus(covidStatus);
 				userprofilemedicalUpdate.setBloodGroup(bloodGroup);
-
 				List<byte[]> byteArraysBp = new ArrayList<>();
 				List<byte[]> byteArraysDiabetes = new ArrayList<>();
 				List<byte[]> byteArraysHeartStroke = new ArrayList<>();
 				List<byte[]> byteArrayAsthmaReport = new ArrayList<>();
 				List<byte[]> byteArraysOther = new ArrayList<>();
 
-
 				for (MultipartFile file : uploadBpReport) {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-
 //						String filename = "sample_pdf.pdf";
-
 //						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
 //						Files.write(fileStorage, bytes);
-
 						byteArraysBp.add(bytes);
-
 //						System.out.println("File saved successfully at: " + fileStorage.toString());
 
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-
 				// Usage of byte arrays
 				for (byte[] byteArray : byteArraysBp) {
 		            userprofilemedicalUpdate.setUploadBpReport(byteArraysBp.isEmpty() ? null : byteArraysBp.get(0));
@@ -456,80 +439,53 @@ public class UserController {
 				for (MultipartFile file : uploadAsthmaReport) {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-
-						String filename = "sample_pdf.pdf";
-
-						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
-						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
-						Files.write(fileStorage, bytes);
-
-						byteArrayAsthmaReport.add(bytes);
-						
-				        System.out.println("File saved successfully at: " + fileStorage.toString());
-						
+//						String filename = "sample_pdf.pdf";
+//						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
+//						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
+//						Files.write(fileStorage, bytes);
+						byteArrayAsthmaReport.add(bytes);	
+//				        System.out.println("File saved successfully at: " + fileStorage.toString());				
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-
 				for (byte[] byteArray1 : byteArrayAsthmaReport) {
 		            userprofilemedicalUpdate.setUploadAsthmaReport(byteArrayAsthmaReport.isEmpty() ? null : byteArrayAsthmaReport.get(0));
 				}
-
 				for (MultipartFile file : uploadDiabetesReport) {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-
 //						String filename = "sample_pdf.pdf";
-//
 //						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//
 //						Files.write(fileStorage, bytes);
-
-						byteArraysDiabetes.add(bytes);
-						
-//				        System.out.println("File saved successfully at: " + fileStorage.toString());
-						
+						byteArraysDiabetes.add(bytes);						
+//				        System.out.println("File saved successfully at: " + fileStorage.toString());						
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-
 				for (byte[] byteArray1 : byteArraysDiabetes) {
 		            userprofilemedicalUpdate.setUploadDiabetesReport(byteArraysDiabetes.isEmpty() ? null : byteArraysDiabetes.get(0));
 				}
-
 				for (MultipartFile file : uploadHeartStrokeReport) {
 					try {
-						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-						
-//						   String filename = "sample_pdf.pdf";
-			                
+						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile					
+//						   String filename = "sample_pdf.pdf";			                
 //			                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //							copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
-//					        Files.write(fileStorage, bytes);
-						
-					        byteArraysHeartStroke.add(bytes);
-						
+//					        Files.write(fileStorage, bytes);		
+					        byteArraysHeartStroke.add(bytes);	
 //				        System.out.println("File saved successfully at: " + fileStorage.toString());
-
 						
 					} catch (IOException e) {
 						// Handle exception (e.g., log or throw)
 						e.printStackTrace();
 					}
 				}
-
 				for (byte[] byteArray2 : byteArraysHeartStroke) {
-					
 		            userprofilemedicalUpdate.setUploadHeartStrokeReport(byteArraysHeartStroke.isEmpty() ? null : byteArraysHeartStroke.get(0));
-
 				}
-
-
 				for (MultipartFile file : uploadOtherReport) {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
@@ -538,20 +494,14 @@ public class UserController {
 //		                
 //		                Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//
 //				        Files.write(fileStorage, bytes);
-						
 				        byteArraysOther.add(bytes);
-						
 //				        System.out.println("File saved successfully at: " + fileStorage.toString());
-
-						
 					} catch (IOException e) {
 						// Handle exception (e.g., log or throw)
 						e.printStackTrace();
 					}
 				}
-
 				// Usage of byte arrays
 				for (byte[] byteArray3 : byteArraysOther) {
 		            userprofilemedicalUpdate.setUploadOtherReport(byteArraysOther.isEmpty() ? null : byteArraysOther.get(0));
@@ -573,20 +523,17 @@ public class UserController {
 		}
 		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
-//  @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
 
+	@PostMapping(value = "/saveFamilyInformation", produces = MediaType.APPLICATION_JSON_VALUE)
 //public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
-	public ResponseObject saveFamilyInformation(@RequestParam String id, String fatherName,
-			Integer fatherAge, String fatherOccupation,
-			@RequestParam("fatherUploadMedicalHistory") List<MultipartFile> fatherUploadMedicalHistory,
-			String motherName, Integer motherAge, String motherOccupation,
-			@RequestParam("motherUploadMedicalHistory") List<MultipartFile> motherUploadMedicalHistory,
-			String spouseName, Integer spouseAge, String spouseOccupation,
-			@RequestParam("spouseUploadMedicalHistory") List<MultipartFile> spouseUploadMedicalHistory,
-			String otherName, Integer otherAge, String otherOccupation,
-			@RequestParam("uploadOtherNomineeMedicalHistory") List<MultipartFile> uploadOtherNomineeMedicalHistory) {
+	public ResponseObject saveFamilyInformation(@RequestParam String id,@RequestParam(value = "fatherName", required = false) String fatherName, @RequestParam(value = "fatherAge", required = false) Integer fatherAge, @RequestParam(value = "fatherOccupation", required = false) String fatherOccupation,
+			@RequestParam(value = "fatherUploadMedicalHistory", required = false) List<MultipartFile> fatherUploadMedicalHistory,
+			@RequestParam(value = "motherName", required = false) String motherName, @RequestParam(value = "motherAge", required = false) Integer motherAge, @RequestParam(value = "motherOccupation", required = false) String motherOccupation,
+			@RequestParam(value = "motherUploadMedicalHistory", required = false) List<MultipartFile> motherUploadMedicalHistory,
+			@RequestParam(value = "spouseName", required = false) String spouseName, @RequestParam(value = "spouseAge", required = false) Integer spouseAge, @RequestParam(value = "spouseOccupation", required = false) String spouseOccupation,
+			@RequestParam(value = "spouseUploadMedicalHistory", required = false) List<MultipartFile> spouseUploadMedicalHistory,
+			@RequestParam(value = "otherName", required = false) String otherName, @RequestParam(value = "otherAge", required = false) Integer otherAge, @RequestParam(value = "otherOccupation", required = false) String otherOccupation,
+			@RequestParam(value = "uploadOtherMedicalHistory", required = false) List<MultipartFile> uploadOtherMedicalHistory) {
 		FamilyInformationEntity userProfileFamilyUpdate = new FamilyInformationEntity();
 		FamilyInformationEntity userss = null;
 		try {
@@ -610,7 +557,6 @@ public class UserController {
 				userProfileFamilyUpdate.setOtherAge(otherAge);
 				userProfileFamilyUpdate.setOtherOccupation(otherOccupation);
 //			userProfileFamilyUpdate.setuploadOtherNomineeMedicalHistory(uploadotherMedicalHistory);
-
 				List<byte[]> byteArraysfatherUploadMedicalHistory = new ArrayList<>();
 				List<byte[]> byteArraysmotherUploadMedicalHistory = new ArrayList<>();
 				List<byte[]> byteArraysspouseUploadMedicalHistory = new ArrayList<>();
@@ -619,101 +565,70 @@ public class UserController {
 				for (MultipartFile file : fatherUploadMedicalHistory) {
 					try {
 						byte[] bytes = file.getBytes(); // Get bytes from MultipartFile
-
 //						String filename = "sample_pdf.pdf";
-
 //						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-
 //						Files.write(fileStorage, bytes);
-
 						byteArraysfatherUploadMedicalHistory.add(bytes);
-
 //						System.out.println("File saved successfully at: " + fileStorage.toString());
-
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-
 				// Usage of byte arrays
 				for (byte[] byteArray : byteArraysfatherUploadMedicalHistory) {
 					userProfileFamilyUpdate
 							.setFatherUploadMedicalHistory(byteArraysfatherUploadMedicalHistory.isEmpty() ? null
 									: byteArraysfatherUploadMedicalHistory.get(0));
 				}
-
 				// --------------------
-
 				for (MultipartFile file : motherUploadMedicalHistory) {
 					try {
 						byte[] bytes = file.getBytes();
-
 //						String filename = "sample_pdf.pdf";
-//
 //						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//
 //						Files.write(fileStorage, bytes);
-
 						byteArraysmotherUploadMedicalHistory.add(bytes);
-
 //						System.out.println("File saved successfully at: " + fileStorage.toString());
-
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-
 				// Usage of byte arrays
 				for (byte[] byteArray : byteArraysmotherUploadMedicalHistory) {
 					userProfileFamilyUpdate
 							.setMotherUploadMedicalHistory(byteArraysmotherUploadMedicalHistory.isEmpty() ? null
 									: byteArraysmotherUploadMedicalHistory.get(0));
 				}
-
 				// ----------------------
-
 				for (MultipartFile file : spouseUploadMedicalHistory) {
 					try {
 						byte[] bytes = file.getBytes();
-
 //						String filename = "sample_pdf.pdf";
-//
 //						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//
 //						Files.write(fileStorage, bytes);
-
 						byteArraysspouseUploadMedicalHistory.add(bytes);
-
 //						System.out.println("File saved successfully at: " + fileStorage.toString());
-
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-
 				for (byte[] byteArray : byteArraysspouseUploadMedicalHistory) {
 					userProfileFamilyUpdate
 							.setSpouseUploadMedicalHistory(byteArraysspouseUploadMedicalHistory.isEmpty() ? null
 									: byteArraysspouseUploadMedicalHistory.get(0));
 				}
-				for (MultipartFile file : uploadOtherNomineeMedicalHistory) {
+				for (MultipartFile file : uploadOtherMedicalHistory) {
 					try {
 						byte[] bytes = file.getBytes();
-
 //						String filename = "sample_pdf.pdf";
-//
 //						Path fileStorage = Paths.get(DIRECTORY, filename).toAbsolutePath().normalize();
 //						copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-//
 //						Files.write(fileStorage, bytes);
-
 						byteArraysuploadOtherNomineeMedicalHistory.add(bytes);
-
 //						System.out.println("File saved successfully at: " + fileStorage.toString());
-
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -724,20 +639,15 @@ public class UserController {
 
 				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
 				if (createUserProfileFamilyInformation.getId() != null) {
-					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,
-							null);
-
+					return appUtils.prepareResponse("Data saved successfully", "Success", "200", 1,null);
 				} else {
 					return appUtils.prepareResponse("Failed to save Data", "Failed", "400", 1, null);
-
 				}
 			}
 			// Usage of byte arrays
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("inside catch block" + e.getMessage());
-
 			return appUtils.prepareResponse("internal server error", "Failer", "500", 1,
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
