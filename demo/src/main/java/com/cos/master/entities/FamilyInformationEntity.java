@@ -26,8 +26,8 @@ import lombok.Setter;
 public class FamilyInformationEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String id;
 
 	@Column(name = "father_name")
 	private String fatherName;
@@ -71,16 +71,16 @@ public class FamilyInformationEntity implements Serializable {
 //	private String nominee2Name;
 
 	@Column(name = "other_nominee_name")
-	private String otherNomineeName;
+	private String otherName;
 
 	@Column(name = "other_nominee_age")
-	private Integer otherNomineeAge;
+	private Integer otherAge;
 
 	@Column(name = "other_nominee_occupation")
-	private String otherNomineeOccupation;
+	private String otherOccupation;
 
 	@Column(name = "upload_other_nominee_medical_history")
-	private byte[] uploadOtherNomineeMedicalHistory;
+	private byte[] otherMedicalHistory;
 
 //
 //   @Column(name="upload_other_nominee_relation")

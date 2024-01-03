@@ -15,12 +15,18 @@ import lombok.Data;
 public class MedicalInformationEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String  id;
 
 	@Column(name = "past_surgeries")
 	private String pastSurgeries;
-
+	
+	@Column(name = "blood_group")
+	private String bloodGroup;
+	
+	@Column(name = "upload_asthma_report")
+	private byte[] uploadAsthmaReport;
+	
 	@Column(name = "upload_bp_report")
 	private byte[] uploadBpReport;
 	

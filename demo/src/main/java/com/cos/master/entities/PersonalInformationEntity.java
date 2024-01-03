@@ -24,8 +24,8 @@ import lombok.Setter;
 public class PersonalInformationEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String  id;
 	private String address;
 	private String gender;
 	
@@ -37,9 +37,10 @@ public class PersonalInformationEntity implements Serializable {
 	private Integer pincode;
 	@Column(name = "marital_status")
 	private String maritalStatus;
-	private Integer height;
+	private String height;
 	private Integer weight;
 	private String smoking;
-	private String alochol;
+	private String alcohol;
+    private String city;
 
 }
