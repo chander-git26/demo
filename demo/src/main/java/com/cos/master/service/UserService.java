@@ -59,7 +59,7 @@ public class UserService {
 			personalInfo.setState(setData(data, 4));
 			personalInfo.setPincode(Integer.parseInt(setData(data, 5)));
 			personalInfo.setMaritalStatus(setData(data, 6));
-			personalInfo.setHeight(Integer.parseInt(setData(data, 7)));
+			personalInfo.setHeight(setData(data, 7));
 			personalInfo.setWeight(Integer.parseInt(setData(data, 8)));
 			personalInfo.setSmoking(setData(data, 9));
 			personalInfo.setAlcohol(setData(data, 10));
