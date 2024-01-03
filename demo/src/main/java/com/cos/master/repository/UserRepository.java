@@ -38,7 +38,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	
 	
 	
-	@Query(value = "Select id,address,gender,date_of_birth,state,pincode,marital_status,height,weight,smoking,alochol from personal_info where id=:userId", nativeQuery = true)
+	@Query(value = "Select id,address,gender,date_of_birth,state,pincode,marital_status,height,weight,smoking,alcohol from personal_info where id=:userId", nativeQuery = true)
 	public List<Object[]> getPersonalInfo(@Param("userId") String userId);
 	
 	@Query(value = "select id,source_of_income,company_name,business_name, annual_income, business_annual_revenue,gst_number,invest_amount from professional_info where id =:userId", nativeQuery = true)
