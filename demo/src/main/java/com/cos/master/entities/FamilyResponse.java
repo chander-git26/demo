@@ -36,7 +36,7 @@ public class FamilyResponse implements Serializable {
 	private String fatherOccupation;
 
 	@Column(name = "father_upload_medical_history")
-	private String  fatherUploadMedicalHistory;
+	private byte[]  fatherUploadMedicalHistory;
 	
 
 	@Column(name = "mother_name")
@@ -49,7 +49,7 @@ public class FamilyResponse implements Serializable {
 	private String motherOccupation;
 	
 	@Column(name = "mother_upload_medical_history")
-	private String  motherUploadMedicalHistory;
+	private byte[]  motherUploadMedicalHistory;
 	
 
 	@Column(name = "spouse_name")
@@ -62,7 +62,7 @@ public class FamilyResponse implements Serializable {
 	private String spouseOccupation;
 	
 	@Column(name = "spouse_upload_medical_history")
-	private String  spouseUploadMedicalHistory;
+	private byte[]  spouseUploadMedicalHistory;
 	
 
 //	@Column(name = "nominee1_name")
@@ -82,7 +82,7 @@ public class FamilyResponse implements Serializable {
 	private String otherNomineeOccupation;
 	
 	@Column(name = "upload_other_nominee_medical_history")
-	private String uploadOtherNomineeMedicalHistory;
+	private byte[]  uploadOtherNomineeMedicalHistory;
 	
 //	@Column(name = "other_nominee_relation")
 //	private String otherNomineeRelation;

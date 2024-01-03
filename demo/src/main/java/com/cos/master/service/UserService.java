@@ -86,6 +86,9 @@ public class UserService {
 
 	}
 
+//   public byte[] getFamilyInfo(String userId) {
+//	return userRepo.getFamilyInfo(userId);
+//}
 	public FamilyResponse getFamilyInfo(String userId) {
 		FamilyResponse familyInfo = new FamilyResponse();
 		List<Object[]> professionalInfoList = userRepo.getFamilylInfo(userId);
@@ -95,19 +98,19 @@ public class UserService {
 			familyInfo.setFatherName(setData(data, 1));
 			familyInfo.setFatherAge(Integer.parseInt(setData(data, 2)));
 			familyInfo.setFatherOccupation(setData(data, 3));
-			familyInfo.setFatherUploadMedicalHistory(setData(data, 4));
+//			familyInfo.setFatherUploadMedicalHistory(setData(data, 4));
 			familyInfo.setMotherName(setData(data, 5));
 			familyInfo.setMotherAge(Integer.parseInt(setData(data, 6)));
 			familyInfo.setMotherOccupation(setData(data, 7));
-			familyInfo.setMotherUploadMedicalHistory(setData(data, 8));
+//			familyInfo.setMotherUploadMedicalHistory(setData(data, 8));
 			familyInfo.setSpouseName(setData(data, 9));
 			familyInfo.setSpouseAge(Integer.parseInt(setData(data, 10)));
 			familyInfo.setSpouseOccupation(setData(data, 11));
-			familyInfo.setSpouseUploadMedicalHistory(setData(data, 12));
+//			familyInfo.setSpouseUploadMedicalHistory(setData(data, 12));
 			familyInfo.setOtherNomineeName(setData(data, 13));
 			familyInfo.setOtherNomineeAge(Integer.parseInt(setData(data, 14)));
 			familyInfo.setOtherNomineeOccupation(setData(data, 15));
-			familyInfo.setUploadOtherNomineeMedicalHistory(setData(data, 16));
+//			familyInfo.setUploadOtherNomineeMedicalHistory(setData(data, 16));
 
 		}
 		return familyInfo;
@@ -169,21 +172,41 @@ public class UserService {
 //
 //	}
 
+	public byte[] getFatherMedicalHistoryInfo(String userId) {
+
+		return userRepo.getFamilyInfo(userId);
+	}
+
+	public byte[] getMotherUploadMedicalHistoryInfo(String userId) {
+
+		return userRepo.getFamilyInfo(userId);
+	}
+
+	public byte[] getSpouseUploadMedicalHistoryInfo(String userId) {
+
+		return userRepo.getFamilyInfo(userId);
+	}
+
+	public byte[] getOtherMedicalHistoryInfo(String userId) {
+
+		return userRepo.getFamilyInfo(userId);
+	}
+
 	public byte[] getMedicalBpInfo(String userId) {
 
 		return userRepo.getMedicalInfo(userId);
 	}
-	
+
 	public byte[] getMedicalDiabetesInfo(String userId) {
 
 		return userRepo.getMedicalInfo(userId);
 	}
-	
+
 	public byte[] getMedicalHeartStrokeInfo(String userId) {
 
 		return userRepo.getMedicalInfo(userId);
 	}
-	
+
 	public byte[] getMedicalOtherInfo(String userId) {
 
 		return userRepo.getMedicalInfo(userId);
@@ -262,15 +285,16 @@ public class UserService {
 		return userRepo.updateFatherName(father_name, id);
 	}
 
-	public int updateFatherAge(int father_age,int id) {
-		return userRepo.updateFatherAge(father_age,id);
-	}
-	public int upadteFatherOccupation(String father_occupation,int id) {
-		return userRepo.upadteFatherOccupation(father_occupation,id);
+	public int updateFatherAge(int father_age, int id) {
+		return userRepo.updateFatherAge(father_age, id);
 	}
 
-	public int updateFatherUploadMedicalHistory(byte[] father_upload_medical_history,int id) {
-		return userRepo.updateFatherUploadMedicalHistory(father_upload_medical_history,id);
+	public int upadteFatherOccupation(String father_occupation, int id) {
+		return userRepo.upadteFatherOccupation(father_occupation, id);
+	}
+
+	public int updateFatherUploadMedicalHistory(byte[] father_upload_medical_history, int id) {
+		return userRepo.updateFatherUploadMedicalHistory(father_upload_medical_history, id);
 	}
 
 	public int updateMotherAge(int mother_age, int id) {
@@ -285,10 +309,10 @@ public class UserService {
 		return userRepo.upadteMotherOccupation(mother_occupation, id);
 	}
 
-	public int updateMotherUploadMedicalHistory(byte[] mother_upload_medical_history,int id) {
-		return userRepo.updateMotherUploadMedicalHistory(mother_upload_medical_history,id);
+	public int updateMotherUploadMedicalHistory(byte[] mother_upload_medical_history, int id) {
+		return userRepo.updateMotherUploadMedicalHistory(mother_upload_medical_history, id);
 	}
-	
+
 	public int upadteSpouseName(String spouse_name, int id) {
 		return userRepo.upadteSpouseName(spouse_name, id);
 	}
@@ -300,11 +324,11 @@ public class UserService {
 	public int updateSpouseOccupation(String spouse_occupation, int id) {
 		return userRepo.updateSpouseOccupation(spouse_occupation, id);
 	}
-     
-	public int updateSpouseUploadMedicalHistory(byte[] spouse_upload_medical_history,int id) {
-		return userRepo.updateSpouseUploadMedicalHistory(spouse_upload_medical_history,id);
+
+	public int updateSpouseUploadMedicalHistory(byte[] spouse_upload_medical_history, int id) {
+		return userRepo.updateSpouseUploadMedicalHistory(spouse_upload_medical_history, id);
 	}
-	
+
 //	public int updateNominee1Name(String nominee1_name,int id) {
 //		return userRepo.updateNominee1Name(nominee1_name,id);
 //	}
@@ -324,9 +348,9 @@ public class UserService {
 	public int updateOtherNomineeOccupation(String other_nominee_occupation, int id) {
 		return userRepo.updateOtherNomineeOccupation(other_nominee_occupation, id);
 	}
-	
-	public int updateOtherNomineeMedicalHistory(byte[] upload_other_nominee_medical_history,int id) {
-		return userRepo.updateUploadOtherNomineeMedicalHistory(upload_other_nominee_medical_history,id);
+
+	public int updateOtherNomineeMedicalHistory(byte[] upload_other_nominee_medical_history, int id) {
+		return userRepo.updateUploadOtherNomineeMedicalHistory(upload_other_nominee_medical_history, id);
 	}
 
 //	public int updateOtherNomineeRelation(String other_nominee_relation,int id) {

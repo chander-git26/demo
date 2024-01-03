@@ -578,7 +578,7 @@ public class UserController {
 //  @PostMapping(value = "/familyInformation", consumes = "multipart/form-data")
 
 //public ResponseObject createUserProfileFamilyInformation(@RequestBody FamilyInformationEntity profileFamilyUpdate) {
-	public ResponseObject createUserProfileFamilyInformation(@RequestParam String id, String fatherName,
+	public ResponseObject saveFamilyInformation(@RequestParam String id, String fatherName,
 			Integer fatherAge, String fatherOccupation,
 			@RequestParam("fatherUploadMedicalHistory") List<MultipartFile> fatherUploadMedicalHistory,
 			String motherName, Integer motherAge, String motherOccupation,
@@ -718,9 +718,9 @@ public class UserController {
 						e.printStackTrace();
 					}
 				}
-				for (byte[] byteArray : byteArraysuploadOtherNomineeMedicalHistory) {
-					userProfileFamilyUpdate.setOtherMedicalHistory(byteArraysuploadOtherNomineeMedicalHistory.isEmpty() ? null: byteArraysuploadOtherNomineeMedicalHistory.get(0));
-				}
+//				for (byte[] byteArray : byteArraysuploadOtherNomineeMedicalHistory) {
+//					userProfileFamilyUpdate.setuploadOtherNomineeMedicalHistory(byteArraysuploadOtherNomineeMedicalHistory.isEmpty() ? null: byteArraysuploadOtherNomineeMedicalHistory.get(0));
+//				}
 
 				FamilyInformationEntity createUserProfileFamilyInformation = familyInfoRepo.save(userProfileFamilyUpdate);
 				if (createUserProfileFamilyInformation.getId() != null) {
@@ -1072,5 +1072,125 @@ public class UserController {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
    }
 	
+
+
+ //----------------------------
+//-------------------
+	@GetMapping("downloadFatherMedicalHistory/{userId}")
+	public ResponseEntity<?> downloadfatherMedicalHistory(@PathVariable("userId") String userId)
+			throws IOException {
+		logger.info("download method" + userId);
+
+		try {
+			if (!userId.equals("0")) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+
+				byte[] familyInfo = userService.getFatherMedicalHistoryInfo(user_id);
+
+				HttpHeaders headers = new HttpHeaders();
+
+				headers.setContentDispositionFormData("attachment", "sample_pdf.pdf");
+
+				headers.setContentType(MediaType.APPLICATION_PDF);
+
+				ResponseEntity<Resource> responseEntity = null;
+				return new ResponseEntity<>(familyInfo, headers, HttpStatus.OK);
+
+			} else {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+
+	@GetMapping("downloadmotherUploadMedicalHistory/{userId}")
+	public ResponseEntity<?> downloadmotherUploadMedicalHistory(@PathVariable("userId") String userId)
+			throws IOException {
+		logger.info("download method" + userId);
+
+		try {
+			if (!userId.equals("0")) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+
+				byte[] familyInfo = userService.getMotherUploadMedicalHistoryInfo(user_id);
+
+				HttpHeaders headers = new HttpHeaders();
+
+				headers.setContentDispositionFormData("attachment", "sample_pdf.pdf");
+
+				headers.setContentType(MediaType.APPLICATION_PDF);
+
+				ResponseEntity<Resource> responseEntity = null;
+				return new ResponseEntity<>(familyInfo, headers, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+
+	@GetMapping("downloadspouseUploadMedicalHistory/{userId}")
+	public ResponseEntity<?> downloadspouseUploadMedicalHistory(@PathVariable("userId") String userId)
+			throws IOException {
+		logger.info("download method" + userId);
+
+		try {
+			if (!userId.equals("0")) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+
+				byte[] familyInfo = userService.getSpouseUploadMedicalHistoryInfo(user_id);
+
+				HttpHeaders headers = new HttpHeaders();
+
+				headers.setContentDispositionFormData("attachment", "sample_pdf.pdf");
+
+				headers.setContentType(MediaType.APPLICATION_PDF);
+
+				ResponseEntity<Resource> responseEntity = null;
+				return new ResponseEntity<>(familyInfo, headers, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
+	
+	@GetMapping("downloaduploadOtherNomineeMedicalHistory/{userId}")
+	public ResponseEntity<?> downloaduploadOtherNomineeMedicalHistory(@PathVariable("userId") String userId)
+			throws IOException {
+		logger.info("download method" + userId);
+
+		try {
+			if (!userId.equals("0")) {
+				UserEntity userEntity = new UserEntity();
+				String user_id = String.valueOf(userId);
+
+				byte[] familyInfo = userService.getOtherMedicalHistoryInfo(user_id);
+
+				HttpHeaders headers = new HttpHeaders();
+
+				headers.setContentDispositionFormData("attachment", "sample_pdf.pdf");
+
+				headers.setContentType(MediaType.APPLICATION_PDF);
+
+				ResponseEntity<Resource> responseEntity = null;
+				return new ResponseEntity<>(familyInfo, headers, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
 	}
 
