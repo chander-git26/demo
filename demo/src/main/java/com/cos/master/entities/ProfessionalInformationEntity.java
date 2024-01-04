@@ -44,7 +44,7 @@ public class ProfessionalInformationEntity implements Serializable {
 	private String businessType;
 	
 	@Column(name = "invest_amount")
-	private int investAmount;
+	private Integer investAmount;
 	
 	
 	
