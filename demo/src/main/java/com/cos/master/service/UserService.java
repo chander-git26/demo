@@ -122,15 +122,16 @@ public class UserService {
 		List<Object[]> professionalInfoList = userRepo.getMedicallInfo(userId);
 		for (int i = 0; i < professionalInfoList.size(); i++) {
 			Object[] data = professionalInfoList.get(i);
-
 			medicalInfo.setId(Integer.parseInt(setData(data, 0)));
 			medicalInfo.setPastSurgeries(setData(data, 1));
-			medicalInfo.setUploadBpReport(convertStringToByteArray(setData(data, 2)));
-			medicalInfo.setUploadDiabetesReport(convertStringToByteArray(setData(data, 3)));
-			medicalInfo.setUploadHeartStrokeReport(convertStringToByteArray(setData(data, 4)));
-			medicalInfo.setUploadOtherReport(convertStringToByteArray(setData(data, 5)));
-			medicalInfo.setCurrentTreatments(setData(data, 6));
-			medicalInfo.setCovidStatus(setData(data, 7));
+			medicalInfo.setBloodGroup(setData(data, 2));
+//			medicalInfo.setUploadAsthmaReport(convertStringToByteArray(setData(data, 3)));
+//			medicalInfo.setUploadBpReport(convertStringToByteArray(setData(data, 4)));
+//			medicalInfo.setUploadDiabetesReport(convertStringToByteArray(setData(data, 5)));
+//			medicalInfo.setUploadHeartStrokeReport(convertStringToByteArray(setData(data, 6)));
+//			medicalInfo.setUploadOtherReport(convertStringToByteArray(setData(data, 7)));
+			medicalInfo.setCurrentTreatments(setData(data, 8));
+			medicalInfo.setCovidStatus(setData(data, 9));
 
 		}
 		return medicalInfo;
