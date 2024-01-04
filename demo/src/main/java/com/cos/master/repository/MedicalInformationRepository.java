@@ -23,7 +23,5 @@ public interface MedicalInformationRepository extends JpaRepository<MedicalInfor
 	@Transactional
 	@Query(value = "update medical_info set past_surgeries=?1, blood_group=?2, upload_asthma_report=?3, upload_bp_report=?4, upload_diabetes_report=?5, upload_heart_stroke_report=?6 upload_other_report=?7, current_treatments=?8, covid_status=?9 where id = ?10", nativeQuery = true)
 	public MedicalInformationEntity updateMedicalInfo(String id);
-	
-	
 }
 

@@ -46,7 +46,6 @@ public class ProfessionalInformationEntity implements Serializable {
 	@Column(name = "invest_amount")
 	private Integer investAmount;
 	
-	
-	
+		
 }
 

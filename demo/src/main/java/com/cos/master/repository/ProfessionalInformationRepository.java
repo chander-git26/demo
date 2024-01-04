@@ -21,6 +21,5 @@ public interface ProfessionalInformationRepository extends JpaRepository<Profess
 	@Transactional
 	@Query(value = "update professional_info set source_of_income=?1, annual_income=?4, business_annual_revenue=?5, gst_number=?6, business_type=?7, invest_amount=?8 where id=?1;", nativeQuery = true)
 	public ProfessionalInformationEntity updateProfessionalInfo(String id);
-	
-	
+		
 }

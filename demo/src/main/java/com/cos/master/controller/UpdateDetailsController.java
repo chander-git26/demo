@@ -1317,6 +1317,7 @@ public static final Logger logger = Logger.getLogger(UpdateDetailsController.cla
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return appUtils.prepareResponse("internal server error", "Failer", "500", 1, HttpStatus.INTERNAL_SERVER_ERROR);
+	
 	}
 }
 

@@ -22,4 +22,5 @@ public interface PersonalInformationRepository extends JpaRepository<PersonalInf
     @Transactional
     @Query(value = "update personal_info set gender = ?1, date_of_birth = ?2, marital_status = ?3, state = ?4, address = ?5, height = ?6, weight = ?7,smoking = ?8,alcohol = ?9, pincode = ?10 where id = ?11", nativeQuery = true)
     public int saveById(String gender,Date dateOfBirth, String martialStatus, String state, String address, String height, String weight, String smoking, String alochol, Integer pincode,  Integer userId);
+
 }
