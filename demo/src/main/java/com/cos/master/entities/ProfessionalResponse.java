@@ -31,13 +31,13 @@ public class ProfessionalResponse implements Serializable {
 	
 	private String businessName;
 	
-	private Integer annualIncome;
+	private String annualIncome;
 	
-	private Integer businessAnnualRevenue;
+	private String businessAnnualRevenue;
 	
 	private String gstNumber;
 	
-	private Integer investAmount;
+	private String investAmount;
 	
 	
 }
