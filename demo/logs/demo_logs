@@ -73,3 +73,26 @@
 2023-12-27 11:46:44 INFO  UserController:151 - Started getUserDetails methodpoornachander156@gmail.com
 2023-12-27 13:02:54 INFO  UserController:151 - Fetch getUserDetails methodpoornachander156@gmail.com
 2023-12-27 13:25:44 INFO  UserController:151 - Started getUserDetails methodpoornachander156@gmail.com
+2024-01-04 12:33:54 INFO  UserController:406 - saveMedicalInformation  methodMedicalInformationEntity(id=null, pastSurgeries=null, bloodGroup=null, uploadAsthmaReport=null, uploadBpReport=null, uploadDiabetesReport=null, uploadHeartStrokeReport=null, uploadOtherReport=null, currentTreatments=null, covidStatus=null)
+2024-01-04 12:33:54 INFO  UserController:525 - inside catch blockJDBC exception executing SQL [select m1_0.id,m1_0.blood_group,m1_0.covid_status,m1_0.current_treatments,m1_0.past_surgeries,m1_0.upload_asthma_report,m1_0.upload_bp_report,m1_0.upload_diabetes_report,m1_0.upload_heart_stroke_report,m1_0.upload_other_report from medical_info m1_0 where m1_0.id=?] [Unknown column 'm1_0.covid_status' in 'field list'] [n/a]; SQL [n/a]
+2024-01-04 12:35:18 INFO  UserController:406 - saveMedicalInformation  methodMedicalInformationEntity(id=null, pastSurgeries=null, bloodGroup=null, uploadAsthmaReport=null, uploadBpReport=null, uploadDiabetesReport=null, uploadHeartStrokeReport=null, uploadOtherReport=null, currentTreatments=null, covidStatus=null)
+2024-01-04 12:36:38 INFO  UserController:258 - Display getMedicalInfo method1026
+2024-01-04 12:37:54 INFO  UserController:274 - inside catch blockCannot invoke "String.getBytes(java.nio.charset.Charset)" because "data" is null
+2024-01-04 12:38:02 INFO  UserController:258 - Display getMedicalInfo method1026
+2024-01-04 12:40:18 INFO  UserController:275 - inside catch blockCannot invoke "String.getBytes(java.nio.charset.Charset)" because "data" is null
+2024-01-04 12:40:32 INFO  UserController:258 - Display getMedicalInfo method1026
+2024-01-04 12:54:53 INFO  UserController:275 - inside catch blockError creating bean with name 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties': Could not bind properties to 'DataSourceProperties' : prefix=spring.datasource, ignoreInvalidFields=false, ignoreUnknownFields=true
+2024-01-04 12:54:55 INFO  UserController:258 - Display getMedicalInfo method1026
+2024-01-04 12:55:37 INFO  UserController:275 - inside catch blockCannot invoke "String.getBytes(java.nio.charset.Charset)" because "data" is null
+2024-01-04 12:59:33 INFO  UserController:258 - Display getMedicalInfo method1026
+2024-01-04 13:04:17 INFO  UserController:258 - Display getMedicalInfo method1026
+2024-01-05 10:19:13 INFO  UserController:168 - signin  methodcom.cos.master.entities.UserEntity@6da74bf4
+2024-01-05 10:29:30 INFO  UserController:113 - Started createUser methodcom.cos.master.entities.UserEntity@6a0d2097
+2024-01-05 10:29:30 INFO  UserController:126 - Middle of create user method 
+2024-01-05 10:31:33 INFO  UserController:953 - upload image methodorg.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@5270e2d3
+2024-01-05 10:31:40 INFO  UserController:168 - signin  methodcom.cos.master.entities.UserEntity@483c637
+2024-01-05 10:32:55 INFO  UserController:168 - signin  methodcom.cos.master.entities.UserEntity@2e1e614e
+2024-01-05 10:34:37 INFO  UserController:168 - signin  methodcom.cos.master.entities.UserEntity@5fc39a1e
+2024-01-05 10:35:27 INFO  UserController:168 - signin  methodcom.cos.master.entities.UserEntity@31f5a186
+2024-01-05 11:39:44 INFO  UserController:168 - signin  methodcom.cos.master.entities.UserEntity@10af9213
+2024-01-05 11:50:47 INFO  UserController:169 - signin  methodcom.cos.master.entities.UserEntity@40049732
