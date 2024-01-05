@@ -213,7 +213,7 @@ public class UserController {
 			if (userId != 0) {
 				String user_id = String.valueOf(userId);
 				ProfessionalResponse proffesionalInfo = userService.getProffesionalInfo(user_id);
-				if (proffesionalInfo.getId() != 0) {
+				if (proffesionalInfo.getId() != null) {
 					return appUtils.prepareResponse("Data fetch successfully", "Success", "200", 1, proffesionalInfo);
 				} else {
 					return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, proffesionalInfo);
