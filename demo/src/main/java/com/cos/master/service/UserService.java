@@ -1,6 +1,9 @@
 package com.cos.master.service;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import com.cos.master.entities.MedicalInfoResponse;
 import com.cos.master.entities.PersonalInfoResponse;
 import com.cos.master.entities.ProfessionalResponse;
 import com.cos.master.entities.UserEntity;
+import com.cos.master.entities.UserResponse;
 import com.cos.master.repository.UserRepository;
 import com.cos.master.security.AES;
 
@@ -278,8 +282,22 @@ public class UserService {
 		return userRepo.getMobileNumber(mobileNumber);
 	}
 
-	public UserEntity getuserInfo(String email) {
-		return userRepo.fetchByUserInfo(email);
+	public UserResponse getuserInfo(String email) {
+		
+		List<Object[]> list = userRepo.fetchByUserInfo(email);
+		Map<String, Object> map = new HashMap<String, Object>();
+		UserResponse userResponse = new UserResponse();
+		for (int i = 0; i < list.size(); i++) {
+			Object[] data = list.get(i);
+			userResponse.setId(setData(data, 0));
+			userResponse.setFirstName(setData(data, 1));
+			userResponse.setLastName(setData(data, 2) );
+			userResponse.setUserId(setData(data, 3));
+			userResponse.setMobile(setData(data, 4));
+			userResponse.setEmail(setData(data, 5));
+			userResponse.setPassword(setData(data, 6));
+		}
+		return userResponse;
 	}
 
 	public int updateFatherName(String father_name, int id) {

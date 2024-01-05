@@ -38,6 +38,7 @@ import com.cos.master.entities.ProfessionalInformationEntity;
 import com.cos.master.entities.ProfessionalResponse;
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.entities.UserEntity;
+import com.cos.master.entities.UserResponse;
 import com.cos.master.repository.FamilyInformationRepository;
 import com.cos.master.repository.MedicalInformationRepository;
 import com.cos.master.repository.PersonalInformationRepository;
@@ -170,7 +171,7 @@ public class UserController {
 		String email = userInf.getEmail();
 		String password = userInf.getPassword();
 //	    String encryptPassword = aes.encrypt(password);
-		UserEntity userEntity = userService.getuserInfo(email);
+		UserResponse userEntity = userService.getuserInfo(email);
 		String decryptPassword = aes.decrypt(userEntity.getPassword());
 //      	users = userRepo.save(user);
 		if (password.equals(decryptPassword)) {
