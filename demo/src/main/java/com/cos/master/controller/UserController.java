@@ -1172,7 +1172,7 @@ public class UserController {
 		try {
 			UserResponse checkEmailId = userService.verifyEmail(userEntity.getEmail());
 			email = userEntity.getEmail(); // Assuming you have an 'email' field in UserEntity
-			if (userEntity != null && checkEmailId == null) {
+			if (userEntity != null && checkEmailId.getEmail() == null) {
 //				String userId = String.valueOf(appUtils.generateUserId());
 //				user.setUserId(userId);
 				user.setCreatedDate(LocalDate.now());
