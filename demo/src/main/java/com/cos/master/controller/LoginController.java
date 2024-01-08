@@ -44,7 +44,7 @@ public class LoginController {
 		map = mapper.readValue(json, Map.class);
 		String mobile = (String) map.get("mobile");
 			if (mobile != null) {
-				String mobileNum = userService.verifyMobileNumber(mobile);
+				String mobileNum = userService.verifyMobileNum(mobile);
 				if (mobileNum == null || mobile.isEmpty()) {
 					return appUtils.prepareResponse("Mobile number not registered", "Failed", "400", 0, null);
 				}else {
