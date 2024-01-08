@@ -13,4 +13,5 @@ public class UserResponse {
 	private String mobile;
 	private String email;
 	private String password;
+	private String otp;
 }

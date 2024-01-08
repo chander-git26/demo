@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.master.entities.ResponseObject;
 import com.cos.master.entities.UserEntity;
+import com.cos.master.entities.UserResponse;
 import com.cos.master.repository.UserRepository;
 import com.cos.master.service.UserService;
 import com.cos.master.utils.AppUtils;
@@ -69,26 +70,32 @@ public class LoginController {
 
 	@PostMapping("/validateOtp")
 	public ResponseObject getUserOtp(@RequestBody String json) {
-		logger.info("validateOtp method "+json);
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			Map<String, Object> map = null;
-			map = mapper.readValue(json, Map.class);
-			String otp = (String) map.get("otp");
-			String mobile = (String) map.get("mobile");
-			if (otp != null && mobile != null) {
-				String generatedOtp = String.valueOf(userService.getUserOtp(mobile));
-				if (otp.equals(generatedOtp)) {
-					return appUtils.prepareResponse("OTP Verified Successfully", "success", "200", 1, null);
-				} else {
-					return appUtils.prepareResponse("Incorrect OTP", "Failed", "400", 0, null);
-				}
-			} else {
-				return appUtils.prepareResponse("Mandatory field are missing", "Failed", "400", 0, null);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
-		}
+	    logger.info("validateOtp method " + json);
+	    ObjectMapper mapper = new ObjectMapper();
+	    try {
+	        Map<String, Object> map = null;
+	        map = mapper.readValue(json, Map.class);
+	        String otp = (String) map.get("otp");
+	        String mobile = (String) map.get("mobile");
+	        if (otp != null && mobile != null) {
+	        	UserResponse userData = userService.getUserOtp(mobile);
+	            if (otp.equals(userData.getOtp())) {
+	                String userId = userService.getUserMobile(mobile);
+	                if (userId != null) {         
+	                    return appUtils.prepareResponse("OTP Verified Successfully", "success", "200", 1, userData.getUserId());
+	                } else {
+	                    return appUtils.prepareResponse("User ID not found", "Failed", "500", 0, null);
+	                }
+	            } else {
+	                return appUtils.prepareResponse("Incorrect OTP", "Failed", "400", 0, null);
+	            }
+	        } else {
+	            return appUtils.prepareResponse("Mandatory field are missing", "Failed", "400", 0, null);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return appUtils.prepareResponse("Some error occurred", "failed", "500", 0, null);
+	    }
 	}
+
 }

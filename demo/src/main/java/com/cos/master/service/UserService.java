@@ -38,8 +38,15 @@ public class UserService {
 		return userRepo.getUserEmail(email);
 	}
 
-	public int getUserOtp(String mobile) {
-		return userRepo.getUserOtp(mobile);
+	public UserResponse getUserOtp(String mobile) {
+		List<Object[]> userData = userRepo.getUserOtp(mobile);
+		UserResponse userResponse = new UserResponse();
+		for (int i = 0; i < userData.size(); i++) {
+			Object[] data = userData.get(i);
+			userResponse.setUserId(setData(data, 0));
+			userResponse.setOtp(setData(data, 1));
+		}
+		return userResponse;
 	}
 
 //	public int updatePassword(String password,String mobile)
