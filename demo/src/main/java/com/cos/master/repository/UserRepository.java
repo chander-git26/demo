@@ -330,4 +330,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	@Transactional
 	@Query(value = "update medical_info set covid_status =:covid_status where id =:id", nativeQuery = true)
 	public int updateCovidStatus(@Param("covid_status") String covid_status, @Param("id") int id);
+	
+	@Query(value = "select user_id,email from user_info where email=?1", nativeQuery = true)
+	public List<Object[]> verifyEmail(String email);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "update user_info set otp =:otp where email =:email", nativeQuery = true)
+	public int saveEmailGeneratedOtp(@Param("otp") String otp, @Param("email") String email);
 }

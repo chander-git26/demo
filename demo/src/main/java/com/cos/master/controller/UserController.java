@@ -1161,5 +1161,60 @@ public class UserController {
 			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PostMapping("/generateOtpForEmail")
+	public ResponseEntity<?> saveEmailAndGenerateOtp(@RequestBody UserEntity userEntity) {
+		logger.info("Started saveEmailAndGenerateOtp method" + userEntity);
+		UserEntity user = new UserEntity();
+		UserEntity savedUser = null;
+		String email = "";
+		Map<String, Object> responseMap = new HashMap<String, Object>();
+		try {
+			UserResponse checkEmailId = userService.verifyEmail(userEntity.getEmail());
+			email = userEntity.getEmail(); // Assuming you have an 'email' field in UserEntity
+			if (userEntity != null && checkEmailId == null) {
+//				String userId = String.valueOf(appUtils.generateUserId());
+//				user.setUserId(userId);
+				user.setCreatedDate(LocalDate.now());
+				user.setModifieddDate(LocalDate.now());
+				user.setEmail(email);
+				savedUser = userRepo.save(user);
+			}
+			if (savedUser != null || email != null) {
+				UserResponse userData = userService.verifyEmail(email);
+				logger.debug("email id verified");
+				if (userData == null) {
+					responseMap.put("status", HttpStatus.OK);
+					responseMap.put("message", "email id not found");
+					return new ResponseEntity<>(responseMap, HttpStatus.OK);
+				} else {
+					String otp = appUtils.generateOtp();
+					if (otp != null) {
+						logger.debug("otp generated");
+						int rowsAffected = userRepo.saveEmailGeneratedOtp(otp, email);
+						if (rowsAffected != 0) {
+							logger.debug("otp saved");
+//						Map<String, Object> otpMap = new HashMap<>();
+//						otpMap.put("otp", otp);
+							responseMap.put("status", HttpStatus.OK);
+							responseMap.put("message", "User otp generated");
+							responseMap.put("userId", userData.getUserId());
+							responseMap.put("email", userData.getEmail());
+							return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
+						}
+						return new ResponseEntity<>("400", HttpStatus.OK);
+					} else {
+						return new ResponseEntity<>("400", HttpStatus.OK);
+					}
+				}
+			} else {
+				return new ResponseEntity<>("400", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Exception in saveEmailAndGenerateOtp method: " + e.getMessage());
+			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
 

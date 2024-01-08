@@ -470,5 +470,15 @@ public class UserService {
 	public int updateCovidStatus(String covid_status, int id) {
 		return userRepo.updateCovidStatus(covid_status, id);
 	}
-
+	
+	public UserResponse verifyEmail(String emailId) {
+		 List<Object[]> dataList = userRepo.verifyEmail(emailId);
+			UserResponse userResponse = new UserResponse();
+			for (int i = 0; i < dataList.size(); i++) {
+				Object[] data = dataList.get(i);
+				userResponse.setUserId(setData(data, 0));
+				userResponse.setEmail(setData(data, 1));
+			}
+		 return userResponse;
+	}
 }
