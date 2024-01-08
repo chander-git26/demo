@@ -108,6 +108,9 @@ public class UserController {
 
 	@Autowired
 	AES aes;
+	
+	@Autowired
+	LoginController login;
 
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody UserEntity userEntity) {
@@ -936,18 +939,18 @@ public class UserController {
 
 	}
 
-	@GetMapping("/verifyMobilenumber/{mobile}")
-	public ResponseObject verifyMobileNumber(@PathVariable("mobile") String mobile) {
-		logger.info("inside verifyMobileNumber method "+mobile);
-		UserEntity userEntity = new UserEntity();
-		String mobileNumber = userService.verifyMobileNumber(mobile);
-		if (mobile != null) {
-			return appUtils.prepareResponse("mobile verify successfully", "successfull", "200", 1, null);
-
-		} else { 
-			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, null);
-		}
-	}
+//	@GetMapping("/verifyMobilenumber/{mobile}")
+//	public ResponseObject verifyMobileNumber(@PathVariable("mobile") String mobile) {
+//		logger.info("inside verifyMobileNumber method "+mobile);
+//		UserEntity userEntity = new UserEntity();
+//		String mobileNumber = userService.verifyMobileNumber(mobile);
+//		if (mobile != null) {
+//			return appUtils.prepareResponse("mobile verify successfully", "successfull", "200", 1, null);
+//
+//		} else { 
+//			return appUtils.prepareResponse("Failed to fetch data", "failed", "400", 1, null);
+//		}
+//	}
 	
 	@PostMapping("/uploadImage")
 	public ResponseObject uploadImage(HttpServletRequest request, @RequestParam("userId") int UserId,@RequestParam("profile") MultipartFile file) throws IOException, SerialException, SQLException {
@@ -1080,7 +1083,6 @@ public class UserController {
 	public ResponseEntity<?> downloaduploadOtherNomineeMedicalHistory(@PathVariable("userId") String userId)
 			throws IOException {
 		logger.info("download method" + userId);
-
 		try {
 			if (!userId.equals("0")) {
 				UserEntity userEntity = new UserEntity();
@@ -1104,5 +1106,60 @@ public class UserController {
 		}
 
 	}
+	
+	@PostMapping("/saveUserMobile")
+	public ResponseEntity<Object> savephoneNumbers(@RequestBody UserEntity userEntity) {
+		logger.info("Started createUser method" + userEntity);
+		UserEntity user = new UserEntity();
+//		UserEntity users = null;
+		String mobile = "";
+		Map<String, Object> responseMap = new HashMap<String, Object>();
+		try {
+			UserEntity users = new UserEntity();
+			String checkMobileNum = userService.verifyMobileNum(userEntity.getMobile());
+			mobile = userEntity.getMobile();
+			if(userEntity != null && checkMobileNum ==null) {
+				String userId = String.valueOf(appUtils.generateUserId());
+				user.setUserId(userId);
+				user.setCreatedDate(LocalDate.now());
+				user.setModifieddDate(LocalDate.now());
+				user.setMobile(mobile);
+				users = userRepo.save(user);
+			}if(users != null || mobile != null) {
+					UserResponse userData = userService.verifyMobileNumber(mobile);
+					logger.debug("mobile number verified");
+					if (userData == null) {
+						responseMap.put("status", HttpStatus.OK);
+						responseMap.put("message", "mobile number not found");
+						return new ResponseEntity<>(responseMap, HttpStatus.OK);
+					} else {
+						String otp = appUtils.generateOtp();
+						if (otp != null) {
+							logger.debug("otp generated");
+							int rowsAffected = userRepo.saveOtp(otp, mobile);
+							if (rowsAffected != 0) {
+								logger.debug("otp saved");
+//								Map<String, Object> otpMap = new HashMap<>();
+//								otpMap.put("otp", otp);
+								responseMap.put("status", HttpStatus.OK);
+								responseMap.put("message", "User otp generated");
+								responseMap.put("userId", userData.getUserId());
+								responseMap.put("mobile", userData.getMobile());
+								return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
+							}
+							return new ResponseEntity<>("400", HttpStatus.OK);
+						} else {
+							return new ResponseEntity<>("400", HttpStatus.OK);
+						}
+					}
+			} else {
+				return new ResponseEntity<>("400", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Inside catch block" + e.getMessage());
+			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
+}
 

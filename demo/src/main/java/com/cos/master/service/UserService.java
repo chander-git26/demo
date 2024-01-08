@@ -278,14 +278,22 @@ public class UserService {
 		return data[index] != null ? data[index].toString() : null;
 	}
 
-	public String verifyMobileNumber(String mobileNumber) {
-		return userRepo.getMobileNumber(mobileNumber);
+	public UserResponse verifyMobileNumber(String mobileNumber) {
+		List<Object[]> list = userRepo.getMobileNumber(mobileNumber);
+		UserResponse userResponse = new UserResponse();
+		for (int i = 0; i < list.size(); i++) {
+			Object[] data = list.get(i);
+			userResponse.setUserId(setData(data, 0));
+			userResponse.setMobile(setData(data, 1));
+		}
+		 return userResponse;
 	}
-
+	
+	public String verifyMobileNum(String mobileNumber) {
+		return userRepo.verifyMobileNum(mobileNumber);
+	}
 	public UserResponse getuserInfo(String email) {
-		
 		List<Object[]> list = userRepo.fetchByUserInfo(email);
-		Map<String, Object> map = new HashMap<String, Object>();
 		UserResponse userResponse = new UserResponse();
 		for (int i = 0; i < list.size(); i++) {
 			Object[] data = list.get(i);

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.cos.master.entities.PersonalInfoResponse;
 import com.cos.master.entities.ProfessionalResponse;
 import com.cos.master.entities.UserEntity;
+import com.cos.master.entities.UserResponse;
 
 import jakarta.transaction.Transactional;
 
@@ -73,9 +74,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	@Query(value = "select user_id from user_info where email=?1", nativeQuery = true)
 	public String getUserEmail(String email);
 
-	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
-	public String getMobileNumber(String mobileNumber);
+	@Query(value = "select user_id,mobile from user_info where mobile=?1", nativeQuery = true)
+	public List<Object[]> getMobileNumber(String mobileNumber);
 
+	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
+	public String verifyMobileNum(String mobileNumber);
+	
 	@Query(value = "select profile from user_info where userId =:userId", nativeQuery = true)
 	public String findById(@Param("userId") String userId);
 
