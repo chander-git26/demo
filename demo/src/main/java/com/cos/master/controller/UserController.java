@@ -1107,8 +1107,8 @@ public class UserController {
 
 	}
 	
-	@PostMapping("/saveUserMobile")
-	public ResponseEntity<Object> savephoneNumbers(@RequestBody UserEntity userEntity) {
+	@PostMapping("/generateOtpForMobile")
+	public ResponseEntity<Object> generateOtpForMobile(@RequestBody UserEntity userEntity) {
 		logger.info("Started createUser method" + userEntity);
 		UserEntity user = new UserEntity();
 //		UserEntity users = null;
