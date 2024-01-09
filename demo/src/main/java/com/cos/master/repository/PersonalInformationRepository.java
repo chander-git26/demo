@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.master.entities.PersonalInformationEntity;
 
-public interface PersonalInformationRepository extends JpaRepository<PersonalInformationEntity, Integer>{
+public interface PersonalInformationRepository extends JpaRepository<PersonalInformationEntity, String>{
 	
 	@Query(value = "select MAX(user_id) from personal_info", nativeQuery = true)
 	public long generateUserId();

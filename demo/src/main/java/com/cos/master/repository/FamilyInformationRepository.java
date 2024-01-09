@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public interface FamilyInformationRepository extends JpaRepository<FamilyInformationEntity, Integer>{
+public interface FamilyInformationRepository extends JpaRepository<FamilyInformationEntity, String>{
 
 	@Query(value = "select MAX(user_id) from family_info", nativeQuery = true)
 	public String generateUserId();

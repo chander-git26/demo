@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cos.master.entities.ProfessionalInformationEntity;
 
 
-public interface ProfessionalInformationRepository extends JpaRepository<ProfessionalInformationEntity, Integer>{
+public interface ProfessionalInformationRepository extends JpaRepository<ProfessionalInformationEntity, String>{
 
 	@Query(value = "select MAX(user_id) from professional_info", nativeQuery = true)
 	public long generateUserId();

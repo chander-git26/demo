@@ -8,7 +8,7 @@ import com.cos.master.entities.ProfilePersonalInformationEntity;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ProfilePersonalInformationRepository extends JpaRepository<ProfilePersonalInformationEntity, Integer>{
+public interface ProfilePersonalInformationRepository extends JpaRepository<ProfilePersonalInformationEntity, String>{
 	
 	@Query(value = "select MAX(user_id) from personal_info", nativeQuery = true)
 	public long generateUserId();

@@ -28,8 +28,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	public String generateUserId();
 
 	@Query(value = "INSERT INTO `demo`.`user_info` (`firstname`, `lastname`, `user_id`, `mobile`, `password`, `email`,  `created_date`, `modified_date`) VALUES (?1, '?2', '?3', '?4', '?5', '?6', '?7', '?8');", nativeQuery = true)
-	public Integer createUser(String firstname, String lastname, String userId, String password, String email,
-			String mobile, LocalDate createdDate, LocalDate modifiedDate);
+	public Integer createUser(String firstname, String lastname, String userId, String password, String email, String mobile, LocalDate createdDate, LocalDate modifiedDate);
 
 	@Query(value = "select * from user_info where user_id = ?1", nativeQuery = true)
 	public UserEntity fetchByUserId(String userId);
@@ -83,6 +82,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	@Query(value = "select mobile from user_info where mobile=?1", nativeQuery = true)
 	public String verifyMobileNum(String mobileNumber);
 	
+	@Query(value = "select user_id,email from user_info where email=?1", nativeQuery = true)
+	public List<Object[]> verifyEmail(String email);
+	
 	@Query(value = "select profile from user_info where userId =:userId", nativeQuery = true)
 	public String findById(@Param("userId") String userId);
 
@@ -100,6 +102,11 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	@Transactional
 	@Query(value = "update user_info set otp =:otp where mobile =:mobile", nativeQuery = true)
 	public int saveOtp(@Param("otp") String otp, @Param("mobile") String mobile);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "update user_info set otp =:otp where email =:email", nativeQuery = true)
+	public int saveEmailGeneratedOtp(@Param("otp") String otp, @Param("email") String email);
 
 	// update
 	@Modifying
@@ -250,9 +257,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	@Modifying
 	@Transactional
 	@Query(value = "update family_info set upload_other_nominee_medical_history =:upload_other_nominee_medical_history where id =:id", nativeQuery = true)
-	public int updateUploadOtherNomineeMedicalHistory(
-			@Param("upload_other_nominee_medical_history") byte[] upload_other_nominee_medical_history,
-			@Param("id") int id);
+	public int updateUploadOtherNomineeMedicalHistory(@Param("upload_other_nominee_medical_history") byte[] upload_other_nominee_medical_history,@Param("id") int id);
 
 //	@Modifying
 //	@Transactional
@@ -334,11 +339,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	@Query(value = "update medical_info set covid_status =:covid_status where id =:id", nativeQuery = true)
 	public int updateCovidStatus(@Param("covid_status") String covid_status, @Param("id") int id);
 	
-	@Query(value = "select user_id,email from user_info where email=?1", nativeQuery = true)
-	public List<Object[]> verifyEmail(String email);
-	
 	@Modifying
 	@Transactional
-	@Query(value = "update user_info set otp =:otp where email =:email", nativeQuery = true)
-	public int saveEmailGeneratedOtp(@Param("otp") String otp, @Param("email") String email);
+	@Query(value = "update user_info set firstname =?1, lastname=?2, dateOfBirth =?3, email=?4, gender=?5, maritalStatus =?6 ", nativeQuery = true)
+	public int saveUserInfoByMobile(String firstname,String lastname,String dateOfBirth, String email, String gender, String maritalStatus);
 }

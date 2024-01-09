@@ -8,7 +8,7 @@ import com.cos.master.entities.ProfileProfessionalInformationEntity;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ProfileProfessionalInformationRepository extends JpaRepository<ProfileProfessionalInformationEntity, Integer>{
+public interface ProfileProfessionalInformationRepository extends JpaRepository<ProfileProfessionalInformationEntity, String>{
 
 	@Query(value = "select MAX(user_id) from professional_info", nativeQuery = true)
 	public long generateUserId();

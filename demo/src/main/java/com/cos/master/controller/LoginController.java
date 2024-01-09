@@ -88,6 +88,7 @@ public class LoginController {
 					responseMap.put("status", "200");
 					responseMap.put("message", "OTP Verified Successfully");
 					responseMap.put("mobile", userData.getMobile());
+					responseMap.put("userId", userData.getUserId());
 					return new ResponseEntity<Object>(responseMap, HttpStatus.OK);
 
 				} else {
@@ -99,7 +100,8 @@ public class LoginController {
 					 logger.debug("validated email Otp");
 					responseMap.put("status", "200");
 	            	responseMap.put("message", "OTP Verified Successfully");
-	            	responseMap.put("mobile", userData.getEmail());
+	            	responseMap.put("email", userData.getEmail());
+	            	responseMap.put("userId", userData.getUserId());
 					return new ResponseEntity<Object>(responseMap, HttpStatus.OK);
 				} else {
 					return new ResponseEntity<Object>("Incorrect OTP", HttpStatus.UNAUTHORIZED);
