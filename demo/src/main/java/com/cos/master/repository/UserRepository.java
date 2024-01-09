@@ -339,19 +339,24 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	@Query(value = "update medical_info set covid_status =:covid_status where id =:id", nativeQuery = true)
 	public int updateCovidStatus(@Param("covid_status") String covid_status, @Param("id") int id);
 	
-	@Modifying
-	@Transactional
-	@Query(value = "update user_info set firstname =?1, lastname=?2, dateOfBirth =?3, email=?4, gender=?5, maritalStatus =?6 ", nativeQuery = true)
-	public int saveUserInfoByMobile(String firstname,String lastname,String dateOfBirth, String email, String gender, String maritalStatus);
+//	@Modifying
+//	@Transactional
+//	@Query(value = "update user_info set firstname =?1, lastname=?2, dateOfBirth =?3, email=?4, gender=?5, maritalStatus =?6 ", nativeQuery = true)
+//	public int saveUserInfoByMobile(String firstname,String lastname,String dateOfBirth, String email, String gender, String maritalStatus);
+	
+//	@Modifying
+//	@Transactional
+//	@Query(value = "update user_info set firstname =?1, lastname=?2, dateOfBirth =?3, mobile=?4, gender=?5, maritalStatus =?6 ", nativeQuery = true)
+//	public int saveUserInfoByMobile(String firstname,String lastname,String dateOfBirth, String mobile, String gender, String maritalStatus);
 	
 	@Modifying
 	@Transactional
-	@Query(value = "update user_info set firstname =?1, lastname=?2, dateOfBirth =?3, gender=?4, maritalStatus =?5,user_id = ?6 where mobile = ?7", nativeQuery = true)
-	public int saveUserInfoByMobile(String firstname,String lastname,String dateOfBirth, String mobile, String gender, String maritalStatus,String userId);
+	@Query(value = "update user_info set firstname =?1, lastname=?2, date_of_birth =?3, gender=?4, marital_status =?5,user_id = ?6 where mobile = ?7", nativeQuery = true)
+	public int saveUserInfoByMobile(String firstname,String lastname,String dateOfBirth, String gender, String maritalStatus,String userId, String mobile);
 	
 	
 	@Modifying
 	@Transactional
-	@Query(value = "update user_info set firstname =?1, lastname=?2, dateOfBirth =?3, gender=?4, maritalStatus =?5, user_id = ?6 where email = ?7", nativeQuery = true)
+	@Query(value = "update user_info set firstname =?1, lastname=?2, date_of_birth =?3, gender=?4, marital_status =?5, user_id = ?6 where email = ?7", nativeQuery = true)
 	public int saveUserInfoByEmail(String firstname,String lastname,String dateOfBirth, String gender, String maritalStatus, String userId, String email);
 }

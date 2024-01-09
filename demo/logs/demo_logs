@@ -96,3 +96,24 @@
 2024-01-05 10:35:27 INFO  UserController:168 - signin  methodcom.cos.master.entities.UserEntity@31f5a186
 2024-01-05 11:39:44 INFO  UserController:168 - signin  methodcom.cos.master.entities.UserEntity@10af9213
 2024-01-05 11:50:47 INFO  UserController:169 - signin  methodcom.cos.master.entities.UserEntity@40049732
+2024-01-09 16:04:59 INFO  UserController:118 - Started createUser methodcom.cos.master.entities.UserEntity@323ae47a
+2024-01-09 16:04:59 INFO  UserController:131 - Middle of create user method 
+2024-01-09 16:04:59 INFO  UserController:151 - Inside catch blockcould not execute statement [Unknown column 'date_of_birth' in 'field list'] [insert into user_info (created_date,date_of_birth,email,firstname,gender,lastname,marital_status,mobile,modified_date,otp,password,profile,unique_id,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into user_info (created_date,date_of_birth,email,firstname,gender,lastname,marital_status,mobile,modified_date,otp,password,profile,unique_id,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+2024-01-09 16:05:56 INFO  UserController:118 - Started createUser methodcom.cos.master.entities.UserEntity@c58a98a
+2024-01-09 16:05:56 INFO  UserController:131 - Middle of create user method 
+2024-01-09 16:05:56 INFO  UserController:151 - Inside catch blockcould not execute statement [Unknown column 'date_of_birth' in 'field list'] [insert into user_info (created_date,date_of_birth,email,firstname,gender,lastname,marital_status,mobile,modified_date,otp,password,profile,unique_id,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into user_info (created_date,date_of_birth,email,firstname,gender,lastname,marital_status,mobile,modified_date,otp,password,profile,unique_id,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+2024-01-09 16:25:24 INFO  UserController:118 - Started createUser methodcom.cos.master.entities.UserEntity@7c68e0c9
+2024-01-09 16:25:24 INFO  UserController:131 - Middle of create user method 
+2024-01-09 16:25:24 INFO  UserController:151 - Inside catch blockcould not execute statement [Unknown column 'date_of_birth' in 'field list'] [insert into user_info (created_date,date_of_birth,email,firstname,gender,lastname,marital_status,mobile,modified_date,otp,password,profile,unique_id,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into user_info (created_date,date_of_birth,email,firstname,gender,lastname,marital_status,mobile,modified_date,otp,password,profile,unique_id,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+2024-01-09 16:25:54 INFO  UserController:118 - Started createUser methodcom.cos.master.entities.UserEntity@77321621
+2024-01-09 16:25:55 INFO  UserController:131 - Middle of create user method 
+2024-01-09 16:25:55 INFO  UserController:151 - Inside catch blockcould not execute statement [Unknown column 'marital_status' in 'field list'] [insert into user_info (created_date,date_of_birth,email,firstname,gender,lastname,marital_status,mobile,modified_date,otp,password,profile,unique_id,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]; SQL [insert into user_info (created_date,date_of_birth,email,firstname,gender,lastname,marital_status,mobile,modified_date,otp,password,profile,unique_id,user_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)]
+2024-01-09 16:26:13 INFO  UserController:118 - Started createUser methodcom.cos.master.entities.UserEntity@531b4f05
+2024-01-09 16:26:13 INFO  UserController:131 - Middle of create user method 
+2024-01-09 16:27:07 INFO  UserController:118 - Started createUser methodcom.cos.master.entities.UserEntity@8b1daf2
+2024-01-09 16:27:07 INFO  UserController:134 - Middle of create user method 
+2024-01-09 16:28:19 INFO  UserController:118 - Started createUser methodcom.cos.master.entities.UserEntity@ca170ec
+2024-01-09 16:28:19 INFO  UserController:134 - Middle of create user method 
+2024-01-09 16:34:16 INFO  UserController:168 - Fetch getUserDetails method1000
+2024-01-09 16:34:29 INFO  UserController:168 - Fetch getUserDetails method173
+2024-01-09 16:35:15 INFO  UserController:168 - Fetch getUserDetails method173

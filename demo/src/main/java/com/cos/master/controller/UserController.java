@@ -123,17 +123,25 @@ public class UserController {
 			if (userEntity != null) {
 				String firstName =userEntity.getFirstname();
 				String mobile =userEntity.getMobile();
+				
 				String uniqueId = appUtils.generateUniqueId(firstName,mobile);
+				
 				String encryptedUniqueId = aes.encrypt(uniqueId);
 //				String encryptedUserId = security.encryptString(createdUserId);
 				user.setUniqueId(encryptedUniqueId);
+				
 				String encryptedPassword = aes.encrypt(userEntity.getPassword());
 				logger.info("Middle of create user method ");
+				
 				String userId = String.valueOf(appUtils.generateUserId());
 				user.setUserId(userId);
+				
 				user.setPassword(encryptedPassword);
+				
 				user.setFirstname(firstName);
+				
 				user.setLastname(userEntity.getLastname());
+				
 				user.setMobile(mobile);
 				user.setEmail(userEntity.getEmail());
 				user.setCreatedDate(LocalDate.now());
@@ -172,12 +180,14 @@ public class UserController {
 	public ResponseObject signin(@RequestBody UserEntity userInf) throws Exception {
 		logger.info("signin  method"+userInf);
 		UserEntity user = new UserEntity();
+		
 		String email = userInf.getEmail();
 		String password = userInf.getPassword();
 //	    String encryptPassword = aes.encrypt(password);
 		UserResponse userEntity = userService.getuserInfo(email);
 		String decryptPassword = aes.decrypt(userEntity.getPassword());
 //      	users = userRepo.save(user);
+		
 		if (password.equals(decryptPassword)) {
 			return appUtils.prepareResponse("User successfully logged in", "Success", "200", 1, userEntity);
 		} else {
@@ -1226,9 +1236,9 @@ public class UserController {
 			String mobile = (String) jsonObject.get("mobile");
 			String firstName = (String) jsonObject.get("firstname");
 			String lastName = (String) jsonObject.get("lastname");
-			String dateOfBirth = (String) jsonObject.get("dateOfBirth");
+			String dateOfBirth = (String) jsonObject.get("date_of_birth");
 			String gender = (String) jsonObject.get("gender");
-			String maritalStatus = (String) jsonObject.get("maritalStatus");
+			String maritalStatus = (String) jsonObject.get("marital_status");
 			UserEntity userEntity = new UserEntity();
 			if (email != null) {
 				userEntity.setFirstname(firstName);
