@@ -66,7 +66,6 @@ public class LoginController {
 			return appUtils.prepareResponse("mobile number cannot be empty", "Failed", "400", 0, null);
 		} catch (Exception e) {
 			logger.info("inside catch block  "+e.getMessage());
-
 			return appUtils.prepareResponse("some error occured", "failed", "500", 0, null);
 		}
 	}
@@ -85,6 +84,7 @@ public class LoginController {
 			if (otp != null && mobile != null) {
 				UserResponse userData = userService.getUserOtp(mobile);
 				if (otp.equals(userData.getOtp())) {
+					 logger.debug("validated mobile Otp");
 					responseMap.put("status", "200");
 					responseMap.put("message", "OTP Verified Successfully");
 					responseMap.put("mobile", userData.getMobile());
@@ -96,6 +96,7 @@ public class LoginController {
 			} else if (otp != null && email != null) {
 				UserResponse userData = userService.getUserOtp(email);
 				if (otp.equals(userData.getOtp())) {
+					 logger.debug("validated email Otp");
 					responseMap.put("status", "200");
 	            	responseMap.put("message", "OTP Verified Successfully");
 	            	responseMap.put("mobile", userData.getEmail());
@@ -104,10 +105,11 @@ public class LoginController {
 					return new ResponseEntity<Object>("Incorrect OTP", HttpStatus.UNAUTHORIZED);
 				}
 			} else {
+				logger.debug("Mandatory field are missing");
 				return new ResponseEntity<Object>("Mandatory field are missing", HttpStatus.UNAUTHORIZED);
 	        }
 	    } catch (Exception e) {
-	    	e.printStackTrace();
+	    	logger.error("inside catch block "+e.getMessage());
 	        return new ResponseEntity<Object>("Some error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	}

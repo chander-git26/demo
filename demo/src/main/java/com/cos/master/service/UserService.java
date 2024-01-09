@@ -44,8 +44,6 @@ public class UserService {
 		boolean containsDigit = false;
 		for(char isDidgit : value.toCharArray()) {
 			if (containsDigit = Character.isDigit(isDidgit)) {
-//				containsDigit = true;
-				System.out.println("flag ="+containsDigit);
 				break;
 			}
 		}
