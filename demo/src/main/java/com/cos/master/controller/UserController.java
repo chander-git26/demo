@@ -12,6 +12,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -1216,5 +1217,58 @@ public class UserController {
 			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PostMapping("/createUserByInfo")
+	public ResponseEntity<?> createUserByInfo(@RequestBody JSONObject jsonObject) {
+		Map<String, Object> responseMap = new HashMap<String, Object>();
+		try {
+			String email = (String) jsonObject.get("email");
+			String mobile = (String) jsonObject.get("mobile");
+			String firstName = (String) jsonObject.get("firstname");
+			String lastName = (String) jsonObject.get("lastname");
+			String dateOfBirth = (String) jsonObject.get("dateOfBirth");
+			String gender = (String) jsonObject.get("gender");
+			String maritalStatus = (String) jsonObject.get("maritalStatus");
+			UserEntity userEntity = new UserEntity();
+			if (email != null) {
+				userEntity.setFirstname(firstName);
+				userEntity.setLastname(lastName);
+				userEntity.setDateOfBirth(dateOfBirth);
+				userEntity.setEmail(email);
+				userEntity.setGender(gender);
+				userEntity.setMaritalStatus(maritalStatus);
+				String userId = String.valueOf(appUtils.generateUserId());
+				userEntity.setUserId(userId);
+				int updated = userRepo.saveUserInfoByEmail(firstName, lastName, dateOfBirth, gender,maritalStatus,userId, email);
+				if (updated != 0) {
+					responseMap.put("userId", userId);
+					responseMap.put("status", HttpStatus.CREATED);
+					responseMap.put("meassage", "user created successfully");
+					return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
+				}
+			} else if (mobile != null) {
+				userEntity.setFirstname(firstName);
+				userEntity.setLastname(lastName);
+				userEntity.setDateOfBirth(dateOfBirth);
+				userEntity.setMobile(mobile);
+				userEntity.setGender(gender);
+				userEntity.setMaritalStatus(maritalStatus);
+				String userId = String.valueOf(appUtils.generateUserId());
+				userEntity.setUserId(userId);
+				int updated = userRepo.saveUserInfoByMobile(firstName, lastName, dateOfBirth, gender,maritalStatus,userId, mobile);
+				if (updated != 0) {
+					responseMap.put("userId", userId);
+					responseMap.put("status", HttpStatus.CREATED);
+					responseMap.put("meassage", "user created successfully");
+					return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
+				}
+				return new ResponseEntity<>("400", HttpStatus.UNAUTHORIZED);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>("500", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>("200", HttpStatus.OK);
+	}
+	
 }
 

@@ -40,7 +40,10 @@ public class UserEntity implements Serializable {
 	private LocalDate createdDate;
 	@Column(name = "modified_date")
 	private LocalDate modifieddDate;
-	
+	private String dateOfBirth;
+	private String gender;
+	@Column(name = "marital_status")
+	private String maritalStatus;
 	@Lob
     private Blob profile;
 }
