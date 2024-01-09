@@ -10,7 +10,7 @@ import com.cos.master.entities.MedicalInformationEntity;
 import com.cos.master.entities.ProfessionalInformationEntity;
 
 
-public interface MedicalInformationRepository extends JpaRepository<MedicalInformationEntity, Integer>{
+public interface MedicalInformationRepository extends JpaRepository<MedicalInformationEntity, String>{
 
 	@Query(value = "select MAX(user_id) from medical_info", nativeQuery = true)
 	public long generateUserId();

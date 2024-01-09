@@ -39,6 +39,7 @@ public class UserEntity implements Serializable {
 	private LocalDate createdDate;
 	@Column(name = "modified_date")
 	private LocalDate modifieddDate;
+	@Column(name = "date_of_birth")
 	private String dateOfBirth;
 	private String gender;
 	@Column(name = "marital_status")
