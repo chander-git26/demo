@@ -351,10 +351,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	
 	@Modifying
 	@Transactional
+
 	@Query(value = "update user_info set firstname =?1, lastname=?2, date_of_birth =?3, gender=?4, marital_status =?5,user_id = ?6 where mobile = ?7", nativeQuery = true)
 	public int saveUserInfoByMobile(String firstname,String lastname,String dateOfBirth, String gender, String maritalStatus,String userId, String mobile);
-	
-	
+
 	@Modifying
 	@Transactional
 	@Query(value = "update user_info set firstname =?1, lastname=?2, date_of_birth =?3, gender=?4, marital_status =?5, user_id = ?6 where email = ?7", nativeQuery = true)
