@@ -1119,8 +1119,8 @@ public class UserController {
 			String checkMobileNum = userService.verifyMobileNum(userEntity.getMobile());
 			mobile = userEntity.getMobile();
 			if(userEntity != null && checkMobileNum ==null) {
-				String userId = String.valueOf(appUtils.generateUserId());
-				user.setUserId(userId);
+//				String userId = String.valueOf(appUtils.generateUserId());
+//				user.setUserId(userId);
 				user.setCreatedDate(LocalDate.now());
 				user.setModifieddDate(LocalDate.now());
 				user.setMobile(mobile);
