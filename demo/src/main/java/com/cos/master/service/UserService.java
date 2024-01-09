@@ -42,10 +42,8 @@ public class UserService {
 		List<Object[]> userData = null;
 		UserResponse userResponse = new UserResponse();
 		boolean containsDigit = false;
-		for(char isDidgit : value.toCharArray()) {
-			if (containsDigit = Character.isDigit(isDidgit)) {
-				break;
-			}
+		if (Character.isDigit(value.charAt(0))) {
+			containsDigit = true;
 		}
 		if (containsDigit == true) {
 			userData = userRepo.getUserOtpByMobile(value);
