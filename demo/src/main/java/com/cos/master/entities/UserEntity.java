@@ -33,7 +33,6 @@ public class UserEntity implements Serializable {
 	private String uniqueId;
 	private String mobile;
 	private String password;
-
 	private String email;
 	private String otp;
 	@Column(name = "created_date")
