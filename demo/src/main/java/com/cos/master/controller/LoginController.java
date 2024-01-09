@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.aspectj.apache.bcel.generic.ObjectType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,7 +72,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/validateOtp")
-	public ResponseObject getUserOtp(@RequestBody String json) {
+	public ResponseEntity<Object> getUserOtp(@RequestBody String json) {
 	    logger.info("validateOtp method " + json);
 	    ObjectMapper mapper = new ObjectMapper();
 	    try {
@@ -82,19 +85,24 @@ public class LoginController {
 	            if (otp.equals(userData.getOtp())) {
 	                String userId = userService.getUserMobile(mobile);
 	                if (userId != null) {         
-	                    return appUtils.prepareResponse("OTP Verified Successfully", "success", "200", 1, userData.getUserId());
+//	                    return appUtils.prepareResponse("OTP Verified Successfully", "success", "200", 1, userData.getUserId());
+	                	return new ResponseEntity<Object>("OTP Verified Successfully", HttpStatus.OK);
 	                } else {
-	                    return appUtils.prepareResponse("User ID not found", "Failed", "500", 0, null);
+//	                    return appUtils.prepareResponse("User ID not found", "Failed", "500", 0, null);
+	                	return new ResponseEntity<Object>("User ID not found", HttpStatus.UNAUTHORIZED);
 	                }
 	            } else {
-	                return appUtils.prepareResponse("Incorrect OTP", "Failed", "400", 0, null);
+	              //  return appUtils.prepareResponse("Incorrect OTP", "Failed", "400", 0, null);
+	                return new ResponseEntity<Object>("Incorrect OTP", HttpStatus.UNAUTHORIZED);
 	            }
 	        } else {
-	            return appUtils.prepareResponse("Mandatory field are missing", "Failed", "400", 0, null);
+	           // return appUtils.prepareResponse("Mandatory field are missing", "Failed", "400", 0, null);
+	            return new ResponseEntity<Object>("Mandatory field are missing", HttpStatus.UNAUTHORIZED);
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        return appUtils.prepareResponse("Some error occurred", "failed", "500", 0, null);
+//	        return appUtils.prepareResponse("Some error occurred", "failed", "500", 0, null);
+	        return new ResponseEntity<Object>("Some error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	}
 
