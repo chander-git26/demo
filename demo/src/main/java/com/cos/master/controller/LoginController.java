@@ -75,33 +75,39 @@ public class LoginController {
 	public ResponseEntity<Object> getUserOtp(@RequestBody String json) {
 	    logger.info("validateOtp method " + json);
 	    ObjectMapper mapper = new ObjectMapper();
+	    Map<String, Object> responseMap = new HashMap<String, Object>();
 	    try {
 	        Map<String, Object> map = null;
 	        map = mapper.readValue(json, Map.class);
 	        String otp = (String) map.get("otp");
 	        String mobile = (String) map.get("mobile");
-	        if (otp != null && mobile != null) {
-	        	UserResponse userData = userService.getUserOtp(mobile);
-	            if (otp.equals(userData.getOtp())) {
-	                String userId = userService.getUserMobile(mobile);
-	                if (userId != null) {         
-//	                    return appUtils.prepareResponse("OTP Verified Successfully", "success", "200", 1, userData.getUserId());
-	                	return new ResponseEntity<Object>("OTP Verified Successfully", HttpStatus.OK);
-	                } else {
-//	                    return appUtils.prepareResponse("User ID not found", "Failed", "500", 0, null);
-	                	return new ResponseEntity<Object>("User ID not found", HttpStatus.UNAUTHORIZED);
-	                }
-	            } else {
-	              //  return appUtils.prepareResponse("Incorrect OTP", "Failed", "400", 0, null);
-	                return new ResponseEntity<Object>("Incorrect OTP", HttpStatus.UNAUTHORIZED);
-	            }
-	        } else {
-	           // return appUtils.prepareResponse("Mandatory field are missing", "Failed", "400", 0, null);
-	            return new ResponseEntity<Object>("Mandatory field are missing", HttpStatus.UNAUTHORIZED);
+	        String email = (String) map.get("email");
+			if (otp != null && mobile != null) {
+				UserResponse userData = userService.getUserOtp(mobile);
+				if (otp.equals(userData.getOtp())) {
+					responseMap.put("status", "200");
+					responseMap.put("message", "OTP Verified Successfully");
+					responseMap.put("mobile", userData.getMobile());
+					return new ResponseEntity<Object>(responseMap, HttpStatus.OK);
+
+				} else {
+					return new ResponseEntity<Object>("Incorrect OTP", HttpStatus.UNAUTHORIZED);
+				}
+			} else if (otp != null && email != null) {
+				UserResponse userData = userService.getUserOtp(email);
+				if (otp.equals(userData.getOtp())) {
+					responseMap.put("status", "200");
+	            	responseMap.put("message", "OTP Verified Successfully");
+	            	responseMap.put("mobile", userData.getEmail());
+					return new ResponseEntity<Object>(responseMap, HttpStatus.OK);
+				} else {
+					return new ResponseEntity<Object>("Incorrect OTP", HttpStatus.UNAUTHORIZED);
+				}
+			} else {
+				return new ResponseEntity<Object>("Mandatory field are missing", HttpStatus.UNAUTHORIZED);
 	        }
 	    } catch (Exception e) {
-	        e.printStackTrace();
-//	        return appUtils.prepareResponse("Some error occurred", "failed", "500", 0, null);
+	    	e.printStackTrace();
 	        return new ResponseEntity<Object>("Some error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	}

@@ -38,13 +38,32 @@ public class UserService {
 		return userRepo.getUserEmail(email);
 	}
 
-	public UserResponse getUserOtp(String mobile) {
-		List<Object[]> userData = userRepo.getUserOtp(mobile);
+	public UserResponse getUserOtp(String value) {
+		List<Object[]> userData = null;
 		UserResponse userResponse = new UserResponse();
-		for (int i = 0; i < userData.size(); i++) {
-			Object[] data = userData.get(i);
-			userResponse.setUserId(setData(data, 0));
-			userResponse.setOtp(setData(data, 1));
+		boolean containsDigit = false;
+		for(char isDidgit : value.toCharArray()) {
+			if (containsDigit = Character.isDigit(isDidgit)) {
+//				containsDigit = true;
+				System.out.println("flag ="+containsDigit);
+				break;
+			}
+		}
+		if (containsDigit == true) {
+			userData = userRepo.getUserOtpByMobile(value);
+			for (int i = 0; i < userData.size(); i++) {
+				Object[] data = userData.get(i);
+				userResponse.setMobile(setData(data, 0));
+				userResponse.setOtp(setData(data, 1));
+			}
+		}
+		else {
+			userData = userRepo.getUserOtpByEmail(value);
+			for (int i = 0; i < userData.size(); i++) {
+				Object[] data = userData.get(i);
+				userResponse.setEmail(setData(data, 0));
+				userResponse.setOtp(setData(data, 1));
+			}
 		}
 		return userResponse;
 	}
