@@ -51,6 +51,7 @@ public class UserService {
 				Object[] data = userData.get(i);
 				userResponse.setMobile(setData(data, 0));
 				userResponse.setOtp(setData(data, 1));
+				userResponse.setUserId(setData(data, 2));
 			}
 		}
 		else {
@@ -59,6 +60,7 @@ public class UserService {
 				Object[] data = userData.get(i);
 				userResponse.setEmail(setData(data, 0));
 				userResponse.setOtp(setData(data, 1));
+				userResponse.setUserId(setData(data, 2));
 			}
 		}
 		return userResponse;
